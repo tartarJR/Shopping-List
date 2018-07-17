@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.tatar.shoppinglist.data.db.item.model.Item;
 
-public class ItemDialogUtils {
+public class ItemAlertDialogUtils {
 
     private static boolean SHOULD_NOT_UPDATE = false;
     private static boolean SHOULD_UPDATE = true;
@@ -25,7 +25,7 @@ public class ItemDialogUtils {
     private AlertDialog alertDialog;
 
 
-    public ItemDialogUtils(Activity activity, AlertDialog.Builder dialogBuilder, AlertDialogActions dialogActions) {
+    public ItemAlertDialogUtils(Activity activity, AlertDialog.Builder dialogBuilder, AlertDialogActions dialogActions) {
         this.activity = activity;
         this.dialogBuilder = dialogBuilder;
         this.dialogActions = dialogActions;
