@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Shopping List</string>
     <string name="see_items">See Items</string>
+    <string name="no_items_found">No Items Found</string>
+    <string name="enter_an_item_name">Enter an item name</string>
+    <string name="add_an_new_item">Add a new item</string>
+    <string name="edit_an_existing_item">Edit an existing item</string>
 </resources>
