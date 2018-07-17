@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import com.tatar.shoppinglist.data.db.item.model.Item;
 
-import javax.inject.Inject;
-
 public class ItemDialogUtils {
 
     private static boolean SHOULD_NOT_UPDATE = false;
@@ -26,7 +24,7 @@ public class ItemDialogUtils {
 
     private AlertDialog alertDialog;
 
-    @Inject
+
     public ItemDialogUtils(Activity activity, AlertDialog.Builder dialogBuilder, AlertDialogActions dialogActions) {
         this.activity = activity;
         this.dialogBuilder = dialogBuilder;
@@ -47,13 +45,14 @@ public class ItemDialogUtils {
 
         dialogBuilder.setView(view);
 
-        final EditText inputNote = view.findViewById(R.id.itemNameEt);
+        final EditText itemNameEt = view.findViewById(R.id.itemNameEt);
         TextView dialogTitle = view.findViewById(R.id.dialogTitle);
         dialogTitle.setText(!shouldUpdate ? activity.getString(R.string.add_an_new_item) : activity.getString(R.string.edit_an_existing_item));
 
         if (shouldUpdate && item != null) {
-            inputNote.setText(item.getName());
+            itemNameEt.setText(item.getName());
         }
+
         dialogBuilder
                 .setCancelable(false)
                 .setPositiveButton(shouldUpdate ? "UPDATE" : "ADD", new DialogInterface.OnClickListener() {
@@ -74,7 +73,7 @@ public class ItemDialogUtils {
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(inputNote.getText().toString())) {
+                if (TextUtils.isEmpty(itemNameEt.getText().toString())) {
                     Toast.makeText(activity, "Please enter an item name!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
@@ -83,14 +82,14 @@ public class ItemDialogUtils {
                 if (shouldUpdate && item != null) {
                     dialogActions.updateItem();
                 } else {
-                    dialogActions.addItem();
+                    dialogActions.addItem(itemNameEt.getText().toString());
                 }
             }
         });
     }
 
     public interface AlertDialogActions {
-        void addItem();
+        void addItem(String name);
 
         void updateItem();
     }
