@@ -24,18 +24,29 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public void updateItem(String id, String name) {
+    public void updateItem(String id, final String name) {
 
+        Realm realm = Realm.getDefaultInstance();
+
+        final Item item = realm.where(Item.class)
+                .equalTo("id", id)
+                .findFirst();
+
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                if (item != null) {
+                    item.setName(name);
+                }
+            }
+        });
+
+        realm.close();
     }
 
     @Override
     public void deleteItem(String id) {
 
-    }
-
-    @Override
-    public Item getItem(String id) {
-        return null;
     }
 
     @Override

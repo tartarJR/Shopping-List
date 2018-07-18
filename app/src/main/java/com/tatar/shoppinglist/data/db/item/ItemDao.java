@@ -11,7 +11,5 @@ public interface ItemDao {
 
     void deleteItem(String id);
 
-    Item getItem(String id);
-
     List<Item> getAllItems();
 }
