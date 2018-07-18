@@ -43,8 +43,8 @@ public class ItemsPresenterImpl implements ItemsPresenter {
     }
 
     @Override
-    public void updateItem(String id, String name) {
-        itemsView.notifyItemUpdated(1, name);
+    public void updateItem(String id, String name, int position) {
+        itemsView.notifyItemUpdated(position, name);
         itemDao.updateItem(id, name);
     }
 

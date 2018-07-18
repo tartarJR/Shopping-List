@@ -112,7 +112,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
 
     @Override
     public void updateItem(String id, String name, int position) {
-        itemsPresenter.updateItem(id, name);
+        itemsPresenter.updateItem(id, name, position);
     }
 
     @Override

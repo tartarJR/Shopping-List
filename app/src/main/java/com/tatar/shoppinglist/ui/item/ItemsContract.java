@@ -21,7 +21,7 @@ public interface ItemsContract {
 
         void addItem(String name);
 
-        void updateItem(String id, String name);
+        void updateItem(String id, String name, int position);
 
         void handleFabClick();
 
