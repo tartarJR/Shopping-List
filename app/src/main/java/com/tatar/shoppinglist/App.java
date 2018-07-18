@@ -3,9 +3,9 @@ package com.tatar.shoppinglist;
 import android.app.Activity;
 import android.app.Application;
 
-import com.tatar.shoppinglist.di.component.AppComponent;
-import com.tatar.shoppinglist.di.component.DaggerAppComponent;
-import com.tatar.shoppinglist.di.module.ContextModule;
+import com.tatar.shoppinglist.di.app.component.AppComponent;
+import com.tatar.shoppinglist.di.app.component.DaggerAppComponent;
+import com.tatar.shoppinglist.di.app.module.ContextModule;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

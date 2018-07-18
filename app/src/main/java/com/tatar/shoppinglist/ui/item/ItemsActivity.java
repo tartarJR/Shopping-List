@@ -5,16 +5,15 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.tatar.shoppinglist.App;
 import com.tatar.shoppinglist.ItemAlertDialogUtils;
 import com.tatar.shoppinglist.R;
-import com.tatar.shoppinglist.di.component.ActivityComponent;
-import com.tatar.shoppinglist.di.component.DaggerActivityComponent;
-import com.tatar.shoppinglist.di.module.ItemAlertDialogModule;
-import com.tatar.shoppinglist.di.module.ItemsModule;
+import com.tatar.shoppinglist.di.item.component.DaggerItemsActivityComponent;
+import com.tatar.shoppinglist.di.item.component.ItemsActivityComponent;
+import com.tatar.shoppinglist.di.item.module.ItemAlertDialogModule;
+import com.tatar.shoppinglist.di.item.module.ItemsModule;
 
 import javax.inject.Inject;
 
@@ -49,13 +48,13 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogU
         setContentView(R.layout.activity_items);
         ButterKnife.bind(this);
 
-        ActivityComponent activityComponent = DaggerActivityComponent.builder()
+        ItemsActivityComponent itemsActivityComponent = DaggerItemsActivityComponent.builder()
                 .itemsModule(new ItemsModule(ItemsActivity.this))
                 .itemAlertDialogModule(new ItemAlertDialogModule(this, this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
 
-        activityComponent.injectItemsActivity(ItemsActivity.this);
+        itemsActivityComponent.injectItemsActivity(ItemsActivity.this);
 
         itemsPresenter.loadItems();
     }

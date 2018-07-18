@@ -1,8 +1,8 @@
-package com.tatar.shoppinglist.di.module;
+package com.tatar.shoppinglist.di.app.module;
 
 import android.content.Context;
 
-import com.tatar.shoppinglist.di.scope.AppScope;
+import com.tatar.shoppinglist.di.app.scope.AppScope;
 
 import dagger.Module;
 import dagger.Provides;
