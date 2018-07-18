@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist;
+package com.tatar.shoppinglist.ui.helpers;
 
 import android.content.Context;
 import android.content.res.Resources;

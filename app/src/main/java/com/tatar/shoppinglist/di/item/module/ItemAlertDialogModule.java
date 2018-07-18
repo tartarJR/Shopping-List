@@ -2,14 +2,14 @@ package com.tatar.shoppinglist.di.item.module;
 
 import android.app.Activity;
 
-import com.tatar.shoppinglist.ItemAlertDialogUtils;
+import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
 import com.tatar.shoppinglist.di.item.scope.ItemsActivityScope;
 
 import dagger.Module;
 import dagger.Provides;
 
 import static android.support.v7.app.AlertDialog.Builder;
-import static com.tatar.shoppinglist.ItemAlertDialogUtils.AlertDialogActions;
+import static com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper.AlertDialogActions;
 
 @Module
 public class ItemAlertDialogModule {
@@ -36,8 +36,8 @@ public class ItemAlertDialogModule {
 
     @ItemsActivityScope
     @Provides
-    public ItemAlertDialogUtils itemDialogUtils(Activity activity, Builder builder, AlertDialogActions dialogActions) {
-        return new ItemAlertDialogUtils(activity, builder, dialogActions);
+    public ItemAlertDialogHelper itemDialogUtils(Activity activity, Builder builder, AlertDialogActions dialogActions) {
+        return new ItemAlertDialogHelper(activity, builder, dialogActions);
     }
 
     @ItemsActivityScope

@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist;
+package com.tatar.shoppinglist.ui.helpers;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -10,9 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tatar.shoppinglist.R;
 import com.tatar.shoppinglist.data.db.item.model.Item;
 
-public class ItemAlertDialogUtils {
+public class ItemAlertDialogHelper {
 
     private static boolean SHOULD_NOT_UPDATE = false;
     private static boolean SHOULD_UPDATE = true;
@@ -25,7 +26,7 @@ public class ItemAlertDialogUtils {
     private AlertDialog alertDialog;
 
 
-    public ItemAlertDialogUtils(Activity activity, AlertDialog.Builder dialogBuilder, AlertDialogActions dialogActions) {
+    public ItemAlertDialogHelper(Activity activity, AlertDialog.Builder dialogBuilder, AlertDialogActions dialogActions) {
         this.activity = activity;
         this.dialogBuilder = dialogBuilder;
         this.dialogActions = dialogActions;

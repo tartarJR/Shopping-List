@@ -1,6 +1,6 @@
 package com.tatar.shoppinglist.di.item.module;
 
-import com.tatar.shoppinglist.ItemAlertDialogUtils;
+import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.di.item.scope.ItemsActivityScope;
 import com.tatar.shoppinglist.ui.item.ItemsPresenterImpl;
@@ -28,7 +28,7 @@ public class ItemsModule {
 
     @ItemsActivityScope
     @Provides
-    public ItemsPresenter itemPresenter(ItemsView itemView, ItemDao itemDao, ItemAlertDialogUtils itemAlertDialogUtils) {
-        return new ItemsPresenterImpl(itemView, itemDao, itemAlertDialogUtils);
+    public ItemsPresenter itemPresenter(ItemsView itemView, ItemDao itemDao, ItemAlertDialogHelper itemAlertDialogHelper) {
+        return new ItemsPresenterImpl(itemView, itemDao, itemAlertDialogHelper);
     }
 }
