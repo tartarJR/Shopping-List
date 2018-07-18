@@ -20,30 +20,29 @@ public class ItemAlertDialogHelper {
     private static int ADD_ITEM_NO_POSITION = -1;
 
     private Activity activity;
-    private AlertDialog.Builder dialogBuilder;
     private AlertDialogActions dialogActions;
 
     private AlertDialog alertDialog;
 
 
-    public ItemAlertDialogHelper(Activity activity, AlertDialog.Builder dialogBuilder, AlertDialogActions dialogActions) {
+    public ItemAlertDialogHelper(Activity activity, AlertDialogActions dialogActions) {
         this.activity = activity;
-        this.dialogBuilder = dialogBuilder;
         this.dialogActions = dialogActions;
     }
 
     public void displayAddItemDialog() {
-        setUpItemAlertDialog(SHOULD_NOT_UPDATE, null, ADD_ITEM_NO_POSITION);
+        setUpAndDisplayItemAlertDialog(SHOULD_NOT_UPDATE, null, ADD_ITEM_NO_POSITION);
     }
 
     public void displayUpdateItemDialog(Item item, int position) {
-        setUpItemAlertDialog(SHOULD_UPDATE, null, ADD_ITEM_NO_POSITION);
+        setUpAndDisplayItemAlertDialog(SHOULD_UPDATE, item, position);
     }
 
-    private void setUpItemAlertDialog(final boolean shouldUpdate, final Item item, final int position) {
+    private void setUpAndDisplayItemAlertDialog(final boolean shouldUpdate, final Item item, final int position) {
         LayoutInflater layoutInflaterAndroid = LayoutInflater.from(activity);
         View view = layoutInflaterAndroid.inflate(R.layout.item_dialog, null);
 
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         dialogBuilder.setView(view);
 
         final EditText itemNameEt = view.findViewById(R.id.itemNameEt);
@@ -81,7 +80,7 @@ public class ItemAlertDialogHelper {
                     alertDialog.dismiss();
                 }
                 if (shouldUpdate && item != null) {
-                    dialogActions.updateItem();
+                    dialogActions.updateItem(item.getId(), itemNameEt.getText().toString(), position);
                 } else {
                     dialogActions.addItem(itemNameEt.getText().toString());
                 }
@@ -89,10 +88,31 @@ public class ItemAlertDialogHelper {
         });
     }
 
+    public void showActionsDialog(final int position, final Item item) {
+        CharSequence colors[] = new CharSequence[]{"Edit", "Delete"};
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+        dialogBuilder.setTitle("Choose option");
+        dialogBuilder.setItems(colors, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                    displayUpdateItemDialog(item, position);
+                } else {
+
+                }
+            }
+        });
+
+        dialogBuilder.show();
+    }
+
     public interface AlertDialogActions {
         void addItem(String name);
 
-        void updateItem();
+        void updateItem(String id, String name, int position);
+
+        void deleteItem();
     }
 
 }
