@@ -13,6 +13,8 @@ public interface ItemsContract {
 
         void notifyItemUpdated(int position, String name);
 
+        void notifyItemDeleted(int position);
+
         void toggleEmptyItems();
     }
 
@@ -22,6 +24,8 @@ public interface ItemsContract {
         void addItem(String name);
 
         void updateItem(String id, String name, int position);
+
+        void deleteItem(String id, int position);
 
         void handleFabClick();
 

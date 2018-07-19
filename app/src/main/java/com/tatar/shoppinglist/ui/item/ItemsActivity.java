@@ -61,7 +61,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
         setContentView(R.layout.activity_items);
         ButterKnife.bind(this);
 
-        setUpDaggerComponentandInjectActivity();
+        setUpDaggerComponentAndInjectActivity();
 
         setUpRecyclerView();
 
@@ -81,17 +81,21 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
 
     @Override
     public void notifyNewItemAdded(Item item) {
-        List<Item> items = itemsPresenter.getItemList();
-        items.add(item);
-        itemsAdapter.notifyItemInserted(items.size());
+        itemsPresenter.getItemList().add(item);
+        itemsAdapter.notifyItemInserted(itemsPresenter.getItemList().size());
     }
 
     @Override
     public void notifyItemUpdated(int position, String name) {
-        List<Item> items = itemsPresenter.getItemList();
-        Item item = items.get(position);
-        item.setName(name);
+        itemsPresenter.getItemList().get(position).setName(name);
         itemsAdapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void notifyItemDeleted(int position) {
+        itemsPresenter.getItemList().remove(position);
+        itemsAdapter.notifyItemRemoved(position);
+        itemsAdapter.notifyItemRangeChanged(position, itemsPresenter.getItemList().size());
     }
 
     @Override
@@ -116,11 +120,11 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
     }
 
     @Override
-    public void deleteItem() {
-
+    public void deleteItem(String id, int position) {
+        itemsPresenter.deleteItem(id, position);
     }
 
-    private void setUpDaggerComponentandInjectActivity() {
+    private void setUpDaggerComponentAndInjectActivity() {
         ItemsActivityComponent itemsActivityComponent = DaggerItemsActivityComponent.builder()
                 .itemsModule(new ItemsModule(ItemsActivity.this))
                 .itemAlertDialogModule(new ItemAlertDialogModule(this, this))
@@ -146,10 +150,9 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
 
             @Override
             public void onLongClick(View view, int position) {
-                Log.i(TAG, "onLongClick: ");
+
             }
         }));
     }
-
 
 }

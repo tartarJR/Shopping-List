@@ -99,7 +99,7 @@ public class ItemAlertDialogHelper {
                 if (which == 0) {
                     displayUpdateItemDialog(item, position);
                 } else {
-
+                    dialogActions.deleteItem(item.getId(), position);
                 }
             }
         });
@@ -112,7 +112,7 @@ public class ItemAlertDialogHelper {
 
         void updateItem(String id, String name, int position);
 
-        void deleteItem();
+        void deleteItem(String id, int position);
     }
 
 }

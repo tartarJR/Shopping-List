@@ -47,6 +47,22 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public void deleteItem(String id) {
 
+        Realm realm = Realm.getDefaultInstance();
+
+        final Item item = realm.where(Item.class)
+                .equalTo("id", id)
+                .findFirst();
+
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                if (item != null) {
+                    item.deleteFromRealm();
+                }
+            }
+        });
+
+        realm.close();
     }
 
     @Override

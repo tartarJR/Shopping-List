@@ -49,6 +49,12 @@ public class ItemsPresenterImpl implements ItemsPresenter {
     }
 
     @Override
+    public void deleteItem(String id, int position) {
+        itemsView.notifyItemDeleted(position);
+        itemDao.deleteItem(id);
+    }
+
+    @Override
     public void handleFabClick() {
         itemAlertDialogHelper.displayAddItemDialog();
     }
