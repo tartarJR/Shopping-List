@@ -7,6 +7,9 @@ import java.util.UUID;
 
 import io.realm.Realm;
 
+/**
+ * A class to perform CRUD operations for Items through Realm local database
+ */
 public class ItemDaoImpl implements ItemDao {
     @Override
     public void createItem(final String name) {

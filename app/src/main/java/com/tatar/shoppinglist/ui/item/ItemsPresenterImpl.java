@@ -1,8 +1,8 @@
 package com.tatar.shoppinglist.ui.item;
 
-import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.item.model.Item;
+import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,9 @@ import java.util.List;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
 
+/**
+ * An Android free presenter class for ItemsActivity to manage its business logic
+ */
 public class ItemsPresenterImpl implements ItemsPresenter {
 
     private static final String TAG = ItemsPresenterImpl.class.getSimpleName();
