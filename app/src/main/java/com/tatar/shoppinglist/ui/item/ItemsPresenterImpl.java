@@ -32,14 +32,14 @@ public class ItemsPresenterImpl implements ItemsPresenter {
     public void loadItems() {
         itemList.addAll(itemDao.getAllItems());
         itemsView.displayItems(itemList);
-        itemsView.toggleEmptyItems();
+        itemsView.toggleNoItemsTv();
     }
 
     @Override
-    public void addItem(String name) {
-        itemsView.notifyNewItemAdded(new Item(name));
+    public void createItem(String name) {
+        itemsView.notifyNewItemCreated(new Item(name));
         itemDao.createItem(name);
-        itemsView.toggleEmptyItems();
+        itemsView.toggleNoItemsTv();
     }
 
     @Override
@@ -52,17 +52,18 @@ public class ItemsPresenterImpl implements ItemsPresenter {
     public void deleteItem(String id, int position) {
         itemsView.notifyItemDeleted(position);
         itemDao.deleteItem(id);
+        itemsView.toggleNoItemsTv();
     }
 
     @Override
-    public void handleFabClick() {
+    public void displayAddOrUpdateItemDialog() {
         itemAlertDialogHelper.displayAddItemDialog();
     }
 
     @Override
-    public void handleRecyclerViewItemClick(int position) {
+    public void displayActionsDialog(int position) {
         Item item = itemList.get(position);
-        itemAlertDialogHelper.showActionsDialog(position, item);
+        itemAlertDialogHelper.setUpAndDisplayActionsDialog(position, item);
     }
 
     @Override
