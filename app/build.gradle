@@ -50,4 +50,6 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.8.9'
     androidTestImplementation 'org.mockito:mockito-android:2.7.22'
     testImplementation "org.robolectric:robolectric:3.8"
+
+    implementation 'org.apache.commons:commons-text:1.4'
 }

@@ -1,23 +1,18 @@
 package com.tatar.shoppinglist.utils;
 
+
+import org.apache.commons.text.WordUtils;
+
 public class StringUtils {
 
     /**
-     * Gets an item name and capitalizes first letter of the each word for data consistency
+     * Gets an item name and makes the each word of the name title case for data consistency
      */
     public static String standardizeItemName(String name) {
-        String trimmedName = name.trim();
-        String[] words = trimmedName.split(" ");
 
-        StringBuilder sb = new StringBuilder();
+        String normalizedString = name.trim().replaceAll("\\s+", " ");
 
-        for (String word : words) {
-            sb.append(Character.toUpperCase(word.charAt(0)))
-                    .append(word.substring(1))
-                    .append(" ");
-        }
-
-        return sb.toString().trim();
+        return WordUtils.capitalizeFully(normalizedString);
     }
 
 }
