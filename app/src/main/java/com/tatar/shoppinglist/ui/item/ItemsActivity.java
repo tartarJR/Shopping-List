@@ -55,7 +55,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
         setContentView(R.layout.activity_items);
         ButterKnife.bind(this);
 
-        provideActivityDependencies();
+        provideDependencies();
 
         setUpRecyclerView();
 
@@ -83,9 +83,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
      */
     @Override
     public void toggleNoItemsTv() {
-        List<Item> items = itemsPresenter.getItemList();
-
-        if (items.size() > 0) {
+        if (itemsPresenter.getItemList().size() > 0) {
             noItemsTv.setVisibility(View.GONE);
         } else {
             noItemsTv.setVisibility(View.VISIBLE);
@@ -101,41 +99,12 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
     }
 
     /**
-     * Refreshes itemsRecyclerView when a new item is added.
-     */
-    @Override
-    public void notifyNewItemCreated(Item item) {
-        itemsPresenter.getItemList().add(item);
-        itemsAdapter.notifyItemInserted(itemsPresenter.getItemList().size());
-    }
-
-    /**
-     * Refreshes itemsRecyclerView when an item is updated.
-     */
-    @Override
-    public void notifyItemUpdated(int position, String name) {
-        itemsPresenter.getItemList().get(position).setName(name);
-        itemsAdapter.notifyItemChanged(position);
-    }
-
-    /**
-     * Refreshes itemsRecyclerView when an item is deleted.
-     */
-    @Override
-    public void notifyItemDeleted(int position) {
-        itemsPresenter.getItemList().remove(position);
-        itemsAdapter.notifyItemRemoved(position);
-        itemsAdapter.notifyItemRangeChanged(position, itemsPresenter.getItemList().size());
-    }
-
-    /**
      * ItemAlertDialogHelper.AlertDialogActions interface method implementation.
      * Used under the create action of the alert dialog to add an Item.
      */
     @Override
     public void addItem(String name) {
         itemsPresenter.createItem(name);
-        displayMessage("Item created.");
     }
 
     /**
@@ -145,7 +114,6 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
     @Override
     public void updateItem(String id, String name, int position) {
         itemsPresenter.updateItem(id, name, position);
-        displayMessage("Item updated.");
     }
 
     /**
@@ -161,7 +129,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
     /**
      * Builds itemsActivityComponent and inject ItemActivity's dependencies.
      */
-    private void provideActivityDependencies() {
+    private void provideDependencies() {
         ItemsActivityComponent itemsActivityComponent = DaggerItemsActivityComponent.builder()
                 .itemsModule(new ItemsModule(ItemsActivity.this, ItemsActivity.this, ItemsActivity.this))
                 .appComponent(App.get(this).getAppComponent())

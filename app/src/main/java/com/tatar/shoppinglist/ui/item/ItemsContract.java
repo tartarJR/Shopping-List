@@ -12,12 +12,6 @@ public interface ItemsContract {
         void toggleNoItemsTv();
 
         void displayMessage(String message);
-
-        void notifyNewItemCreated(Item item);
-
-        void notifyItemUpdated(int position, String name);
-
-        void notifyItemDeleted(int position);
     }
 
     interface ItemsPresenter {

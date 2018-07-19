@@ -3,6 +3,7 @@ package com.tatar.shoppinglist.ui.item;
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
+import com.tatar.shoppinglist.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,28 +34,41 @@ public class ItemsPresenterImpl implements ItemsPresenter {
 
     @Override
     public void loadItems() {
-        itemList.addAll(itemDao.getAllItems());
-        itemsView.displayItems(itemList);
+        refreshAndDisplayItemsList();
         itemsView.toggleNoItemsTv();
     }
 
     @Override
     public void createItem(String name) {
-        itemsView.notifyNewItemCreated(new Item(name));
-        itemDao.createItem(name);
-        itemsView.toggleNoItemsTv();
+
+        String standardizedItemName = StringUtils.standardizeItemName(name);
+
+        if (itemDao.createItem(standardizedItemName)) {
+            refreshAndDisplayItemsList();
+            itemsView.toggleNoItemsTv();
+            itemsView.displayMessage("Item created.");
+        } else {
+            itemsView.displayMessage("This item is already created.");
+        }
     }
 
     @Override
     public void updateItem(String id, String name, int position) {
-        itemsView.notifyItemUpdated(position, name);
-        itemDao.updateItem(id, name);
+
+        String standardizedItemName = StringUtils.standardizeItemName(name);
+
+        if (itemDao.updateItem(id, standardizedItemName)) {
+            refreshAndDisplayItemsList();
+            itemsView.displayMessage("Item updated.");
+        } else {
+            itemsView.displayMessage("There is an item already created with that name.");
+        }
     }
 
     @Override
     public void deleteItem(String id, int position) {
-        itemsView.notifyItemDeleted(position);
         itemDao.deleteItem(id);
+        refreshAndDisplayItemsList();
         itemsView.toggleNoItemsTv();
     }
 
@@ -72,5 +86,11 @@ public class ItemsPresenterImpl implements ItemsPresenter {
     @Override
     public List<Item> getItemList() {
         return itemList;
+    }
+
+    private void refreshAndDisplayItemsList() {
+        itemList.clear();
+        itemList.addAll(itemDao.getAllItems());
+        itemsView.displayItems(itemList);
     }
 }
