@@ -5,6 +5,9 @@ import io.realm.annotations.PrimaryKey;
 
 public class Item extends RealmObject {
 
+    public static final String ID_FIELD = "id";
+    public static final String NAME_FIELD = "name";
+
     @PrimaryKey
     private String id;
     private String name;
