@@ -1,5 +1,7 @@
 package com.tatar.shoppinglist.data.db.item;
 
+import android.util.Log;
+
 import com.tatar.shoppinglist.data.db.item.model.Item;
 
 import java.util.List;
@@ -8,72 +10,128 @@ import java.util.UUID;
 import io.realm.Realm;
 
 /**
- * A class to perform CRUD operations for Items through Realm local database
+ * A class to perform CRUD operations for Items through Realm local database.
  */
 public class ItemDaoImpl implements ItemDao {
+
+    private final String TAG = ItemDaoImpl.class.getSimpleName();
+
     @Override
-    public void createItem(final String name) {
-        Realm realm = Realm.getDefaultInstance();
+    public boolean createItem(final String name) {
 
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                Item item1 = realm.createObject(Item.class, UUID.randomUUID().toString());
-                item1.setName(name);
+        boolean isCreated = false;
+
+        Realm realm = null;
+
+        try {
+            realm = Realm.getDefaultInstance();
+
+            // Avoid creating an item with an existing item name.
+            final Item item = realm.where(Item.class).equalTo(Item.NAME_FIELD, name).findFirst();
+
+            if (item == null) {
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        Item item = realm.createObject(Item.class, UUID.randomUUID().toString());
+                        item.setName(name);
+                    }
+                });
+
+                isCreated = true;
             }
-        });
+        } catch (Exception e) {
+            Log.e(TAG, "createItem: ", e);
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
 
-        realm.close();
+        return isCreated;
     }
 
     @Override
-    public void updateItem(String id, final String name) {
+    public boolean updateItem(String id, final String name) {
 
-        Realm realm = Realm.getDefaultInstance();
+        boolean isUpdated = false;
 
-        final Item item = realm.where(Item.class)
-                .equalTo("id", id)
-                .findFirst();
+        Realm realm = null;
 
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                if (item != null) {
-                    item.setName(name);
-                }
+        try {
+            realm = Realm.getDefaultInstance();
+
+            // Avoid updating an item name with an existing item name.
+            final Item item = realm.where(Item.class).equalTo(Item.ID_FIELD, id).findFirst();
+
+            if (item != null && !item.getName().equalsIgnoreCase(name)) {
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        item.setName(name);
+                    }
+                });
+
+                isUpdated = true;
             }
-        });
+        } catch (Exception e) {
+            Log.e(TAG, "updateItem: ", e);
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
 
-        realm.close();
+        return isUpdated;
     }
 
     @Override
     public void deleteItem(String id) {
 
-        Realm realm = Realm.getDefaultInstance();
+        Realm realm = null;
 
-        final Item item = realm.where(Item.class)
-                .equalTo("id", id)
-                .findFirst();
+        try {
+            realm = Realm.getDefaultInstance();
 
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                if (item != null) {
-                    item.deleteFromRealm();
+            final Item item = realm.where(Item.class).equalTo(Item.ID_FIELD, id).findFirst();
+
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    if (item != null) {
+                        item.deleteFromRealm();
+                    }
                 }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, "deleteItem: ", e);
+        } finally {
+            if (realm != null) {
+                realm.close();
             }
-        });
-
-        realm.close();
+        }
     }
 
     @Override
     public List<Item> getAllItems() {
-        Realm realm = Realm.getDefaultInstance();
-        List<Item> gitHubUserList = realm.copyFromRealm(realm.where(Item.class).findAll());
-        realm.close();
+
+        Realm realm = null;
+
+        List<Item> gitHubUserList = null;
+
+        try {
+            realm = Realm.getDefaultInstance();
+            gitHubUserList = realm.copyFromRealm(realm.where(Item.class).findAll());
+        } catch (Exception e) {
+            Log.e(TAG, "getAllItems: ", e);
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
 
         return gitHubUserList;
     }
+
 }
