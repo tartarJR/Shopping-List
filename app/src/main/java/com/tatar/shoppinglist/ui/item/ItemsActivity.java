@@ -1,7 +1,6 @@
 package com.tatar.shoppinglist.ui.item;
 
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -36,9 +35,6 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
 
     private static final String TAG = ItemsActivity.class.getSimpleName();
 
-    @BindView(R.id.coordinatorLayout)
-    CoordinatorLayout coordinatorLayout;
-
     @BindView(R.id.itemsRecyclerView)
     RecyclerView itemsRecyclerView;
 
@@ -48,6 +44,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
     @BindView(R.id.floatingActionButton)
     FloatingActionButton floatingActionButton;
 
+    @Inject
     ItemsAdapter itemsAdapter;
 
     @Inject
@@ -167,7 +164,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
      */
     private void provideActivityDependencies() {
         ItemsActivityComponent itemsActivityComponent = DaggerItemsActivityComponent.builder()
-                .itemsModule(new ItemsModule(ItemsActivity.this))
+                .itemsModule(new ItemsModule(ItemsActivity.this, ItemsActivity.this))
                 .itemAlertDialogModule(new ItemAlertDialogModule(this, this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
@@ -179,7 +176,6 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
      * Sets up itemsRecyclerView along with its ItemAnimator, ItemDecoration and ItemTouchListener.
      */
     private void setUpRecyclerView() {
-        itemsAdapter = new ItemsAdapter(ItemsActivity.this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         itemsRecyclerView.setLayoutManager(mLayoutManager);
         itemsRecyclerView.setItemAnimator(new DefaultItemAnimator());
