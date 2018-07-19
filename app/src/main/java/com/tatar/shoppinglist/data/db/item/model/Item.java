@@ -1,6 +1,7 @@
 package com.tatar.shoppinglist.data.db.item.model;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
 
 public class Item extends RealmObject {
@@ -10,6 +11,7 @@ public class Item extends RealmObject {
 
     @PrimaryKey
     private String id;
+    @Index
     private String name;
 
     public Item() {
