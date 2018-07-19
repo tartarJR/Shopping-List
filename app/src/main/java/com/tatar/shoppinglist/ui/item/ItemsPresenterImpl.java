@@ -1,5 +1,7 @@
 package com.tatar.shoppinglist.ui.item;
 
+import android.util.Log;
+
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
@@ -34,42 +36,60 @@ public class ItemsPresenterImpl implements ItemsPresenter {
 
     @Override
     public void loadItems() {
-        refreshAndDisplayItemsList();
-        itemsView.toggleNoItemsTv();
+        try {
+            refreshAndDisplayItemsList();
+            itemsView.toggleNoItemsTv();
+        } catch (Exception e) {
+            Log.e(TAG, "loadItems: ", e);
+            itemsView.displayMessage("An error occurred, please try again later.");
+        }
     }
 
     @Override
     public void createItem(String name) {
+        try {
+            String standardizedItemName = StringUtils.standardizeItemName(name);
 
-        String standardizedItemName = StringUtils.standardizeItemName(name);
-
-        if (itemDao.createItem(standardizedItemName)) {
-            refreshAndDisplayItemsList();
-            itemsView.toggleNoItemsTv();
-            itemsView.displayMessage("Item created.");
-        } else {
-            itemsView.displayMessage("This item is already created.");
+            if (itemDao.createItem(standardizedItemName)) {
+                refreshAndDisplayItemsList();
+                itemsView.toggleNoItemsTv();
+                itemsView.displayMessage("Item created.");
+            } else {
+                itemsView.displayMessage("This item is already created.");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "createItem: ", e);
+            itemsView.displayMessage("An error occurred, please try again later.");
         }
     }
 
     @Override
     public void updateItem(String id, String name, int position) {
+        try {
+            String standardizedItemName = StringUtils.standardizeItemName(name);
 
-        String standardizedItemName = StringUtils.standardizeItemName(name);
-
-        if (itemDao.updateItem(id, standardizedItemName)) {
-            refreshAndDisplayItemsList();
-            itemsView.displayMessage("Item updated.");
-        } else {
-            itemsView.displayMessage("There is an item already created with that name.");
+            if (itemDao.updateItem(id, standardizedItemName)) {
+                refreshAndDisplayItemsList();
+                itemsView.displayMessage("Item updated.");
+            } else {
+                itemsView.displayMessage("There is an item already created with that name.");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "createItem: ", e);
+            itemsView.displayMessage("An error occurred, please try again later.");
         }
     }
 
     @Override
     public void deleteItem(String id, int position) {
-        itemDao.deleteItem(id);
-        refreshAndDisplayItemsList();
-        itemsView.toggleNoItemsTv();
+        try {
+            itemDao.deleteItem(id);
+            refreshAndDisplayItemsList();
+            itemsView.toggleNoItemsTv();
+        } catch (Exception e) {
+            Log.e(TAG, "deleteItem: ", e);
+            itemsView.displayMessage("An error occurred, please try again later.");
+        }
     }
 
     @Override

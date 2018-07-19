@@ -1,7 +1,5 @@
 package com.tatar.shoppinglist.data.db.item;
 
-import android.util.Log;
-
 import com.tatar.shoppinglist.data.db.item.model.Item;
 
 import java.util.List;
@@ -40,8 +38,6 @@ public class ItemDaoImpl implements ItemDao {
 
                 isCreated = true;
             }
-        } catch (Exception e) {
-            Log.e(TAG, "createItem: ", e);
         } finally {
             if (realm != null) {
                 realm.close();
@@ -75,8 +71,6 @@ public class ItemDaoImpl implements ItemDao {
 
                 isUpdated = true;
             }
-        } catch (Exception e) {
-            Log.e(TAG, "updateItem: ", e);
         } finally {
             if (realm != null) {
                 realm.close();
@@ -104,8 +98,6 @@ public class ItemDaoImpl implements ItemDao {
                     }
                 }
             });
-        } catch (Exception e) {
-            Log.e(TAG, "deleteItem: ", e);
         } finally {
             if (realm != null) {
                 realm.close();
@@ -123,8 +115,6 @@ public class ItemDaoImpl implements ItemDao {
         try {
             realm = Realm.getDefaultInstance();
             gitHubUserList = realm.copyFromRealm(realm.where(Item.class).findAll());
-        } catch (Exception e) {
-            Log.e(TAG, "getAllItems: ", e);
         } finally {
             if (realm != null) {
                 realm.close();
