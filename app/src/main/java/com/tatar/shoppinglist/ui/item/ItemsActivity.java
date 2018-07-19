@@ -15,7 +15,6 @@ import com.tatar.shoppinglist.R;
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.di.item.component.DaggerItemsActivityComponent;
 import com.tatar.shoppinglist.di.item.component.ItemsActivityComponent;
-import com.tatar.shoppinglist.di.item.module.ItemAlertDialogModule;
 import com.tatar.shoppinglist.di.item.module.ItemsModule;
 import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
 import com.tatar.shoppinglist.ui.helpers.RecyclerTouchListener;
@@ -164,8 +163,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
      */
     private void provideActivityDependencies() {
         ItemsActivityComponent itemsActivityComponent = DaggerItemsActivityComponent.builder()
-                .itemsModule(new ItemsModule(ItemsActivity.this, ItemsActivity.this))
-                .itemAlertDialogModule(new ItemAlertDialogModule(this, this))
+                .itemsModule(new ItemsModule(ItemsActivity.this, ItemsActivity.this, ItemsActivity.this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
 
