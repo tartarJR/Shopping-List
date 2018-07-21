@@ -8,4 +8,5 @@
     <string name="item_name">Item Name</string>
     <string name="see_shopping_lists">See Shopping Lists</string>
     <string name="items_activity_title">Item Management</string>
+    <string name="shopping_lists_activity_title">Shopping List Management</string>
 </resources>

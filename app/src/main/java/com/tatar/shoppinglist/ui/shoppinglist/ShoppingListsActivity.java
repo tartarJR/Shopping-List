@@ -12,8 +12,8 @@ public class ShoppingListsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shopping_list);
+        setContentView(R.layout.activity_shopping_lists);
         ButterKnife.bind(this);
-        setTitle("Shopping List Management");
+        setTitle(getString(R.string.shopping_lists_activity_title));
     }
 }
