@@ -10,6 +10,7 @@ public class ShoppingList extends RealmObject {
     private String id;
     private String name;
     private String note;
+    private boolean isCompleted;
     private RealmList<ShoppingListItem> shoppingListItems;
 
     public String getId() {
@@ -34,6 +35,14 @@ public class ShoppingList extends RealmObject {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 
     public RealmList<ShoppingListItem> getShoppingListItems() {
