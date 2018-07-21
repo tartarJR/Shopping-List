@@ -1,7 +1,5 @@
 package com.tatar.shoppinglist.di.item.module;
 
-import android.app.Activity;
-
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.di.item.scope.ItemsActivityScope;
 import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
@@ -61,7 +59,7 @@ public class ItemsModule {
 
     @ItemsActivityScope
     @Provides
-    public ItemAlertDialogHelper itemDialogUtils(ItemsActivity itemsActivity, AlertDialogActions dialogActions) {
+    public ItemAlertDialogHelper itemAlertDialogHelper(ItemsActivity itemsActivity, AlertDialogActions dialogActions) {
         return new ItemAlertDialogHelper(itemsActivity, dialogActions);
     }
 }
