@@ -15,13 +15,13 @@ import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
 
 @Module
-public class ItemsModule {
+public class ItemsActivityModule {
 
     private ItemsActivity itemsActivity;
     private ItemsView itemView;
     private AlertDialogActions dialogActions;
 
-    public ItemsModule(ItemsActivity itemsActivity, ItemsView itemView, AlertDialogActions dialogActions) {
+    public ItemsActivityModule(ItemsActivity itemsActivity, ItemsView itemView, AlertDialogActions dialogActions) {
         this.itemsActivity = itemsActivity;
         this.itemView = itemView;
         this.dialogActions = dialogActions;

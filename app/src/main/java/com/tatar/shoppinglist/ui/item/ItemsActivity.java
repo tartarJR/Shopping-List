@@ -15,8 +15,7 @@ import com.tatar.shoppinglist.R;
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.di.item.component.DaggerItemsActivityComponent;
 import com.tatar.shoppinglist.di.item.component.ItemsActivityComponent;
-import com.tatar.shoppinglist.di.item.module.ItemsModule;
-import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
+import com.tatar.shoppinglist.di.item.module.ItemsActivityModule;
 import com.tatar.shoppinglist.ui.helpers.RecyclerTouchListener;
 import com.tatar.shoppinglist.ui.helpers.RecyclerViewDividerDecoration;
 
@@ -28,9 +27,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper.AlertDialogActions;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
+import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
 
-public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogHelper.AlertDialogActions, ItemsContract.ItemsView {
+public class ItemsActivity extends AppCompatActivity implements AlertDialogActions, ItemsView {
 
     private static final String TAG = ItemsActivity.class.getSimpleName();
 
@@ -132,7 +133,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
      */
     private void provideDependencies() {
         ItemsActivityComponent itemsActivityComponent = DaggerItemsActivityComponent.builder()
-                .itemsModule(new ItemsModule(ItemsActivity.this, ItemsActivity.this, ItemsActivity.this))
+                .itemsModule(new ItemsActivityModule(ItemsActivity.this, ItemsActivity.this, ItemsActivity.this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
 
