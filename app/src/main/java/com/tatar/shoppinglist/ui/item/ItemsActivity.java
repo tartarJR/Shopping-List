@@ -54,6 +54,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemAlertDialogH
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
         ButterKnife.bind(this);
+        setTitle(getString(R.string.items_activity_title));
 
         provideDependencies();
 

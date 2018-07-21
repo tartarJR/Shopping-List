@@ -7,4 +7,5 @@
     <string name="edit_an_existing_item">Edit an existing item</string>
     <string name="item_name">Item Name</string>
     <string name="see_shopping_lists">See Shopping Lists</string>
+    <string name="items_activity_title">Item Management</string>
 </resources>
