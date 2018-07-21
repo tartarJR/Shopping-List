@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.tatar.shoppinglist.R;
 import com.tatar.shoppinglist.ui.item.ItemsActivity;
-import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListActivity;
+import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.shoppingListsBtn)
     void goToShoppingListActivity() {
-        Intent intent = new Intent(MainActivity.this, ShoppingListActivity.class);
+        Intent intent = new Intent(MainActivity.this, ShoppingListsActivity.class);
         startActivity(intent);
     }
 }
