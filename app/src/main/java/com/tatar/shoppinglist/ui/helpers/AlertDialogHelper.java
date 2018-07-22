@@ -27,32 +27,32 @@ public class AlertDialogHelper {
      * Displays an alert dialog for either adding an Item.
      */
     public void displayAddItemDialog() {
-        setUpAndDisplayItemAlertDialog(false, null);
+        setUpAndDisplayAlertDialog(false, null);
     }
 
     /**
      * Displays an alert dialog for either updating an Item.
      */
     private void displayUpdateItemDialog(Item item) {
-        setUpAndDisplayItemAlertDialog(true, item);
+        setUpAndDisplayAlertDialog(true, item);
     }
 
     /**
-     * Creates and displays an alert dialog for either adding or updating an Item.
+     * Creates and displays an alert dialog for either adding or updating.
      */
-    private void setUpAndDisplayItemAlertDialog(final boolean shouldUpdate, final Item item) {
-        LayoutInflater layoutInflaterAndroid = LayoutInflater.from(activity);
-        View view = layoutInflaterAndroid.inflate(R.layout.item_dialog, null);
+    private void setUpAndDisplayAlertDialog(final boolean shouldUpdate, final Item item) {
+        LayoutInflater layoutInflater = LayoutInflater.from(activity);
+        View view = layoutInflater.inflate(R.layout.alert_dialog, null);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         dialogBuilder.setView(view);
 
-        final EditText itemNameEt = view.findViewById(R.id.itemNameEt);
+        final EditText nameEt = view.findViewById(R.id.nameEt);
         TextView dialogTitle = view.findViewById(R.id.dialogTitle);
         dialogTitle.setText(!shouldUpdate ? activity.getString(R.string.add_an_new_item) : activity.getString(R.string.edit_an_existing_item));
 
         if (shouldUpdate && item != null) {
-            itemNameEt.setText(item.getName());
+            nameEt.setText(item.getName());
         }
 
         dialogBuilder
@@ -75,16 +75,16 @@ public class AlertDialogHelper {
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(itemNameEt.getText().toString())) {
+                if (TextUtils.isEmpty(nameEt.getText().toString())) {
                     Toast.makeText(activity, "Please enter an item name!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     alertDialog.dismiss();
                 }
                 if (shouldUpdate && item != null) {
-                    dialogActions.updateItem(item.getId(), itemNameEt.getText().toString());
+                    dialogActions.updateItem(item.getId(), nameEt.getText().toString());
                 } else {
-                    dialogActions.addItem(itemNameEt.getText().toString());
+                    dialogActions.addItem(nameEt.getText().toString());
                 }
             }
         });
