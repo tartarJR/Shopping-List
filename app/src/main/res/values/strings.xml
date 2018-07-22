@@ -9,4 +9,6 @@
     <string name="see_shopping_lists">See Shopping Lists</string>
     <string name="items_activity_title">Item Management</string>
     <string name="shopping_lists_activity_title">Shopping List Management</string>
+    <string name="no_shopping_lists_found">No Shopping Lists Found</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

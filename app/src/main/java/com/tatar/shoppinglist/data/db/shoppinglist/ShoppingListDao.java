@@ -7,17 +7,13 @@ import java.util.List;
 
 public interface ShoppingListDao {
 
-    void createShoppingList();
+    void createShoppingList(String name);
 
-    void updateShoppingList();
-
-    void deleteShoppingList();
-
-    ShoppingList getShoppingList(String id);
+    void deleteShoppingList(String id);
 
     List<ShoppingList> getAllShoppingLists();
 
-    void addItemToShoppingList(Item item);
+    void addItemToShoppingList(String id, Item item);
 
-    void removeItemFromShoppingList(String id);
+    void removeItemFromShoppingList(String id, Item item);
 }
