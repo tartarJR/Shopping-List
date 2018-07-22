@@ -13,12 +13,12 @@ import android.widget.Toast;
 import com.tatar.shoppinglist.R;
 import com.tatar.shoppinglist.data.db.item.model.Item;
 
-public class ItemAlertDialogHelper {
+public class AlertDialogHelper {
 
     private Activity activity;
     private AlertDialogActions dialogActions;
 
-    public ItemAlertDialogHelper(Activity activity, AlertDialogActions dialogActions) {
+    public AlertDialogHelper(Activity activity, AlertDialogActions dialogActions) {
         this.activity = activity;
         this.dialogActions = dialogActions;
     }

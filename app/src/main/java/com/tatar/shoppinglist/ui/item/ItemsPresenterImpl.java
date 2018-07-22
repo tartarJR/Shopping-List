@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.item.model.Item;
-import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
+import com.tatar.shoppinglist.ui.helpers.AlertDialogHelper;
 import com.tatar.shoppinglist.utils.StringUtils;
 
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
@@ -19,12 +19,12 @@ public class ItemsPresenterImpl implements ItemsPresenter {
 
     private ItemsView itemsView;
     private ItemDao itemDao;
-    private ItemAlertDialogHelper itemAlertDialogHelper;
+    private AlertDialogHelper alertDialogHelper;
 
-    public ItemsPresenterImpl(ItemsView itemsView, ItemDao itemDao, ItemAlertDialogHelper itemAlertDialogHelper) {
+    public ItemsPresenterImpl(ItemsView itemsView, ItemDao itemDao, AlertDialogHelper alertDialogHelper) {
         this.itemsView = itemsView;
         this.itemDao = itemDao;
-        this.itemAlertDialogHelper = itemAlertDialogHelper;
+        this.alertDialogHelper = alertDialogHelper;
     }
 
     @Override
@@ -85,12 +85,12 @@ public class ItemsPresenterImpl implements ItemsPresenter {
 
     @Override
     public void displayAddOrUpdateItemDialog() {
-        itemAlertDialogHelper.displayAddItemDialog();
+        alertDialogHelper.displayAddItemDialog();
     }
 
     @Override
     public void displayActionsDialog(Item item) {
-        itemAlertDialogHelper.setUpAndDisplayActionsDialog(item);
+        alertDialogHelper.setUpAndDisplayActionsDialog(item);
     }
 
     private void refreshAndDisplayItemsList() {

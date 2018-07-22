@@ -2,14 +2,14 @@ package com.tatar.shoppinglist.di.shoppinglist.module;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.di.shoppinglist.scope.ShoppingListsActivityScope;
-import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
+import com.tatar.shoppinglist.ui.helpers.AlertDialogHelper;
 import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsActivity;
 import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsPresenterImpl;
 
 import dagger.Module;
 import dagger.Provides;
 
-import static com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper.AlertDialogActions;
+import static com.tatar.shoppinglist.ui.helpers.AlertDialogHelper.AlertDialogActions;
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsPresenter;
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsView;
 
@@ -46,13 +46,13 @@ public class ShoppingListsActivityModule {
 
     @ShoppingListsActivityScope
     @Provides
-    public ShoppingListsPresenter shoppingListsPresenter(ShoppingListsView shoppingListsView, ShoppingListDao shoppingListDao, ItemAlertDialogHelper itemAlertDialogHelper) {
-        return new ShoppingListsPresenterImpl(shoppingListsView, shoppingListDao, itemAlertDialogHelper);
+    public ShoppingListsPresenter shoppingListsPresenter(ShoppingListsView shoppingListsView, ShoppingListDao shoppingListDao, AlertDialogHelper alertDialogHelper) {
+        return new ShoppingListsPresenterImpl(shoppingListsView, shoppingListDao, alertDialogHelper);
     }
 
     @ShoppingListsActivityScope
     @Provides
-    public ItemAlertDialogHelper itemDialogUtils(ShoppingListsActivity shoppingListsActivity, AlertDialogActions dialogActions) {
-        return new ItemAlertDialogHelper(shoppingListsActivity, dialogActions);
+    public AlertDialogHelper alertDialogHelper(ShoppingListsActivity shoppingListsActivity, AlertDialogActions dialogActions) {
+        return new AlertDialogHelper(shoppingListsActivity, dialogActions);
     }
 }

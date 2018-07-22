@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper.AlertDialogActions;
+import static com.tatar.shoppinglist.ui.helpers.AlertDialogHelper.AlertDialogActions;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
 
@@ -120,7 +120,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
     }
 
     /**
-     * ItemAlertDialogHelper.AlertDialogActions interface method implementation.
+     * AlertDialogHelper.AlertDialogActions interface method implementation.
      * Used under the create action of the alert dialog to add an Item.
      */
     @Override
@@ -129,7 +129,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
     }
 
     /**
-     * ItemAlertDialogHelper.AlertDialogActions interface method implementation.
+     * AlertDialogHelper.AlertDialogActions interface method implementation.
      * Used under the update action of the alert dialog to update an Item.
      */
     @Override
@@ -138,7 +138,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
     }
 
     /**
-     * ItemAlertDialogHelper.AlertDialogActions interface method implementation.
+     * AlertDialogHelper.AlertDialogActions interface method implementation.
      * Used under the delete action click event of the alert dialog to delete an Item.
      */
     @Override

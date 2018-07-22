@@ -2,8 +2,8 @@ package com.tatar.shoppinglist.di.item.module;
 
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.di.item.scope.ItemsActivityScope;
-import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
-import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper.AlertDialogActions;
+import com.tatar.shoppinglist.ui.helpers.AlertDialogHelper;
+import com.tatar.shoppinglist.ui.helpers.AlertDialogHelper.AlertDialogActions;
 import com.tatar.shoppinglist.ui.item.ItemsActivity;
 import com.tatar.shoppinglist.ui.item.ItemsAdapter;
 import com.tatar.shoppinglist.ui.item.ItemsPresenterImpl;
@@ -47,8 +47,8 @@ public class ItemsActivityModule {
 
     @ItemsActivityScope
     @Provides
-    public ItemsPresenter itemPresenter(ItemsView itemView, ItemDao itemDao, ItemAlertDialogHelper itemAlertDialogHelper) {
-        return new ItemsPresenterImpl(itemView, itemDao, itemAlertDialogHelper);
+    public ItemsPresenter itemPresenter(ItemsView itemView, ItemDao itemDao, AlertDialogHelper alertDialogHelper) {
+        return new ItemsPresenterImpl(itemView, itemDao, alertDialogHelper);
     }
 
     @ItemsActivityScope
@@ -59,7 +59,7 @@ public class ItemsActivityModule {
 
     @ItemsActivityScope
     @Provides
-    public ItemAlertDialogHelper itemAlertDialogHelper(ItemsActivity itemsActivity, AlertDialogActions dialogActions) {
-        return new ItemAlertDialogHelper(itemsActivity, dialogActions);
+    public AlertDialogHelper alertDialogHelper(ItemsActivity itemsActivity, AlertDialogActions dialogActions) {
+        return new AlertDialogHelper(itemsActivity, dialogActions);
     }
 }
