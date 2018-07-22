@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglist;
+package com.tatar.shoppinglist.ui.item;
 
 import android.os.AsyncTask;
 
