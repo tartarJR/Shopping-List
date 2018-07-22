@@ -9,9 +9,11 @@ public interface ItemsContract {
     interface ItemsView {
         void displayItems(List<Item> items);
 
-        void toggleNoItemsTv();
+        void toggleNoItemsTv(int size);
 
         void displayMessage(String message);
+
+        void toogleProgressBar();
     }
 
     interface ItemsPresenter {
@@ -19,15 +21,13 @@ public interface ItemsContract {
 
         void createItem(String name);
 
-        void updateItem(String id, String name, int position);
+        void updateItem(String id, String name);
 
-        void deleteItem(String id, int position);
+        void deleteItem(String id);
 
         void displayAddOrUpdateItemDialog();
 
-        void displayActionsDialog(int position);
-
-        List<Item> getItemList();
+        void displayActionsDialog(Item item);
     }
 
 }

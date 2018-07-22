@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,9 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
 
     @BindView(R.id.floatingActionButton)
     FloatingActionButton floatingActionButton;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     @Inject
     ItemsAdapter itemsAdapter;
@@ -84,8 +88,8 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
      * Displays noItemsTV if there is no item in local database.
      */
     @Override
-    public void toggleNoItemsTv() {
-        if (itemsPresenter.getItemList().size() > 0) {
+    public void toggleNoItemsTv(int size) {
+        if (size > 0) {
             noItemsTv.setVisibility(View.GONE);
         } else {
             noItemsTv.setVisibility(View.VISIBLE);
@@ -98,6 +102,21 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
     @Override
     public void displayMessage(String message) {
         Toast.makeText(ItemsActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toogleProgressBar() {
+        if (progressBar.getVisibility() == View.INVISIBLE) {
+            progressBar.setVisibility(View.VISIBLE);
+            itemsRecyclerView.setVisibility(View.INVISIBLE);
+            noItemsTv.setVisibility(View.INVISIBLE);
+            floatingActionButton.setVisibility(View.INVISIBLE);
+        } else {
+            progressBar.setVisibility(View.INVISIBLE);
+            itemsRecyclerView.setVisibility(View.VISIBLE);
+            noItemsTv.setVisibility(View.VISIBLE);
+            floatingActionButton.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
@@ -114,8 +133,8 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
      * Used under the update action of the alert dialog to update an Item.
      */
     @Override
-    public void updateItem(String id, String name, int position) {
-        itemsPresenter.updateItem(id, name, position);
+    public void updateItem(String id, String name) {
+        itemsPresenter.updateItem(id, name);
     }
 
     /**
@@ -123,9 +142,8 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
      * Used under the delete action click event of the alert dialog to delete an Item.
      */
     @Override
-    public void deleteItem(String id, int position) {
-        itemsPresenter.deleteItem(id, position);
-        displayMessage("Item deleted.");
+    public void deleteItem(String id) {
+        itemsPresenter.deleteItem(id);
     }
 
     /**
@@ -133,7 +151,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
      */
     private void provideDependencies() {
         ItemsActivityComponent itemsActivityComponent = DaggerItemsActivityComponent.builder()
-                .itemsModule(new ItemsActivityModule(ItemsActivity.this, ItemsActivity.this, ItemsActivity.this))
+                .itemsActivityModule(new ItemsActivityModule(ItemsActivity.this, ItemsActivity.this, ItemsActivity.this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
 
@@ -153,7 +171,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
         itemsRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, itemsRecyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                itemsPresenter.displayActionsDialog(position);
+                itemsPresenter.displayActionsDialog(itemsAdapter.getItem(position));
             }
 
             @Override

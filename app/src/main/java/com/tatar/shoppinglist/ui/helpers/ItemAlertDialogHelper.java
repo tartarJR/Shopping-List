@@ -27,20 +27,20 @@ public class ItemAlertDialogHelper {
      * Displays an alert dialog for either adding an Item.
      */
     public void displayAddItemDialog() {
-        setUpAndDisplayItemAlertDialog(false, null, -1);
+        setUpAndDisplayItemAlertDialog(false, null);
     }
 
     /**
      * Displays an alert dialog for either updating an Item.
      */
-    private void displayUpdateItemDialog(Item item, int position) {
-        setUpAndDisplayItemAlertDialog(true, item, position);
+    private void displayUpdateItemDialog(Item item) {
+        setUpAndDisplayItemAlertDialog(true, item);
     }
 
     /**
      * Creates and displays an alert dialog for either adding or updating an Item.
      */
-    private void setUpAndDisplayItemAlertDialog(final boolean shouldUpdate, final Item item, final int position) {
+    private void setUpAndDisplayItemAlertDialog(final boolean shouldUpdate, final Item item) {
         LayoutInflater layoutInflaterAndroid = LayoutInflater.from(activity);
         View view = layoutInflaterAndroid.inflate(R.layout.item_dialog, null);
 
@@ -82,7 +82,7 @@ public class ItemAlertDialogHelper {
                     alertDialog.dismiss();
                 }
                 if (shouldUpdate && item != null) {
-                    dialogActions.updateItem(item.getId(), itemNameEt.getText().toString(), position);
+                    dialogActions.updateItem(item.getId(), itemNameEt.getText().toString());
                 } else {
                     dialogActions.addItem(itemNameEt.getText().toString());
                 }
@@ -93,7 +93,7 @@ public class ItemAlertDialogHelper {
     /**
      * Creates and displays an alert dialog for picking an option to update or delete an Item.
      */
-    public void setUpAndDisplayActionsDialog(final int position, final Item item) {
+    public void setUpAndDisplayActionsDialog(final Item item) {
         CharSequence actions[] = new CharSequence[]{"Update", "Delete"};
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
@@ -103,9 +103,9 @@ public class ItemAlertDialogHelper {
             public void onClick(DialogInterface dialog, int actionType) {
                 // actionType 0 mean update action will bee performed, otherwise delete operation will be performed
                 if (actionType == 0) {
-                    displayUpdateItemDialog(item, position);
+                    displayUpdateItemDialog(item);
                 } else {
-                    dialogActions.deleteItem(item.getId(), position);
+                    dialogActions.deleteItem(item.getId());
                 }
             }
         });
@@ -119,9 +119,9 @@ public class ItemAlertDialogHelper {
     public interface AlertDialogActions {
         void addItem(String name);
 
-        void updateItem(String id, String name, int position);
+        void updateItem(String id, String name);
 
-        void deleteItem(String id, int position);
+        void deleteItem(String id);
     }
 
 }

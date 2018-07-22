@@ -53,8 +53,8 @@ public class ItemsActivityModule {
 
     @ItemsActivityScope
     @Provides
-    public ItemsAdapter itemsAdapter(ItemsActivity itemsActivity) {
-        return new ItemsAdapter(itemsActivity);
+    public ItemsAdapter itemsAdapter() {
+        return new ItemsAdapter();
     }
 
     @ItemsActivityScope

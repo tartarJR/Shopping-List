@@ -1,6 +1,5 @@
 package com.tatar.shoppinglist.ui.item;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -21,11 +20,9 @@ import butterknife.ButterKnife;
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
 
     private List<Item> itemList;
-    private final Context context;
 
-    public ItemsAdapter(Context context) {
+    public ItemsAdapter() {
         this.itemList = new ArrayList<>();
-        this.context = context;
     }
 
     @NonNull
@@ -62,6 +59,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public Item getItem(int position) {
+        return itemList.get(position);
     }
 
     public void setItemList(List<Item> itemList) {

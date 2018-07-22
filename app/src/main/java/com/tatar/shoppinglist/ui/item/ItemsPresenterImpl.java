@@ -5,10 +5,8 @@ import android.util.Log;
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.ui.helpers.ItemAlertDialogHelper;
+import com.tatar.shoppinglist.ui.shoppinglist.ItemsTask;
 import com.tatar.shoppinglist.utils.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
@@ -20,8 +18,6 @@ public class ItemsPresenterImpl implements ItemsPresenter {
 
     private static final String TAG = ItemsPresenterImpl.class.getSimpleName();
 
-    private List<Item> itemList;
-
     private ItemsView itemsView;
     private ItemDao itemDao;
     private ItemAlertDialogHelper itemAlertDialogHelper;
@@ -30,15 +26,12 @@ public class ItemsPresenterImpl implements ItemsPresenter {
         this.itemsView = itemsView;
         this.itemDao = itemDao;
         this.itemAlertDialogHelper = itemAlertDialogHelper;
-
-        itemList = new ArrayList<>();
     }
 
     @Override
     public void loadItems() {
         try {
             refreshAndDisplayItemsList();
-            itemsView.toggleNoItemsTv();
         } catch (Exception e) {
             Log.e(TAG, "loadItems: ", e);
             itemsView.displayMessage("An error occurred, please try again later.");
@@ -52,7 +45,6 @@ public class ItemsPresenterImpl implements ItemsPresenter {
 
             if (itemDao.createItem(standardizedItemName)) {
                 refreshAndDisplayItemsList();
-                itemsView.toggleNoItemsTv();
                 itemsView.displayMessage("Item created.");
             } else {
                 itemsView.displayMessage("This item is already created.");
@@ -64,7 +56,7 @@ public class ItemsPresenterImpl implements ItemsPresenter {
     }
 
     @Override
-    public void updateItem(String id, String name, int position) {
+    public void updateItem(String id, String name) {
         try {
             String standardizedItemName = StringUtils.standardizeItemName(name);
 
@@ -81,11 +73,11 @@ public class ItemsPresenterImpl implements ItemsPresenter {
     }
 
     @Override
-    public void deleteItem(String id, int position) {
+    public void deleteItem(String id) {
         try {
             itemDao.deleteItem(id);
             refreshAndDisplayItemsList();
-            itemsView.toggleNoItemsTv();
+            itemsView.displayMessage("Item deleted.");
         } catch (Exception e) {
             Log.e(TAG, "deleteItem: ", e);
             itemsView.displayMessage("An error occurred, please try again later.");
@@ -98,19 +90,12 @@ public class ItemsPresenterImpl implements ItemsPresenter {
     }
 
     @Override
-    public void displayActionsDialog(int position) {
-        Item item = itemList.get(position);
-        itemAlertDialogHelper.setUpAndDisplayActionsDialog(position, item);
-    }
-
-    @Override
-    public List<Item> getItemList() {
-        return itemList;
+    public void displayActionsDialog(Item item) {
+        itemAlertDialogHelper.setUpAndDisplayActionsDialog(item);
     }
 
     private void refreshAndDisplayItemsList() {
-        itemList.clear();
-        itemList.addAll(itemDao.getAllItems());
-        itemsView.displayItems(itemList);
+        ItemsTask itemsTask = new ItemsTask(itemsView, itemDao);
+        itemsTask.execute();
     }
 }

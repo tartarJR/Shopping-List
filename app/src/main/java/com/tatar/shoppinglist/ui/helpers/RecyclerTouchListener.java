@@ -6,6 +6,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.tatar.shoppinglist.data.db.item.model.Item;
+
 public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
     private ClickListener clicklistener;
