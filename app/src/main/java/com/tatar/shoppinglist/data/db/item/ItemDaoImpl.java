@@ -110,18 +110,18 @@ public class ItemDaoImpl implements ItemDao {
 
         Realm realm = null;
 
-        List<Item> gitHubUserList = null;
+        List<Item> itemList = null;
 
         try {
             realm = Realm.getDefaultInstance();
-            gitHubUserList = realm.copyFromRealm(realm.where(Item.class).findAll());
+            itemList = realm.copyFromRealm(realm.where(Item.class).findAll());
         } finally {
             if (realm != null) {
                 realm.close();
             }
         }
 
-        return gitHubUserList;
+        return itemList;
     }
 
 }

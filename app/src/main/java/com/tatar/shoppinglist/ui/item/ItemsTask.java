@@ -22,7 +22,7 @@ public class ItemsTask extends AsyncTask<Void, Void, List<Item>> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        itemsView.toogleProgressBar();
+        itemsView.toggleProgressBar();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ItemsTask extends AsyncTask<Void, Void, List<Item>> {
     @Override
     protected void onPostExecute(List<Item> items) {
         super.onPostExecute(items);
-        itemsView.toogleProgressBar();
+        itemsView.toggleProgressBar();
 
         if (items == null) {
             itemsView.displayMessage("Upps ! Something went wrong.");

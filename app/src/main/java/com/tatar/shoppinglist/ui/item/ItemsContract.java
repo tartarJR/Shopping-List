@@ -13,7 +13,7 @@ public interface ItemsContract {
 
         void displayMessage(String message);
 
-        void toogleProgressBar();
+        void toggleProgressBar();
     }
 
     interface ItemsPresenter {

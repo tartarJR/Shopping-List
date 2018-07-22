@@ -105,7 +105,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
     }
 
     @Override
-    public void toogleProgressBar() {
+    public void toggleProgressBar() {
         if (progressBar.getVisibility() == View.INVISIBLE) {
             progressBar.setVisibility(View.VISIBLE);
             itemsRecyclerView.setVisibility(View.INVISIBLE);
