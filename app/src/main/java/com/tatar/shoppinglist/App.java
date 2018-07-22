@@ -18,7 +18,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        appComponent = DaggerAppComponent.builder().contextModule(new ContextModule(this)).build();
+        appComponent = DaggerAppComponent.builder().build();
 
         // initialize Realm
         Realm.init(getApplicationContext());
