@@ -38,8 +38,9 @@ public class ShoppingListsPresenterImpl implements ShoppingListsContract.Shoppin
         try {
             String standardizedItemName = StringUtils.standardizeItemName(name);
             shoppingListDao.createShoppingList(standardizedItemName);
-            refreshAndDisplayShoppingLists();
             shoppingListsView.displayMessage("Shopping list created.");
+            refreshAndDisplayShoppingLists();
+            shoppingListsView.navigateToAddItemActivity(standardizedItemName);
         } catch (Exception e) {
             Log.e(TAG, "createShoppingList: ", e);
             shoppingListsView.displayMessage("An error occurred, please try again later.");

@@ -11,7 +11,7 @@ public interface ShoppingListsContract {
 
         void toggleNoShoppingListTv(int size);
 
-        void navigateToAddItemActivity();
+        void navigateToAddItemActivity(String title);
 
         void toggleProgressBar();
 

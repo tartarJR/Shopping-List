@@ -1,5 +1,6 @@
 package com.tatar.shoppinglist.ui.shoppinglist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,9 @@ import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
 import com.tatar.shoppinglist.di.shoppinglist.component.DaggerShoppingListsActivityComponent;
 import com.tatar.shoppinglist.di.shoppinglist.component.ShoppingListsActivityComponent;
 import com.tatar.shoppinglist.di.shoppinglist.module.ShoppingListsActivityModule;
+import com.tatar.shoppinglist.ui.item.ItemsActivity;
+import com.tatar.shoppinglist.ui.main.MainActivity;
+import com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemActivity;
 import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
 import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
 import com.tatar.shoppinglist.utils.ui.RecyclerViewDividerDecoration;
@@ -89,8 +93,10 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
     }
 
     @Override
-    public void navigateToAddItemActivity() {
-
+    public void navigateToAddItemActivity(String title) {
+        Intent intent = new Intent(ShoppingListsActivity.this, AddItemActivity.class);
+        intent.putExtra(AddItemActivity.INCOMING_TITLE, title);
+        startActivity(intent);
     }
 
     @Override
