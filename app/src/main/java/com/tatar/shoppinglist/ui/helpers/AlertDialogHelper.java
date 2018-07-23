@@ -27,20 +27,20 @@ public class AlertDialogHelper {
      * Displays an alert dialog for either adding an Item.
      */
     public void displayAddItemDialog() {
-        setUpAndDisplayAlertDialog(false, null);
+        setUpAndDisplayItemAlertDialog(false, null);
     }
 
     /**
      * Displays an alert dialog for either updating an Item.
      */
     private void displayUpdateItemDialog(Item item) {
-        setUpAndDisplayAlertDialog(true, item);
+        setUpAndDisplayItemAlertDialog(true, item);
     }
 
     /**
-     * Creates and displays an alert dialog for either adding or updating.
+     * Creates and displays an alert dialog for either adding or updating an item.
      */
-    private void setUpAndDisplayAlertDialog(final boolean shouldUpdate, final Item item) {
+    private void setUpAndDisplayItemAlertDialog(final boolean shouldUpdate, final Item item) {
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
         View view = layoutInflater.inflate(R.layout.alert_dialog, null);
 
@@ -48,6 +48,7 @@ public class AlertDialogHelper {
         dialogBuilder.setView(view);
 
         final EditText nameEt = view.findViewById(R.id.nameEt);
+        nameEt.setHint(R.string.enter_an_item_name_hint);
         TextView dialogTitle = view.findViewById(R.id.dialogTitle);
         dialogTitle.setText(!shouldUpdate ? activity.getString(R.string.add_an_new_item) : activity.getString(R.string.edit_an_existing_item));
 
@@ -86,6 +87,54 @@ public class AlertDialogHelper {
                 } else {
                     dialogActions.addItem(nameEt.getText().toString());
                 }
+            }
+        });
+    }
+
+    /**
+     * Creates and displays an alert dialog for creating a shopping list.
+     * TODO refactor this method since it violates DRY principle by doing almost the same job with setUpAndDisplayItemAlertDialog method
+     * TODO make alert dialog methods more generic
+     */
+    public void setUpAndDisplayShoppingListAlertDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(activity);
+        View view = layoutInflater.inflate(R.layout.alert_dialog, null);
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+        dialogBuilder.setView(view);
+
+        final EditText nameEt = view.findViewById(R.id.nameEt);
+        nameEt.setHint("Enter a shopping list name");
+        TextView dialogTitle = view.findViewById(R.id.dialogTitle);
+        dialogTitle.setText(R.string.create_shopping_list_title);
+
+        dialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("CREATE", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogBox, int id) {
+
+                    }
+                })
+                .setNegativeButton("CANCEL",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogBox, int id) {
+                                dialogBox.cancel();
+                            }
+                        });
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(nameEt.getText().toString())) {
+                    Toast.makeText(activity, "Please enter a shopping list name!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    alertDialog.dismiss();
+                }
+                dialogActions.addItem(nameEt.getText().toString());
             }
         });
     }
