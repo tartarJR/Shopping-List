@@ -124,7 +124,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
      * Used under the create action of the alert dialog to add an Item.
      */
     @Override
-    public void addItem(String name) {
+    public void create(String name) {
         itemsPresenter.createItem(name);
     }
 
@@ -133,7 +133,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
      * Used under the update action of the alert dialog to update an Item.
      */
     @Override
-    public void updateItem(String id, String name) {
+    public void update(String id, String name) {
         itemsPresenter.updateItem(id, name);
     }
 
@@ -142,7 +142,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
      * Used under the delete action click event of the alert dialog to delete an Item.
      */
     @Override
-    public void deleteItem(String id) {
+    public void delete(String id) {
         itemsPresenter.deleteItem(id);
     }
 

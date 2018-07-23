@@ -83,9 +83,9 @@ public class AlertDialogHelper {
                     alertDialog.dismiss();
                 }
                 if (shouldUpdate && item != null) {
-                    dialogActions.updateItem(item.getId(), nameEt.getText().toString());
+                    dialogActions.update(item.getId(), nameEt.getText().toString());
                 } else {
-                    dialogActions.addItem(nameEt.getText().toString());
+                    dialogActions.create(nameEt.getText().toString());
                 }
             }
         });
@@ -134,7 +134,7 @@ public class AlertDialogHelper {
                 } else {
                     alertDialog.dismiss();
                 }
-                dialogActions.addItem(nameEt.getText().toString());
+                dialogActions.create(nameEt.getText().toString());
             }
         });
     }
@@ -154,7 +154,7 @@ public class AlertDialogHelper {
                 if (actionType == 0) {
                     displayUpdateItemDialog(item);
                 } else {
-                    dialogActions.deleteItem(item.getId());
+                    dialogActions.delete(item.getId());
                 }
             }
         });
@@ -166,11 +166,11 @@ public class AlertDialogHelper {
      * An interface for managing AlertDialog actions. It will be implemented by an Activity
      */
     public interface AlertDialogActions {
-        void addItem(String name);
+        void create(String name);
 
-        void updateItem(String id, String name);
+        void update(String id, String name);
 
-        void deleteItem(String id);
+        void delete(String id);
     }
 
 }
