@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
-import com.tatar.shoppinglist.ui.helpers.AlertDialogHelper;
+import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
 import com.tatar.shoppinglist.utils.StringUtils;
 
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsView;

@@ -2,8 +2,8 @@ package com.tatar.shoppinglist.di.item.module;
 
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.di.item.scope.ItemsActivityScope;
-import com.tatar.shoppinglist.ui.helpers.AlertDialogHelper;
-import com.tatar.shoppinglist.ui.helpers.AlertDialogHelper.AlertDialogActions;
+import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
+import com.tatar.shoppinglist.utils.ui.AlertDialogHelper.AlertDialogActions;
 import com.tatar.shoppinglist.ui.item.ItemsActivity;
 import com.tatar.shoppinglist.ui.item.ItemsAdapter;
 import com.tatar.shoppinglist.ui.item.ItemsPresenterImpl;

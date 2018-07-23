@@ -17,9 +17,9 @@ import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
 import com.tatar.shoppinglist.di.shoppinglist.component.DaggerShoppingListsActivityComponent;
 import com.tatar.shoppinglist.di.shoppinglist.component.ShoppingListsActivityComponent;
 import com.tatar.shoppinglist.di.shoppinglist.module.ShoppingListsActivityModule;
-import com.tatar.shoppinglist.ui.helpers.AlertDialogHelper;
-import com.tatar.shoppinglist.ui.helpers.RecyclerTouchListener;
-import com.tatar.shoppinglist.ui.helpers.RecyclerViewDividerDecoration;
+import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
+import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
+import com.tatar.shoppinglist.utils.ui.RecyclerViewDividerDecoration;
 
 import java.util.List;
 

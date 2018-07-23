@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.helpers;
+package com.tatar.shoppinglist.utils.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;

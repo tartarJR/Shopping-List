@@ -17,8 +17,8 @@ import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.di.item.component.DaggerItemsActivityComponent;
 import com.tatar.shoppinglist.di.item.component.ItemsActivityComponent;
 import com.tatar.shoppinglist.di.item.module.ItemsActivityModule;
-import com.tatar.shoppinglist.ui.helpers.RecyclerTouchListener;
-import com.tatar.shoppinglist.ui.helpers.RecyclerViewDividerDecoration;
+import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
+import com.tatar.shoppinglist.utils.ui.RecyclerViewDividerDecoration;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.tatar.shoppinglist.ui.helpers.AlertDialogHelper.AlertDialogActions;
+import static com.tatar.shoppinglist.utils.ui.AlertDialogHelper.AlertDialogActions;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
 
