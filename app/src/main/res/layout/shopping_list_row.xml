@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:paddingBottom="10dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/itemDot"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:textColor="@color/orange_dot_color"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/shoppingListNameLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/itemDot"
+        android:layout_toRightOf="@id/itemDot"
+        android:text="@string/shopping_list_name"
+        android:textColor="@color/timestamp"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/shoppingListNameTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shoppingListNameLbl"
+        android:layout_toEndOf="@id/itemDot"
+        android:layout_toRightOf="@id/itemDot"
+        android:textColor="@color/note_list_text"
+        android:textSize="18sp"
+        tools:text="Item name" />
+
+</RelativeLayout>

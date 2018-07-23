@@ -4,6 +4,7 @@ import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.di.shoppinglist.scope.ShoppingListsActivityScope;
 import com.tatar.shoppinglist.ui.helpers.AlertDialogHelper;
 import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsActivity;
+import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsAdapter;
 import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsPresenterImpl;
 
 import dagger.Module;
@@ -48,6 +49,12 @@ public class ShoppingListsActivityModule {
     @Provides
     public ShoppingListsPresenter shoppingListsPresenter(ShoppingListsView shoppingListsView, ShoppingListDao shoppingListDao, AlertDialogHelper alertDialogHelper) {
         return new ShoppingListsPresenterImpl(shoppingListsView, shoppingListDao, alertDialogHelper);
+    }
+
+    @ShoppingListsActivityScope
+    @Provides
+    public ShoppingListsAdapter shoppingListsAdapter() {
+        return new ShoppingListsAdapter();
     }
 
     @ShoppingListsActivityScope
