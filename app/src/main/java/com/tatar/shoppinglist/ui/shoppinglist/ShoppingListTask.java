@@ -1,6 +1,7 @@
 package com.tatar.shoppinglist.ui.shoppinglist;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
@@ -38,6 +39,7 @@ public class ShoppingListTask extends AsyncTask<Void, Void, List<ShoppingList>> 
         if (shoppingLists == null) {
             shoppingListsView.displayMessage("Upps ! Something went wrong.");
         } else {
+            Log.i("BOYZ", "onPostExecute: " + shoppingLists.size());
             shoppingListsView.toggleNoShoppingListTv(shoppingLists.size());
             shoppingListsView.displayShoppingLists(shoppingLists);
         }

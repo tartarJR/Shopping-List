@@ -28,7 +28,7 @@ public interface ShoppingListsContract {
 
         void deleteShoppingList(String id);
 
-        void displayAddOrUpdateShoppingListDialog();
+        void displayCreateShoppingListDialog();
 
         void displayActionsDialog(ShoppingList shoppingList);
     }

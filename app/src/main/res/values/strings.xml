@@ -12,4 +12,5 @@
     <string name="no_shopping_lists_found">No Shopping Lists Found</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="create_shopping_list_title">Create a Shopping List</string>
+    <string name="shopping_list_name">Shopping List Name</string>
 </resources>
