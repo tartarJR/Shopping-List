@@ -90,7 +90,7 @@ public class ItemsPresenterImpl implements ItemsPresenter {
 
     @Override
     public void displayActionsDialog(Item item) {
-        alertDialogHelper.setUpAndDisplayActionsDialog(item);
+        alertDialogHelper.setUpAndDisplayActionsDialog(item.getId(), item.getName());
     }
 
     private void refreshAndDisplayItemsList() {
