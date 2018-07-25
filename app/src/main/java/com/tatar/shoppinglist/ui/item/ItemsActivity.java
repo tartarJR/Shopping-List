@@ -28,9 +28,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.tatar.shoppinglist.utils.ui.AlertDialogHelper.AlertDialogActions;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
+import static com.tatar.shoppinglist.utils.ui.AlertDialogHelper.AlertDialogActions;
 
 public class ItemsActivity extends AppCompatActivity implements AlertDialogActions, ItemsView {
 
@@ -73,7 +73,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
      */
     @OnClick(R.id.floatingActionButton)
     void floatingActionButtonClick() {
-        itemsPresenter.displayAddOrUpdateItemDialog();
+        itemsPresenter.displayAddItemDialog();
     }
 
     /**

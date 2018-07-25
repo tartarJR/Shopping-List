@@ -25,7 +25,7 @@ public interface ItemsContract {
 
         void deleteItem(String id);
 
-        void displayAddOrUpdateItemDialog();
+        void displayAddItemDialog();
 
         void displayActionsDialog(Item item);
     }
