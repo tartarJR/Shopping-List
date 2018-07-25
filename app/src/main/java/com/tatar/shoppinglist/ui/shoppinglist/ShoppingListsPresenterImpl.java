@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
-import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
 import com.tatar.shoppinglist.utils.StringUtils;
+import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
 
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsView;
 
@@ -37,10 +37,10 @@ public class ShoppingListsPresenterImpl implements ShoppingListsContract.Shoppin
     public void createShoppingList(String name) {
         try {
             String standardizedItemName = StringUtils.standardizeItemName(name);
-            shoppingListDao.createShoppingList(standardizedItemName);
+            String id = shoppingListDao.createShoppingList(standardizedItemName);
             shoppingListsView.displayMessage("Shopping list created.");
             refreshAndDisplayShoppingLists();
-            shoppingListsView.navigateToAddItemActivity(standardizedItemName);
+            shoppingListsView.navigateToAddItemActivity(standardizedItemName, id);
         } catch (Exception e) {
             Log.e(TAG, "createShoppingList: ", e);
             shoppingListsView.displayMessage("An error occurred, please try again later.");
@@ -49,21 +49,37 @@ public class ShoppingListsPresenterImpl implements ShoppingListsContract.Shoppin
 
     @Override
     public void updateShoppingList(String id, String name) {
-
+        try {
+            String standardizedItemName = StringUtils.standardizeItemName(name);
+            shoppingListDao.updateShoppingList(id, standardizedItemName);
+            refreshAndDisplayShoppingLists();
+            shoppingListsView.displayMessage("Shopping List updated.");
+        } catch (Exception e) {
+            Log.e(TAG, "updateShoppingList: ", e);
+            shoppingListsView.displayMessage("An error occurred, please try again later.");
+        }
     }
 
     @Override
     public void deleteShoppingList(String id) {
+        try {
+            shoppingListDao.deleteShoppingList(id);
+            refreshAndDisplayShoppingLists();
+            shoppingListsView.displayMessage("Shopping List deleted.");
+        } catch (Exception e) {
+            Log.e(TAG, "deleteItem: ", e);
+            shoppingListsView.displayMessage("An error occurred, please try again later.");
+        }
     }
 
     @Override
     public void displayCreateShoppingListDialog() {
-        alertDialogHelper.setUpAndDisplayShoppingListAlertDialog();
+        alertDialogHelper.displayCreateShoppingListAlertDialog();
     }
 
     @Override
     public void displayActionsDialog(ShoppingList shoppingList) {
-
+        alertDialogHelper.setUpAndDisplayActionsDialog(shoppingList.getId(), shoppingList.getName());
     }
 
     private void refreshAndDisplayShoppingLists() {

@@ -18,8 +18,6 @@ import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
 import com.tatar.shoppinglist.di.shoppinglist.component.DaggerShoppingListsActivityComponent;
 import com.tatar.shoppinglist.di.shoppinglist.component.ShoppingListsActivityComponent;
 import com.tatar.shoppinglist.di.shoppinglist.module.ShoppingListsActivityModule;
-import com.tatar.shoppinglist.ui.item.ItemsActivity;
-import com.tatar.shoppinglist.ui.main.MainActivity;
 import com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemActivity;
 import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
 import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
@@ -78,11 +76,17 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
         shoppingListsPresenter.displayCreateShoppingListDialog();
     }
 
+    /**
+     * Displays all ShoppingLists in a RecyclerView.
+     */
     @Override
     public void displayShoppingLists(List<ShoppingList> shoppingLists) {
         shoppingListsAdapter.setshoppingLists(shoppingLists);
     }
 
+    /**
+     * Displays noShoppingListsTv if there is no shopping list in local database.
+     */
     @Override
     public void toggleNoShoppingListTv(int size) {
         if (size > 0) {
@@ -92,10 +96,14 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
         }
     }
 
+    /**
+     * Navigates to AddItemActivity after ShoppingList creation or RecyclerView item touch
+     */
     @Override
-    public void navigateToAddItemActivity(String title) {
+    public void navigateToAddItemActivity(String title, String id) {
         Intent intent = new Intent(ShoppingListsActivity.this, AddItemActivity.class);
         intent.putExtra(AddItemActivity.INCOMING_TITLE, title);
+        intent.putExtra(AddItemActivity.INCOMING_SHOPPING_LIST_ID, id);
         startActivity(intent);
     }
 
@@ -114,25 +122,39 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
         }
     }
 
+    /**
+     * Displays the given String as a Toast message.
+     */
     @Override
     public void displayMessage(String message) {
         Toast.makeText(ShoppingListsActivity.this, message, Toast.LENGTH_SHORT).show();
-
     }
 
+    /**
+     * AlertDialogHelper.AlertDialogActions interface method implementation.
+     * Used under the create action of the alert dialog to add an ShoppingList.
+     */
     @Override
     public void create(String name) {
         shoppingListsPresenter.createShoppingList(name);
     }
 
+    /**
+     * AlertDialogHelper.AlertDialogActions interface method implementation.
+     * Used under the update action of the alert dialog to update an ShoppingList.
+     */
     @Override
     public void update(String id, String name) {
-
+        shoppingListsPresenter.updateShoppingList(id, name);
     }
 
+    /**
+     * AlertDialogHelper.AlertDialogActions interface method implementation.
+     * Used under the delete action click event of the alert dialog to delete an ShoppingList.
+     */
     @Override
     public void delete(String id) {
-
+        shoppingListsPresenter.deleteShoppingList(id);
     }
 
     /**
@@ -148,7 +170,7 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
     }
 
     /**
-     * Sets up itemsRecyclerView along with its ItemAnimator, ItemDecoration and ItemTouchListener.
+     * Sets up shoppingListsRecyclerView along with its ItemAnimator, ItemDecoration and ItemTouchListener.
      */
     private void setUpRecyclerView() {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -160,12 +182,13 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
         shoppingListsRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, shoppingListsRecyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                shoppingListsPresenter.displayActionsDialog(shoppingListsAdapter.getShoppingList(position));
+                ShoppingList shoppingList = shoppingListsAdapter.getShoppingList(position);
+                navigateToAddItemActivity(shoppingList.getName(), shoppingList.getId());
             }
 
             @Override
             public void onLongClick(View view, int position) {
-
+                shoppingListsPresenter.displayActionsDialog(shoppingListsAdapter.getShoppingList(position));
             }
         }));
     }

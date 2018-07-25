@@ -9,6 +9,7 @@ import com.tatar.shoppinglist.R;
 public class AddItemActivity extends AppCompatActivity {
 
     public static final String INCOMING_TITLE = "title";
+    public static final String INCOMING_SHOPPING_LIST_ID = "id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +18,7 @@ public class AddItemActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String title = intent.getStringExtra(INCOMING_TITLE);
+        String id = intent.getStringExtra(INCOMING_SHOPPING_LIST_ID);
         setTitle(title);
     }
 }

@@ -13,9 +13,11 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
     private final String TAG = ShoppingListDaoImpl.class.getSimpleName();
 
     @Override
-    public void createShoppingList(final String name) {
+    public String createShoppingList(final String name) {
 
         Realm realm = null;
+
+        final String id = UUID.randomUUID().toString();
 
         try {
             realm = Realm.getDefaultInstance();
@@ -23,10 +25,38 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
-                    ShoppingList shoppingList = realm.createObject(ShoppingList.class, UUID.randomUUID().toString());
+                    ShoppingList shoppingList = realm.createObject(ShoppingList.class, id);
                     shoppingList.setName(name);
                 }
             });
+
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
+
+        return id;
+    }
+
+    @Override
+    public void updateShoppingList(String id, final String name) {
+        Realm realm = null;
+
+        try {
+            realm = Realm.getDefaultInstance();
+
+            final ShoppingList shoppingList = realm.where(ShoppingList.class).equalTo(ShoppingList.ID_FIELD, id).findFirst();
+
+            if (shoppingList != null) {
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        shoppingList.setName(name);
+                    }
+                });
+            }
         } finally {
             if (realm != null) {
                 realm.close();

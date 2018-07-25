@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface ShoppingListDao {
 
-    void createShoppingList(String name);
+    String createShoppingList(String name);
+
+    void updateShoppingList(String id, String name);
 
     void deleteShoppingList(String id);
 

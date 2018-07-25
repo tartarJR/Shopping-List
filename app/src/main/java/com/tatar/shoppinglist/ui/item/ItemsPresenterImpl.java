@@ -66,7 +66,7 @@ public class ItemsPresenterImpl implements ItemsPresenter {
                 itemsView.displayMessage("There is an item already created with that name.");
             }
         } catch (Exception e) {
-            Log.e(TAG, "createItem: ", e);
+            Log.e(TAG, "updateItem: ", e);
             itemsView.displayMessage("An error occurred, please try again later.");
         }
     }
