@@ -1,7 +1,7 @@
 package com.tatar.shoppinglist.data.db.shoppinglist;
 
-import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
+import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;
 
 import java.util.List;
 import java.util.UUID;
@@ -107,12 +107,29 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
     }
 
     @Override
-    public void addItemToShoppingList(String id, Item item) {
+    public void addItemToShoppingList(String id, String name) {
+        Realm realm = null;
 
+        try {
+            realm = Realm.getDefaultInstance();
+
+            ShoppingList shoppingList = realm.where(ShoppingList.class).equalTo(ShoppingList.ID_FIELD, id).findFirst();
+            ShoppingListItem shoppingListItem = realm.createObject(ShoppingListItem.class, UUID.randomUUID().toString());
+            shoppingListItem.setName(name);
+            shoppingList.getShoppingListItems().add(shoppingListItem);
+
+            /* TODO inject ItemDao or use createItem method here to add as an Item to app as well if there is no Item existing with the given name parameter */
+
+
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
     }
 
     @Override
-    public void removeItemFromShoppingList(String id, Item item) {
+    public void removeItemFromShoppingList(String id, int position) {
 
     }
 }
