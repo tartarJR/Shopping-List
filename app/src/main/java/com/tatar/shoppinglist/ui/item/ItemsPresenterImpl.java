@@ -5,7 +5,7 @@ import android.util.Log;
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.utils.StringUtils;
-import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
+import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
 
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
@@ -81,16 +81,6 @@ public class ItemsPresenterImpl implements ItemsPresenter {
             Log.e(TAG, "deleteItem: ", e);
             itemsView.displayMessage("An error occurred, please try again later.");
         }
-    }
-
-    @Override
-    public void displayAddItemDialog() {
-        alertDialogHelper.displayAddItemDialog();
-    }
-
-    @Override
-    public void displayActionsDialog(Item item) {
-        alertDialogHelper.setUpAndDisplayActionsDialog(item.getId(), item.getName());
     }
 
     private void refreshAndDisplayItemsList() {

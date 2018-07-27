@@ -2,15 +2,15 @@ package com.tatar.shoppinglist.di.shoppinglist.module;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.di.shoppinglist.scope.ShoppingListsActivityScope;
-import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
+import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsPresenterImpl;
 import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsActivity;
 import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsAdapter;
-import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsPresenterImpl;
+import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogActions;
+import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
 
 import dagger.Module;
 import dagger.Provides;
 
-import static com.tatar.shoppinglist.utils.ui.AlertDialogHelper.AlertDialogActions;
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsPresenter;
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsView;
 
@@ -19,12 +19,12 @@ public class ShoppingListsActivityModule {
 
     private ShoppingListsActivity shoppingListsActivity;
     private ShoppingListsView shoppingListsView;
-    private AlertDialogActions dialogActions;
+    private AlertDialogActions alertDialogActions;
 
-    public ShoppingListsActivityModule(ShoppingListsActivity shoppingListsActivity, ShoppingListsView shoppingListsView, AlertDialogActions dialogActions) {
+    public ShoppingListsActivityModule(ShoppingListsActivity shoppingListsActivity, ShoppingListsView shoppingListsView, AlertDialogActions alertDialogActions) {
         this.shoppingListsActivity = shoppingListsActivity;
         this.shoppingListsView = shoppingListsView;
-        this.dialogActions = dialogActions;
+        this.alertDialogActions = alertDialogActions;
     }
 
     @ShoppingListsActivityScope
@@ -41,14 +41,14 @@ public class ShoppingListsActivityModule {
 
     @ShoppingListsActivityScope
     @Provides
-    public AlertDialogActions dialogActions() {
-        return dialogActions;
+    public AlertDialogActions alertDialogActions() {
+        return alertDialogActions;
     }
 
     @ShoppingListsActivityScope
     @Provides
-    public ShoppingListsPresenter shoppingListsPresenter(ShoppingListsView shoppingListsView, ShoppingListDao shoppingListDao, AlertDialogHelper alertDialogHelper) {
-        return new ShoppingListsPresenterImpl(shoppingListsView, shoppingListDao, alertDialogHelper);
+    public ShoppingListsPresenter shoppingListsPresenter(ShoppingListsView shoppingListsView, ShoppingListDao shoppingListDao) {
+        return new ShoppingListsPresenterImpl(shoppingListsView, shoppingListDao);
     }
 
     @ShoppingListsActivityScope
@@ -59,7 +59,7 @@ public class ShoppingListsActivityModule {
 
     @ShoppingListsActivityScope
     @Provides
-    public AlertDialogHelper alertDialogHelper(ShoppingListsActivity shoppingListsActivity, AlertDialogActions dialogActions) {
-        return new AlertDialogHelper(shoppingListsActivity, dialogActions);
+    public AlertDialogHelper alertDialogHelper(ShoppingListsActivity shoppingListsActivity, AlertDialogActions alertDialogActions) {
+        return new AlertDialogHelper(shoppingListsActivity, alertDialogActions);
     }
 }

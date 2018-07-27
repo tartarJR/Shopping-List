@@ -3,24 +3,21 @@ package com.tatar.shoppinglist.ui.shoppinglist;
 import android.util.Log;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
-import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
 import com.tatar.shoppinglist.utils.StringUtils;
-import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
 
+import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsPresenter;
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsView;
 
-public class ShoppingListsPresenterImpl implements ShoppingListsContract.ShoppingListsPresenter {
+public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
 
     private static final String TAG = ShoppingListsPresenterImpl.class.getSimpleName();
 
     private ShoppingListsView shoppingListsView;
     private ShoppingListDao shoppingListDao;
-    private AlertDialogHelper alertDialogHelper;
 
-    public ShoppingListsPresenterImpl(ShoppingListsView shoppingListsView, ShoppingListDao shoppingListDao, AlertDialogHelper alertDialogHelper) {
+    public ShoppingListsPresenterImpl(ShoppingListsView shoppingListsView, ShoppingListDao shoppingListDao) {
         this.shoppingListsView = shoppingListsView;
         this.shoppingListDao = shoppingListDao;
-        this.alertDialogHelper = alertDialogHelper;
     }
 
     @Override
@@ -70,16 +67,6 @@ public class ShoppingListsPresenterImpl implements ShoppingListsContract.Shoppin
             Log.e(TAG, "deleteItem: ", e);
             shoppingListsView.displayMessage("An error occurred, please try again later.");
         }
-    }
-
-    @Override
-    public void displayCreateShoppingListDialog() {
-        alertDialogHelper.displayCreateShoppingListAlertDialog();
-    }
-
-    @Override
-    public void displayActionsDialog(ShoppingList shoppingList) {
-        alertDialogHelper.setUpAndDisplayActionsDialog(shoppingList.getId(), shoppingList.getName());
     }
 
     private void refreshAndDisplayShoppingLists() {

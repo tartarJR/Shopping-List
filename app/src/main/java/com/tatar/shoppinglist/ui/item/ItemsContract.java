@@ -24,10 +24,6 @@ public interface ItemsContract {
         void updateItem(String id, String name);
 
         void deleteItem(String id);
-
-        void displayAddItemDialog();
-
-        void displayActionsDialog(Item item);
     }
 
 }

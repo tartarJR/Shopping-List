@@ -27,10 +27,6 @@ public interface ShoppingListsContract {
         void updateShoppingList(String id, String name);
 
         void deleteShoppingList(String id);
-
-        void displayCreateShoppingListDialog();
-
-        void displayActionsDialog(ShoppingList shoppingList);
     }
 
 }

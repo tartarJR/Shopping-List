@@ -2,11 +2,11 @@ package com.tatar.shoppinglist.di.item.module;
 
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.di.item.scope.ItemsActivityScope;
-import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
-import com.tatar.shoppinglist.utils.ui.AlertDialogHelper.AlertDialogActions;
 import com.tatar.shoppinglist.ui.item.ItemsActivity;
 import com.tatar.shoppinglist.ui.item.ItemsAdapter;
 import com.tatar.shoppinglist.ui.item.ItemsPresenterImpl;
+import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogActions;
+import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,12 +19,12 @@ public class ItemsActivityModule {
 
     private ItemsActivity itemsActivity;
     private ItemsView itemView;
-    private AlertDialogActions dialogActions;
+    private AlertDialogActions alertDialogActions;
 
-    public ItemsActivityModule(ItemsActivity itemsActivity, ItemsView itemView, AlertDialogActions dialogActions) {
+    public ItemsActivityModule(ItemsActivity itemsActivity, ItemsView itemView, AlertDialogActions alertDialogActions) {
         this.itemsActivity = itemsActivity;
         this.itemView = itemView;
-        this.dialogActions = dialogActions;
+        this.alertDialogActions = alertDialogActions;
     }
 
     @ItemsActivityScope
@@ -41,8 +41,8 @@ public class ItemsActivityModule {
 
     @ItemsActivityScope
     @Provides
-    public AlertDialogActions dialogActions() {
-        return dialogActions;
+    public AlertDialogActions alertDialogActions() {
+        return alertDialogActions;
     }
 
     @ItemsActivityScope
@@ -59,7 +59,7 @@ public class ItemsActivityModule {
 
     @ItemsActivityScope
     @Provides
-    public AlertDialogHelper alertDialogHelper(ItemsActivity itemsActivity, AlertDialogActions dialogActions) {
-        return new AlertDialogHelper(itemsActivity, dialogActions);
+    public AlertDialogHelper alertDialogHelper(ItemsActivity itemsActivity, AlertDialogActions alertDialogActions) {
+        return new AlertDialogHelper(itemsActivity, alertDialogActions);
     }
 }

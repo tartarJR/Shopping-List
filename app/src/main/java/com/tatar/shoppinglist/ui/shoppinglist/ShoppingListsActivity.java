@@ -19,9 +19,10 @@ import com.tatar.shoppinglist.di.shoppinglist.component.DaggerShoppingListsActiv
 import com.tatar.shoppinglist.di.shoppinglist.component.ShoppingListsActivityComponent;
 import com.tatar.shoppinglist.di.shoppinglist.module.ShoppingListsActivityModule;
 import com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemActivity;
-import com.tatar.shoppinglist.utils.ui.AlertDialogHelper;
 import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
 import com.tatar.shoppinglist.utils.ui.RecyclerViewDividerDecoration;
+import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogActions;
+import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ import butterknife.OnClick;
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsPresenter;
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsView;
 
-public class ShoppingListsActivity extends AppCompatActivity implements ShoppingListsView, AlertDialogHelper.AlertDialogActions {
+public class ShoppingListsActivity extends AppCompatActivity implements ShoppingListsView, AlertDialogActions {
 
     @BindView(R.id.shoppingListsRecyclerView)
     RecyclerView shoppingListsRecyclerView;
@@ -50,6 +51,9 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
 
     @Inject
     ShoppingListsAdapter shoppingListsAdapter;
+
+    @Inject
+    AlertDialogHelper alertDialogHelper;
 
     @Inject
     ShoppingListsPresenter shoppingListsPresenter;
@@ -73,7 +77,7 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
      */
     @OnClick(R.id.floatingActionButton)
     void floatingActionButtonClick() {
-        shoppingListsPresenter.displayCreateShoppingListDialog();
+        alertDialogHelper.displayCreateShoppingListAlertDialog();
     }
 
     /**
@@ -131,7 +135,7 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
     }
 
     /**
-     * AlertDialogHelper.AlertDialogActions interface method implementation.
+     * AlertDialogActions interface method implementation.
      * Used under the create action of the alert dialog to add an ShoppingList.
      */
     @Override
@@ -140,7 +144,7 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
     }
 
     /**
-     * AlertDialogHelper.AlertDialogActions interface method implementation.
+     * AlertDialogActions interface method implementation.
      * Used under the update action of the alert dialog to update an ShoppingList.
      */
     @Override
@@ -149,12 +153,17 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
     }
 
     /**
-     * AlertDialogHelper.AlertDialogActions interface method implementation.
+     * AlertDialogActions interface method implementation.
      * Used under the delete action click event of the alert dialog to delete an ShoppingList.
      */
     @Override
     public void delete(String id) {
         shoppingListsPresenter.deleteShoppingList(id);
+    }
+
+    @Override
+    public void displayUpdateDialog(String id, String name) {
+        alertDialogHelper.displayUpdateShoppingListAlertDialog(id, name);
     }
 
     /**
@@ -188,7 +197,8 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
 
             @Override
             public void onLongClick(View view, int position) {
-                shoppingListsPresenter.displayActionsDialog(shoppingListsAdapter.getShoppingList(position));
+                ShoppingList shoppingList = shoppingListsAdapter.getShoppingList(position);
+                alertDialogHelper.setUpAndDisplayActionsDialog(shoppingList.getId(), shoppingList.getName());
             }
         }));
     }

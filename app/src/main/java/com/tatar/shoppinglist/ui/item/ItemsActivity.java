@@ -19,6 +19,8 @@ import com.tatar.shoppinglist.di.item.component.ItemsActivityComponent;
 import com.tatar.shoppinglist.di.item.module.ItemsActivityModule;
 import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
 import com.tatar.shoppinglist.utils.ui.RecyclerViewDividerDecoration;
+import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogActions;
+import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
 
 import java.util.List;
 
@@ -30,9 +32,8 @@ import butterknife.OnClick;
 
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
-import static com.tatar.shoppinglist.utils.ui.AlertDialogHelper.AlertDialogActions;
 
-public class ItemsActivity extends AppCompatActivity implements AlertDialogActions, ItemsView {
+public class ItemsActivity extends AppCompatActivity implements ItemsView, AlertDialogActions {
 
     private static final String TAG = ItemsActivity.class.getSimpleName();
 
@@ -50,6 +51,9 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
 
     @Inject
     ItemsAdapter itemsAdapter;
+
+    @Inject
+    AlertDialogHelper alertDialogHelper;
 
     @Inject
     ItemsPresenter itemsPresenter;
@@ -73,7 +77,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
      */
     @OnClick(R.id.floatingActionButton)
     void floatingActionButtonClick() {
-        itemsPresenter.displayAddItemDialog();
+        alertDialogHelper.displayAddItemDialog();
     }
 
     /**
@@ -120,7 +124,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
     }
 
     /**
-     * AlertDialogHelper.AlertDialogActions interface method implementation.
+     * AlertDialogActions interface method implementation.
      * Used under the create action of the alert dialog to add an Item.
      */
     @Override
@@ -129,7 +133,7 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
     }
 
     /**
-     * AlertDialogHelper.AlertDialogActions interface method implementation.
+     * AlertDialogActions interface method implementation.
      * Used under the update action of the alert dialog to update an Item.
      */
     @Override
@@ -138,12 +142,17 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
     }
 
     /**
-     * AlertDialogHelper.AlertDialogActions interface method implementation.
+     * AlertDialogActions interface method implementation.
      * Used under the delete action click event of the alert dialog to delete an Item.
      */
     @Override
     public void delete(String id) {
         itemsPresenter.deleteItem(id);
+    }
+
+    @Override
+    public void displayUpdateDialog(String id, String name) {
+        alertDialogHelper.displayUpdateItemDialog(id, name);
     }
 
     /**
@@ -171,14 +180,14 @@ public class ItemsActivity extends AppCompatActivity implements AlertDialogActio
         itemsRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, itemsRecyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                itemsPresenter.displayActionsDialog(itemsAdapter.getItem(position));
+
             }
 
             @Override
             public void onLongClick(View view, int position) {
-
+                Item item = itemsAdapter.getItem(position);
+                alertDialogHelper.setUpAndDisplayActionsDialog(item.getId(), item.getName());
             }
         }));
     }
-
 }
