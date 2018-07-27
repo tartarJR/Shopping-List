@@ -22,4 +22,9 @@
     <string name="create_shopping_list_title">Create a Shopping List</string>
     <string name="update_an_existing_shopping_list">Update an existing shopping list</string>
     <string name="shopping_list_name_hint">Enter an shopping list name</string>
+
+    <!--AddItemActivity-->
+    <string name="add_btn_txt">ADD</string>
+    <string name="item_name_actv_hint">Enter an item name</string>
+
 </resources>
