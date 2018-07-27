@@ -26,5 +26,6 @@
     <!--AddItemActivity-->
     <string name="add_btn_txt">ADD</string>
     <string name="item_name_actv_hint">Enter an item name</string>
+    <string name="no_items_in_your_shopping_list">No items in your shopping list</string>
 
 </resources>
