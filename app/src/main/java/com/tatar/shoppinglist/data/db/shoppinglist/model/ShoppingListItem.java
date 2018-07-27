@@ -5,6 +5,10 @@ import io.realm.annotations.PrimaryKey;
 
 public class ShoppingListItem extends RealmObject {
 
+    public static final String ID_FIELD = "id";
+    public static final String NAME_FIELD = "name";
+    public static final String IS_COLLECTED_FIELD = "isCollected";
+
     @PrimaryKey
     private String id;
     private String name;
