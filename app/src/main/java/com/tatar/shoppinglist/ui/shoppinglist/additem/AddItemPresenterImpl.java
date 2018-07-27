@@ -52,6 +52,7 @@ public class AddItemPresenterImpl implements AddItemPresenter {
                 shoppingListDao.addItemToShoppingList(shoppingListId, standardizedItemName);
                 addItemView.clearActv();
                 addItemView.displayMessage("Item has been added to shopping list.");
+                getActvItems();
                 refreshAndDisplayShoppingListsItems(shoppingListId);
             } else {
                 addItemView.displayMessage("Please enter an item name.");
