@@ -13,6 +13,8 @@ public class AddItemPresenterImpl implements AddItemPresenter {
 
     private static final String TAG = AddItemPresenterImpl.class.getSimpleName();
 
+    private String shoppingListId;
+
     private AddItemView addItemView;
     private ItemDao itemDao;
     private ShoppingListDao shoppingListDao;
@@ -37,6 +39,8 @@ public class AddItemPresenterImpl implements AddItemPresenter {
     @Override
     public void getShoppingListItems(String shoppingListId) {
         try {
+            this.shoppingListId = shoppingListId;
+
             refreshAndDisplayShoppingListsItems(shoppingListId);
         } catch (Exception e) {
             Log.e(TAG, "getShoppingListItems: ", e);
@@ -45,7 +49,7 @@ public class AddItemPresenterImpl implements AddItemPresenter {
     }
 
     @Override
-    public void addItemToShoppingList(String shoppingListId, String name) {
+    public void addItemToShoppingList(String name) {
         try {
             if (name != null && !name.isEmpty()) {
                 String standardizedItemName = StringUtils.standardizeItemName(name);

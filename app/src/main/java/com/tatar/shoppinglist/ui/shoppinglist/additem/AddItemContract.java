@@ -25,7 +25,7 @@ public interface AddItemContract {
 
         void getShoppingListItems(String shoppingListId);
 
-        void addItemToShoppingList(String shoppingListId, String name);
+        void addItemToShoppingList(String name);
 
         void deleteItemFromShoppingList();
 

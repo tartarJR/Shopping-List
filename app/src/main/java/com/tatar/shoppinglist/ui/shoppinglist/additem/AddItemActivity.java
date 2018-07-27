@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;
 import com.tatar.shoppinglist.di.additem.component.AddItemActivityComponent;
 import com.tatar.shoppinglist.di.additem.component.DaggerAddItemActivityComponent;
 import com.tatar.shoppinglist.di.additem.module.AddItemActivityModule;
+import com.tatar.shoppinglist.ui.main.MainActivity;
 import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
 import com.tatar.shoppinglist.utils.ui.RecyclerViewDividerDecoration;
 
@@ -40,8 +42,6 @@ public class AddItemActivity extends AppCompatActivity implements AddItemView {
 
     public static final String INCOMING_TITLE = "title";
     public static final String INCOMING_SHOPPING_LIST_ID = "id";
-
-    private String shoppingListId;
 
     @BindView(R.id.itemNameActv)
     AutoCompleteTextView itemNameActv;
@@ -75,7 +75,7 @@ public class AddItemActivity extends AppCompatActivity implements AddItemView {
 
         Intent intent = getIntent();
         String title = intent.getStringExtra(INCOMING_TITLE);
-        shoppingListId = intent.getStringExtra(INCOMING_SHOPPING_LIST_ID);
+        String shoppingListId = intent.getStringExtra(INCOMING_SHOPPING_LIST_ID);
         setTitle(title);
 
         provideDependencies();
@@ -89,7 +89,7 @@ public class AddItemActivity extends AppCompatActivity implements AddItemView {
 
     @OnClick(R.id.addItemBtn)
     void floatingActionButtonClick() {
-        addItemsPresenter.addItemToShoppingList(shoppingListId, itemNameActv.getText().toString());
+        addItemsPresenter.addItemToShoppingList(itemNameActv.getText().toString());
     }
 
     @Override
