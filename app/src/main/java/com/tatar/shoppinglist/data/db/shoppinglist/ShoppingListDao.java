@@ -1,6 +1,7 @@
 package com.tatar.shoppinglist.data.db.shoppinglist;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
+import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;
 
 import java.util.List;
 
@@ -8,13 +9,17 @@ public interface ShoppingListDao {
 
     String createShoppingList(String name);
 
-    void updateShoppingList(String id, String name);
+    void updateShoppingList(String shoppingListId, String name);
 
-    void deleteShoppingList(String id);
+    void deleteShoppingList(String shoppingListId);
 
     List<ShoppingList> getAllShoppingLists();
 
-    void addItemToShoppingList(String id, String name);
+    List<ShoppingListItem> getShoppingListItemsById(String shoppingListId);
 
-    void removeItemFromShoppingList(String id, int position);
+    void addItemToShoppingList(String shoppingListId, String name);
+
+    void removeItemFromShoppingList(String shoppingListId, int position);
+
+    void switchIsCollected(String itemId);
 }
