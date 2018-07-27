@@ -77,7 +77,7 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
      */
     @OnClick(R.id.floatingActionButton)
     void floatingActionButtonClick() {
-        alertDialogHelper.displayCreateShoppingListAlertDialog();
+        alertDialogHelper.displayCreateShoppingListDialog();
     }
 
     /**
@@ -163,7 +163,7 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
 
     @Override
     public void displayUpdateDialog(String id, String name) {
-        alertDialogHelper.displayUpdateShoppingListAlertDialog(id, name);
+        alertDialogHelper.displayUpdateShoppingListDialog(id, name);
     }
 
     /**
@@ -198,7 +198,7 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
             @Override
             public void onLongClick(View view, int position) {
                 ShoppingList shoppingList = shoppingListsAdapter.getShoppingList(position);
-                alertDialogHelper.setUpAndDisplayActionsDialog(shoppingList.getId(), shoppingList.getName());
+                alertDialogHelper.displayActionsDialog(shoppingList.getId(), shoppingList.getName());
             }
         }));
     }

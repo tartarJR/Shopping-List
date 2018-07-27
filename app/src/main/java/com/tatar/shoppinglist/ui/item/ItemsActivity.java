@@ -186,7 +186,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemsView, Alert
             @Override
             public void onLongClick(View view, int position) {
                 Item item = itemsAdapter.getItem(position);
-                alertDialogHelper.setUpAndDisplayActionsDialog(item.getId(), item.getName());
+                alertDialogHelper.displayActionsDialog(item.getId(), item.getName());
             }
         }));
     }

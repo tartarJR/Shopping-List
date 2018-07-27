@@ -111,7 +111,7 @@ public class AlertDialogHelper {
     /**
      * Displays an alert dialog for creating a shopping list.
      */
-    public void displayCreateShoppingListAlertDialog() {
+    public void displayCreateShoppingListDialog() {
         View view = layoutInflater.inflate(R.layout.alert_dialog, null);
 
         final AlertDialog addItemDialog = createAlertDialog(view, activity.getString(R.string.create_shopping_list_title), activity.getString(R.string.shopping_list_name_hint), "CREATE");
@@ -138,7 +138,7 @@ public class AlertDialogHelper {
     /**
      * Displays an alert dialog for updating a shopping list.
      */
-    public void displayUpdateShoppingListAlertDialog(final String id, String name) {
+    public void displayUpdateShoppingListDialog(final String id, String name) {
         View view = layoutInflater.inflate(R.layout.alert_dialog, null);
 
         final AlertDialog addItemDialog = createAlertDialog(view, activity.getString(R.string.update_an_existing_shopping_list), activity.getString(R.string.shopping_list_name_hint), "UPDATE");
@@ -166,7 +166,7 @@ public class AlertDialogHelper {
     /**
      * Creates and displays an alert dialog for picking an option to update or delete an Item.
      */
-    public void setUpAndDisplayActionsDialog(final String id, final String name) {
+    public void displayActionsDialog(final String id, final String name) {
         CharSequence actions[] = new CharSequence[]{"Update", "Delete"};
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
