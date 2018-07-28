@@ -29,6 +29,7 @@
             android:name=".ui.shoppinglistitem.ShoppingListItemActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.shoppinglist.ShoppingListsActivity" />
+        <activity android:name=".ui.completedshoppinglist.CompletedShoppingListsActivity"></activity>
     </application>
 
 </manifest>

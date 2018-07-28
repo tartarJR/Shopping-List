@@ -1,11 +1,12 @@
 package com.tatar.shoppinglist.ui.main;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.tatar.shoppinglist.R;
+import com.tatar.shoppinglist.ui.completedshoppinglist.CompletedShoppingListsActivity;
 import com.tatar.shoppinglist.ui.item.ItemsActivity;
 import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsActivity;
 
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.itemsActivityBtn)
     Button itemsActivityBtn;
+
+    @BindView(R.id.completedShoppingListsBtn)
+    Button completedShoppingListsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.shoppingListsBtn)
     void goToShoppingListActivity() {
         Intent intent = new Intent(MainActivity.this, ShoppingListsActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.completedShoppingListsBtn)
+    void goToCompletedShoppingListsActivity() {
+        Intent intent = new Intent(MainActivity.this, CompletedShoppingListsActivity.class);
         startActivity(intent);
     }
 }

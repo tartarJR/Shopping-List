@@ -4,6 +4,7 @@
     <!--MainActivity-->
     <string name="see_shopping_lists">See Shopping Lists</string>
     <string name="see_items">See Items</string>
+    <string name="see_completed_shopping_lists">See completed shopping lists</string>
 
     <!--ItemsActivity-->
     <string name="items_activity_title">Item Management</string>
@@ -30,5 +31,8 @@
     <string name="collected_checkbox_text">Collected</string>
     <string name="delete_row_item_txt">DELETE</string>
     <string name="delete_row_icon_img_decr">Delete row icon img</string>
+
+    <!--CompletedShoppingListsActivity-->
+    <string name="completed_shopping_lists_activity_title">Completed Shopping Lists</string>
 
 </resources>
