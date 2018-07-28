@@ -2,20 +2,15 @@ package com.tatar.shoppinglist.ui.shoppinglistitem;
 
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;
+import com.tatar.shoppinglist.ui.BaseView;
 
 import java.util.List;
 
 public interface ShoppingListItemContract {
-    interface ShoppingListItemView {
+    interface ShoppingListItemView extends BaseView {
         void populateItemActv(List<Item> items);
 
         void displayShoppingListItems(List<ShoppingListItem> shoppingListItems);
-
-        void toggleProgressBar();
-
-        void toggleNoItemsTv(int size);
-
-        void displayMessage(String message);
 
         void clearActv();
     }

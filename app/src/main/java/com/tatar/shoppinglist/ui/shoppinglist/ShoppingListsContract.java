@@ -1,21 +1,16 @@
 package com.tatar.shoppinglist.ui.shoppinglist;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
+import com.tatar.shoppinglist.ui.BaseView;
 
 import java.util.List;
 
 public interface ShoppingListsContract {
 
-    interface ShoppingListsView {
+    interface ShoppingListsView extends BaseView {
         void displayShoppingLists(List<ShoppingList> shoppingLists);
 
-        void toggleNoShoppingListTv(int size);
-
         void navigateToAddItemActivity(String title, String id);
-
-        void toggleProgressBar();
-
-        void displayMessage(String message);
     }
 
     interface ShoppingListsPresenter {

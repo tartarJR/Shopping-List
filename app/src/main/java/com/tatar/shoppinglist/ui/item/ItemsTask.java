@@ -38,7 +38,7 @@ public class ItemsTask extends AsyncTask<Void, Void, List<Item>> {
         if (items == null) {
             itemsView.displayMessage("Upps ! Something went wrong.");
         } else {
-            itemsView.toggleNoItemsTv(items.size());
+            itemsView.toggleNoDataTv(items.size());
             itemsView.displayItems(items);
         }
     }

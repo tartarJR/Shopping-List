@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/shoppingListItemsRecyclerView"
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/itemNameActv" />
 
     <TextView
-        android:id="@+id/noShoppingListItemsTv"
+        android:id="@+id/noDataTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_items_in_your_shopping_list"

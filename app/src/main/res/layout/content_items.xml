@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_items">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/itemsRecyclerView"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/noItemsTv"
+        android:id="@+id/noDataTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

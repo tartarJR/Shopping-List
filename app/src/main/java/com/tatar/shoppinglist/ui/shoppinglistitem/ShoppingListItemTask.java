@@ -36,7 +36,7 @@ public class ShoppingListItemTask extends AsyncTask<String, Void, List<ShoppingL
         if (shoppingListItems == null) {
             shoppingListItemView.displayMessage("Upps ! Something went wrong.");
         } else {
-            shoppingListItemView.toggleNoItemsTv(shoppingListItems.size());
+            shoppingListItemView.toggleNoDataTv(shoppingListItems.size());
             shoppingListItemView.displayShoppingListItems(shoppingListItems);
         }
     }
