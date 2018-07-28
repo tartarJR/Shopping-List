@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,11 +21,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemContract.AddItemPresenter;
+
 public class ShoppingListItemsAdapter extends RecyclerView.Adapter<ShoppingListItemsAdapter.ViewHolder> {
 
     private List<ShoppingListItem> shoppingListItems;
+    private AddItemPresenter addItemPresenter;
 
-    public ShoppingListItemsAdapter() {
+    public ShoppingListItemsAdapter(AddItemPresenter addItemPresenter) {
+        this.addItemPresenter = addItemPresenter;
         this.shoppingListItems = new ArrayList<>();
     }
 
@@ -32,7 +37,6 @@ public class ShoppingListItemsAdapter extends RecyclerView.Adapter<ShoppingListI
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_list_item_row, parent, false);
-
         return new ShoppingListItemsAdapter.ViewHolder(itemView);
     }
 
@@ -42,6 +46,7 @@ public class ShoppingListItemsAdapter extends RecyclerView.Adapter<ShoppingListI
 
         holder.itemNameTv.setText(shoppingListItem.getName());
         holder.itemDot.setText(Html.fromHtml("&#8226;"));
+        holder.isCollectedCheckBox.setChecked(shoppingListItem.isCollected());
     }
 
     @Override
@@ -58,7 +63,7 @@ public class ShoppingListItemsAdapter extends RecyclerView.Adapter<ShoppingListI
         notifyDataSetChanged();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.backgroundView)
         public RelativeLayout backgroundView;
@@ -78,6 +83,14 @@ public class ShoppingListItemsAdapter extends RecyclerView.Adapter<ShoppingListI
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+
+            isCollectedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    ShoppingListItem item = getShoppingListItem(getAdapterPosition());
+                    addItemPresenter.updateIsCollectedForItem(item.getId(), isChecked);
+                }
+            });
         }
     }
 

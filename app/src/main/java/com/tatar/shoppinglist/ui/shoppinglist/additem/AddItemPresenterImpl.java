@@ -79,8 +79,8 @@ public class AddItemPresenterImpl implements AddItemPresenter {
     }
 
     @Override
-    public void collectOrUnCollectItem() {
-
+    public void updateIsCollectedForItem(String itemId, boolean isCollected) {
+        shoppingListDao.updateIsCollectedForItem(itemId, isCollected);
     }
 
     private void refreshAndDisplayShoppingListsItems(String shoppingListId) {

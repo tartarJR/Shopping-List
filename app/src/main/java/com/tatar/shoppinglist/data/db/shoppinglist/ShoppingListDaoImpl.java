@@ -15,6 +15,43 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
     private final String TAG = ShoppingListDaoImpl.class.getSimpleName();
 
     @Override
+    public List<ShoppingList> getAllShoppingLists() {
+        Realm realm = null;
+
+        List<ShoppingList> shoppingLists;
+
+        try {
+            realm = Realm.getDefaultInstance();
+            shoppingLists = realm.copyFromRealm(realm.where(ShoppingList.class).equalTo(ShoppingList.IS_COMPLETED_FIELD, false).findAll());
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
+
+        return shoppingLists;
+    }
+
+    @Override
+    public List<ShoppingListItem> getShoppingListItemsById(String shoppingListId) {
+        Realm realm = null;
+
+        List<ShoppingListItem> shoppingListItems = new ArrayList<>();
+
+        try {
+            realm = Realm.getDefaultInstance();
+            ShoppingList shoppingList = realm.copyFromRealm(realm.where(ShoppingList.class).equalTo(ShoppingList.ID_FIELD, shoppingListId).findFirst());
+            shoppingListItems.addAll(shoppingList.getShoppingListItems());
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
+
+        return shoppingListItems;
+    }
+
+    @Override
     public String createShoppingList(final String name) {
 
         Realm realm = null;
@@ -99,43 +136,6 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
     }
 
     @Override
-    public List<ShoppingList> getAllShoppingLists() {
-        Realm realm = null;
-
-        List<ShoppingList> shoppingLists;
-
-        try {
-            realm = Realm.getDefaultInstance();
-            shoppingLists = realm.copyFromRealm(realm.where(ShoppingList.class).equalTo(ShoppingList.IS_COMPLETED_FIELD, false).findAll());
-        } finally {
-            if (realm != null) {
-                realm.close();
-            }
-        }
-
-        return shoppingLists;
-    }
-
-    @Override
-    public List<ShoppingListItem> getShoppingListItemsById(String shoppingListId) {
-        Realm realm = null;
-
-        List<ShoppingListItem> shoppingListItems = new ArrayList<>();
-
-        try {
-            realm = Realm.getDefaultInstance();
-            ShoppingList shoppingList = realm.copyFromRealm(realm.where(ShoppingList.class).equalTo(ShoppingList.ID_FIELD, shoppingListId).findFirst());
-            shoppingListItems.addAll(shoppingList.getShoppingListItems());
-        } finally {
-            if (realm != null) {
-                realm.close();
-            }
-        }
-
-        return shoppingListItems;
-    }
-
-    @Override
     public void addItemToShoppingList(final String shoppingListId, final String name) {
 
         Realm realm = null;
@@ -198,7 +198,27 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
     }
 
     @Override
-    public void switchIsCollected(String itemId) {
+    public void updateIsCollectedForItem(String itemId, final boolean isCollected) {
+        Realm realm = null;
 
+        try {
+            realm = Realm.getDefaultInstance();
+
+            final ShoppingListItem shoppingListItem = realm.where(ShoppingListItem.class).equalTo(ShoppingListItem.ID_FIELD, itemId).findFirst();
+
+            if (shoppingListItem != null) {
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        shoppingListItem.setCollected(isCollected);
+                    }
+                });
+            }
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
     }
 }

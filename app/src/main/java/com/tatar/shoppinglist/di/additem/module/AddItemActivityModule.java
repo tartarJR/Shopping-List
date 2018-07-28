@@ -51,7 +51,7 @@ public class AddItemActivityModule {
 
     @AddItemActivityScope
     @Provides
-    public ShoppingListItemsAdapter shoppingListItemsAdapter() {
-        return new ShoppingListItemsAdapter();
+    public ShoppingListItemsAdapter shoppingListItemsAdapter(AddItemPresenter addItemPresenter) {
+        return new ShoppingListItemsAdapter(addItemPresenter);
     }
 }
