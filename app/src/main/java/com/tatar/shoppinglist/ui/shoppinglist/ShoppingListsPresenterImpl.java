@@ -1,16 +1,14 @@
 package com.tatar.shoppinglist.ui.shoppinglist;
 
-import android.util.Log;
-
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.utils.StringUtils;
+
+import timber.log.Timber;
 
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsPresenter;
 import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsView;
 
 public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
-
-    private static final String TAG = ShoppingListsPresenterImpl.class.getSimpleName();
 
     private ShoppingListsView shoppingListsView;
     private ShoppingListDao shoppingListDao;
@@ -25,7 +23,7 @@ public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
         try {
             refreshAndDisplayShoppingLists();
         } catch (Exception e) {
-            Log.e(TAG, "loadShoppingLists: ", e);
+            Timber.e("loadShoppingLists: ", e);
             shoppingListsView.displayMessage("An error occurred, please try again later.");
         }
     }
@@ -39,7 +37,7 @@ public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
             refreshAndDisplayShoppingLists();
             shoppingListsView.navigateToAddItemActivity(standardizedItemName, id);
         } catch (Exception e) {
-            Log.e(TAG, "createShoppingList: ", e);
+            Timber.e("createShoppingList: ", e);
             shoppingListsView.displayMessage("An error occurred, please try again later.");
         }
     }
@@ -52,7 +50,7 @@ public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
             refreshAndDisplayShoppingLists();
             shoppingListsView.displayMessage("Shopping List updated.");
         } catch (Exception e) {
-            Log.e(TAG, "updateShoppingList: ", e);
+            Timber.e("updateShoppingList: ", e);
             shoppingListsView.displayMessage("An error occurred, please try again later.");
         }
     }
@@ -64,7 +62,7 @@ public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
             refreshAndDisplayShoppingLists();
             shoppingListsView.displayMessage("Shopping List deleted.");
         } catch (Exception e) {
-            Log.e(TAG, "deleteItem: ", e);
+            Timber.e("deleteShoppingList: ", e);
             shoppingListsView.displayMessage("An error occurred, please try again later.");
         }
     }

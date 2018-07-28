@@ -5,10 +5,10 @@ import android.app.Application;
 
 import com.tatar.shoppinglist.di.app.component.AppComponent;
 import com.tatar.shoppinglist.di.app.component.DaggerAppComponent;
-import com.tatar.shoppinglist.di.app.module.ContextModule;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import timber.log.Timber;
 
 public class App extends Application {
 
@@ -17,6 +17,9 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // init Timber for logging
+        Timber.plant(new Timber.DebugTree());
 
         appComponent = DaggerAppComponent.builder().build();
 

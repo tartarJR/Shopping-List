@@ -1,11 +1,9 @@
 package com.tatar.shoppinglist.ui.item;
 
-import android.util.Log;
-
 import com.tatar.shoppinglist.data.db.item.ItemDao;
-import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.utils.StringUtils;
-import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
+
+import timber.log.Timber;
 
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
 import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
@@ -15,16 +13,12 @@ import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
  */
 public class ItemsPresenterImpl implements ItemsPresenter {
 
-    private static final String TAG = ItemsPresenterImpl.class.getSimpleName();
-
     private ItemsView itemsView;
     private ItemDao itemDao;
-    private AlertDialogHelper alertDialogHelper;
 
-    public ItemsPresenterImpl(ItemsView itemsView, ItemDao itemDao, AlertDialogHelper alertDialogHelper) {
+    public ItemsPresenterImpl(ItemsView itemsView, ItemDao itemDao) {
         this.itemsView = itemsView;
         this.itemDao = itemDao;
-        this.alertDialogHelper = alertDialogHelper;
     }
 
     @Override
@@ -32,7 +26,7 @@ public class ItemsPresenterImpl implements ItemsPresenter {
         try {
             refreshAndDisplayItemsList();
         } catch (Exception e) {
-            Log.e(TAG, "loadItems: ", e);
+            Timber.e("loadItems: ", e);
             itemsView.displayMessage("An error occurred, please try again later.");
         }
     }
@@ -49,7 +43,7 @@ public class ItemsPresenterImpl implements ItemsPresenter {
                 itemsView.displayMessage("This item is already created.");
             }
         } catch (Exception e) {
-            Log.e(TAG, "createItem: ", e);
+            Timber.e("createItem: ", e);
             itemsView.displayMessage("An error occurred, please try again later.");
         }
     }
@@ -66,7 +60,7 @@ public class ItemsPresenterImpl implements ItemsPresenter {
                 itemsView.displayMessage("There is an item already created with that name.");
             }
         } catch (Exception e) {
-            Log.e(TAG, "updateItem: ", e);
+            Timber.e("updateItem: ", e);
             itemsView.displayMessage("An error occurred, please try again later.");
         }
     }
@@ -78,7 +72,7 @@ public class ItemsPresenterImpl implements ItemsPresenter {
             refreshAndDisplayItemsList();
             itemsView.displayMessage("Item deleted.");
         } catch (Exception e) {
-            Log.e(TAG, "deleteItem: ", e);
+            Timber.e("deleteItem: ", e);
             itemsView.displayMessage("An error occurred, please try again later.");
         }
     }
