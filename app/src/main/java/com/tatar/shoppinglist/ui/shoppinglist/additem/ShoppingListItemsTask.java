@@ -1,7 +1,6 @@
 package com.tatar.shoppinglist.ui.shoppinglist.additem;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;

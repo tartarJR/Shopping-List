@@ -1,7 +1,5 @@
 package com.tatar.shoppinglist.data.db.shoppinglist;
 
-import android.util.Log;
-
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;

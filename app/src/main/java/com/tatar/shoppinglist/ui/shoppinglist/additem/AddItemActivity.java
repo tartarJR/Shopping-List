@@ -1,12 +1,15 @@
 package com.tatar.shoppinglist.ui.shoppinglist.additem;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -21,8 +24,7 @@ import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;
 import com.tatar.shoppinglist.di.additem.component.AddItemActivityComponent;
 import com.tatar.shoppinglist.di.additem.component.DaggerAddItemActivityComponent;
 import com.tatar.shoppinglist.di.additem.module.AddItemActivityModule;
-import com.tatar.shoppinglist.ui.main.MainActivity;
-import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
+import com.tatar.shoppinglist.utils.ui.RecyclerItemTouchHelper;
 import com.tatar.shoppinglist.utils.ui.RecyclerViewDividerDecoration;
 
 import java.util.List;
@@ -36,12 +38,15 @@ import butterknife.OnClick;
 import static com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemContract.AddItemPresenter;
 import static com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemContract.AddItemView;
 
-public class AddItemActivity extends AppCompatActivity implements AddItemView {
+public class AddItemActivity extends AppCompatActivity implements AddItemView, RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
     private static final String TAG = AddItemActivity.class.getSimpleName();
 
     public static final String INCOMING_TITLE = "title";
     public static final String INCOMING_SHOPPING_LIST_ID = "id";
+
+    @BindView(R.id.addItemLayout)
+    ConstraintLayout addItemLayout;
 
     @BindView(R.id.itemNameActv)
     AutoCompleteTextView itemNameActv;
@@ -52,8 +57,8 @@ public class AddItemActivity extends AppCompatActivity implements AddItemView {
     @BindView(R.id.shoppingListItemsRecyclerView)
     RecyclerView shoppingListItemsRecyclerView;
 
-    @BindView(R.id.noItemsTv)
-    TextView noItemsTv;
+    @BindView(R.id.noShoppingListItemsTv)
+    TextView noShoppingListItemsTv;
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -109,22 +114,24 @@ public class AddItemActivity extends AppCompatActivity implements AddItemView {
             itemNameActv.setVisibility(View.INVISIBLE);
             addItemBtn.setVisibility(View.INVISIBLE);
             shoppingListItemsRecyclerView.setVisibility(View.INVISIBLE);
-            noItemsTv.setVisibility(View.INVISIBLE);
+            noShoppingListItemsTv.setVisibility(View.INVISIBLE);
         } else {
             progressBar.setVisibility(View.INVISIBLE);
             itemNameActv.setVisibility(View.VISIBLE);
             addItemBtn.setVisibility(View.VISIBLE);
             shoppingListItemsRecyclerView.setVisibility(View.VISIBLE);
-            noItemsTv.setVisibility(View.VISIBLE);
+            if (noShoppingListItemsTv.getVisibility() != View.INVISIBLE) {
+                noShoppingListItemsTv.setVisibility(View.VISIBLE);
+            }
         }
     }
 
     @Override
     public void toggleNoItemsTv(int size) {
         if (size > 0) {
-            noItemsTv.setVisibility(View.GONE);
+            noShoppingListItemsTv.setVisibility(View.GONE);
         } else {
-            noItemsTv.setVisibility(View.VISIBLE);
+            noShoppingListItemsTv.setVisibility(View.VISIBLE);
         }
     }
 
@@ -160,16 +167,27 @@ public class AddItemActivity extends AppCompatActivity implements AddItemView {
         shoppingListItemsRecyclerView.addItemDecoration(new RecyclerViewDividerDecoration(this, LinearLayoutManager.VERTICAL, 16));
         shoppingListItemsRecyclerView.setAdapter(shoppingListItemsAdapter);
 
-        shoppingListItemsRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, shoppingListItemsRecyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, final int position) {
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(shoppingListItemsRecyclerView);
+    }
 
-            }
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if (viewHolder instanceof ShoppingListItemsAdapter.ViewHolder) {
+            final int indexToBeDeleted = viewHolder.getAdapterPosition();
+            final ShoppingListItem removedItem = shoppingListItemsAdapter.getShoppingListItem(indexToBeDeleted);
+            addItemsPresenter.removeItemFromShoppingList(indexToBeDeleted);
 
-            @Override
-            public void onLongClick(View view, int position) {
+            Snackbar snackbar = Snackbar.make(addItemLayout, removedItem.getName() + " removed from the shopping list!", Snackbar.LENGTH_LONG);
+            snackbar.setAction("UNDO", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addItemsPresenter.addItemToShoppingList(removedItem.getName());
+                }
+            });
 
-            }
-        }));
+            snackbar.setActionTextColor(Color.YELLOW); // TODO change color, redesign snackbar
+            snackbar.show();
+        }
     }
 }

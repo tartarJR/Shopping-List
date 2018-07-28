@@ -1,12 +1,14 @@
 package com.tatar.shoppinglist.ui.shoppinglist.additem;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.tatar.shoppinglist.R;
@@ -58,18 +60,24 @@ public class ShoppingListItemsAdapter extends RecyclerView.Adapter<ShoppingListI
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.backgroundView)
+        public RelativeLayout backgroundView;
+
+        @BindView(R.id.foregroundView)
+        public ConstraintLayout foregroundView;
+
         @BindView(R.id.itemDot)
-        TextView itemDot;
+        public TextView itemDot;
 
         @BindView(R.id.itemNameTv)
-        TextView itemNameTv;
+        public TextView itemNameTv;
 
         @BindView(R.id.isCollectedCheckBox)
-        CheckBox isCollectedCheckBox;
+        public CheckBox isCollectedCheckBox;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+        public ViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
         }
     }
 
