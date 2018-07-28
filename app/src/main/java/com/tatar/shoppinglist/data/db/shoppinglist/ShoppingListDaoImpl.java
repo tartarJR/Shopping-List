@@ -82,6 +82,13 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
                 @Override
                 public void execute(Realm realm) {
                     if (shoppingList != null) {
+
+                        List<ShoppingListItem> itemsToDelete = new ArrayList<>(shoppingList.getShoppingListItems());
+
+                        for (ShoppingListItem item : itemsToDelete) {
+                            item.deleteFromRealm();
+                        }
+
                         shoppingList.deleteFromRealm();
                     }
                 }
@@ -97,7 +104,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
     public List<ShoppingList> getAllShoppingLists() {
         Realm realm = null;
 
-        List<ShoppingList> shoppingLists = null;
+        List<ShoppingList> shoppingLists;
 
         try {
             realm = Realm.getDefaultInstance();
@@ -166,7 +173,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
     }
 
     @Override
-    public void removeItemFromShoppingList(String shoppingListId, int position) {
+    public void removeItemFromShoppingList(String shoppingListId, final int position) {
         Realm realm = null;
 
         try {
@@ -178,7 +185,10 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
                 @Override
                 public void execute(Realm realm) {
                     if (shoppingList != null) {
-                        shoppingList.deleteFromRealm();
+                        ShoppingListItem shoppingListItem = shoppingList.getShoppingListItems().get(position);
+                        if (shoppingListItem != null) {
+                            shoppingListItem.deleteFromRealm();
+                        }
                     }
                 }
             });
