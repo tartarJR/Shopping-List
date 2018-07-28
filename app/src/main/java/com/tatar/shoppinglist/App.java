@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.tatar.shoppinglist.di.app.component.AppComponent;
 import com.tatar.shoppinglist.di.app.component.DaggerAppComponent;
+import com.tatar.shoppinglist.di.app.module.ContextModule;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -21,7 +22,9 @@ public class App extends Application {
         // init Timber for logging
         Timber.plant(new Timber.DebugTree());
 
-        appComponent = DaggerAppComponent.builder().build();
+        appComponent = DaggerAppComponent.builder()
+                .contextModule(new ContextModule(this))
+                .build();
 
         // initialize Realm
         Realm.init(getApplicationContext());

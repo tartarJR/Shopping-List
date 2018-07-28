@@ -2,6 +2,7 @@ package com.tatar.shoppinglist.di.app.component;
 
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
+import com.tatar.shoppinglist.data.network.ShoppingListService;
 import com.tatar.shoppinglist.di.app.module.ContextModule;
 import com.tatar.shoppinglist.di.app.module.DaoModule;
 import com.tatar.shoppinglist.di.app.scope.AppScope;
@@ -14,4 +15,6 @@ public interface AppComponent {
     ItemDao getItemDao();
 
     ShoppingListDao getShoppingListDao();
+
+    ShoppingListService ShoppingListService();
 }
