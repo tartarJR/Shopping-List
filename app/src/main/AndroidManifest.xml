@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tatar.shoppinglist">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -29,7 +31,9 @@
             android:name=".ui.shoppinglistitem.ShoppingListItemActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.shoppinglist.ShoppingListsActivity" />
-        <activity android:name=".ui.completedshoppinglist.CompletedShoppingListsActivity"></activity>
+        <activity
+            android:name=".ui.completedshoppinglist.CompletedShoppingListsActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
     </application>
 
 </manifest>
