@@ -1,6 +1,5 @@
 package com.tatar.shoppinglist.ui.shoppinglistitem;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
@@ -81,10 +80,8 @@ public class ShoppingListItemActivity extends BaseActivity implements ShoppingLi
 
     @Override
     protected void makeInitialCalls() {
-        Intent intent = getIntent();
-        String shoppingListId = intent.getStringExtra(INCOMING_SHOPPING_LIST_ID);
         addItemsPresenter.getActvItems();
-        addItemsPresenter.getShoppingListItems(shoppingListId);
+        addItemsPresenter.getShoppingListItems(getIntent().getStringExtra(INCOMING_SHOPPING_LIST_ID));
     }
 
     @OnClick(R.id.addItemBtn)
