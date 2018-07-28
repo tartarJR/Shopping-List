@@ -17,14 +17,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module(includes = NetworkModule.class)
 public class ShoppingListServiceModule {
 
-    @Provides
     @AppScope
+    @Provides
     public ShoppingListService service(Retrofit retrofit) {
         return retrofit.create(ShoppingListService.class);
     }
 
-    @Provides
     @AppScope
+    @Provides
     public Retrofit retrofit(OkHttpClient okHttpClient, Gson gson) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -33,8 +33,8 @@ public class ShoppingListServiceModule {
                 .build();
     }
 
-    @Provides
     @AppScope
+    @Provides
     public Gson gson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(DateTime.class, new DateTimeConverter());

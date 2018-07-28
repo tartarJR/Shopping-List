@@ -16,8 +16,8 @@ import timber.log.Timber;
 @Module(includes = ContextModule.class)
 public class NetworkModule {
 
-    @Provides
     @AppScope
+    @Provides
     public OkHttpClient okHttpClient(HttpLoggingInterceptor loggingInterceptor, Cache cache) {
         return new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
@@ -25,8 +25,8 @@ public class NetworkModule {
                 .build();
     }
 
-    @Provides
     @AppScope
+    @Provides
     public HttpLoggingInterceptor loggingInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
@@ -40,14 +40,14 @@ public class NetworkModule {
         return interceptor;
     }
 
-    @Provides
     @AppScope
+    @Provides
     public Cache cache(File cacheFile) {
         return new Cache(cacheFile, 10 * 1000 * 1000);
     }
 
-    @Provides
     @AppScope
+    @Provides
     public File cacheFile(Context context) {
         return new File(context.getCacheDir(), "okhttp_cache");
     }
