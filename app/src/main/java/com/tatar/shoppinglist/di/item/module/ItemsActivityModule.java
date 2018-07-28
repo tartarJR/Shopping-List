@@ -47,8 +47,8 @@ public class ItemsActivityModule {
 
     @ItemsActivityScope
     @Provides
-    public ItemsPresenter itemPresenter(ItemsView itemView, ItemDao itemDao, AlertDialogHelper alertDialogHelper) {
-        return new ItemsPresenterImpl(itemView, itemDao, alertDialogHelper);
+    public ItemsPresenter itemPresenter(ItemsView itemView, ItemDao itemDao) {
+        return new ItemsPresenterImpl(itemView, itemDao);
     }
 
     @ItemsActivityScope
