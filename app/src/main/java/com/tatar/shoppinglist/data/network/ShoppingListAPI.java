@@ -10,7 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
-public interface ShoppingListService {
+public interface ShoppingListAPI {
 
     String BASE_URL = "https://shopping-list-53f01.firebaseio.com/";
 

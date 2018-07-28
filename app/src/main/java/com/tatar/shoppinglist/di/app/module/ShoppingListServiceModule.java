@@ -3,7 +3,7 @@ package com.tatar.shoppinglist.di.app.module;
 import com.fatboyindustrial.gsonjodatime.DateTimeConverter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.tatar.shoppinglist.data.network.ShoppingListService;
+import com.tatar.shoppinglist.data.network.ShoppingListAPI;
 import com.tatar.shoppinglist.di.app.scope.AppScope;
 
 import org.joda.time.DateTime;
@@ -19,8 +19,8 @@ public class ShoppingListServiceModule {
 
     @AppScope
     @Provides
-    public ShoppingListService service(Retrofit retrofit) {
-        return retrofit.create(ShoppingListService.class);
+    public ShoppingListAPI shoppingListAPI(Retrofit retrofit) {
+        return retrofit.create(ShoppingListAPI.class);
     }
 
     @AppScope
@@ -29,7 +29,7 @@ public class ShoppingListServiceModule {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(okHttpClient)
-                .baseUrl(ShoppingListService.BASE_URL)
+                .baseUrl(ShoppingListAPI.BASE_URL)
                 .build();
     }
 
