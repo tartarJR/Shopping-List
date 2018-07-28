@@ -27,7 +27,7 @@ public interface AddItemContract {
 
         void addItemToShoppingList(String name);
 
-        void deleteItemFromShoppingList();
+        void removeItemFromShoppingList(int position);
 
         void collectOrUnCollectItem();
     }

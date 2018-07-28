@@ -68,8 +68,14 @@ public class AddItemPresenterImpl implements AddItemPresenter {
     }
 
     @Override
-    public void deleteItemFromShoppingList() {
-
+    public void removeItemFromShoppingList(int position) {
+        try {
+            shoppingListDao.removeItemFromShoppingList(shoppingListId, position);
+            refreshAndDisplayShoppingListsItems(shoppingListId);
+        } catch (Exception e) {
+            Log.e(TAG, "removeItemFromShoppingList: ", e);
+            addItemView.displayMessage("An error occurred, please try again later.");
+        }
     }
 
     @Override
