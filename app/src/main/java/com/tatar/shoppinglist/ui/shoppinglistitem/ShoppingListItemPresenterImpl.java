@@ -77,7 +77,13 @@ public class ShoppingListItemPresenterImpl implements ShoppingListItemContract.S
 
     @Override
     public void updateIsCollectedForItem(String itemId, boolean isCollected) {
-        shoppingListDao.updateIsCollectedForItem(itemId, isCollected);
+        try {
+            shoppingListDao.updateIsCollectedForItem(itemId, isCollected);
+        } catch (Exception e) {
+            Log.e(TAG, "updateIsCollectedForItem: ", e);
+            shoppingListItemView.displayMessage("An error occurred, please try again later.");
+        }
+
     }
 
     private void refreshAndDisplayShoppingListsItems(String shoppingListId) {
