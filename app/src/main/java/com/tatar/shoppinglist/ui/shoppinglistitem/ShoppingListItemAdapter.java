@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglist.additem;
+package com.tatar.shoppinglist.ui.shoppinglistitem;
 
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -21,15 +21,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemContract.AddItemPresenter;
+import static com.tatar.shoppinglist.ui.shoppinglistitem.ShoppingListItemContract.ShoppingListItemPresenter;
 
-public class ShoppingListItemsAdapter extends RecyclerView.Adapter<ShoppingListItemsAdapter.ViewHolder> {
+public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListItemAdapter.ViewHolder> {
 
     private List<ShoppingListItem> shoppingListItems;
-    private AddItemPresenter addItemPresenter;
+    private ShoppingListItemPresenter shoppingListItemPresenter;
 
-    public ShoppingListItemsAdapter(AddItemPresenter addItemPresenter) {
-        this.addItemPresenter = addItemPresenter;
+    public ShoppingListItemAdapter(ShoppingListItemContract.ShoppingListItemPresenter shoppingListItemPresenter) {
+        this.shoppingListItemPresenter = shoppingListItemPresenter;
         this.shoppingListItems = new ArrayList<>();
     }
 
@@ -37,7 +37,7 @@ public class ShoppingListItemsAdapter extends RecyclerView.Adapter<ShoppingListI
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_list_item_row, parent, false);
-        return new ShoppingListItemsAdapter.ViewHolder(itemView);
+        return new ShoppingListItemAdapter.ViewHolder(itemView);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class ShoppingListItemsAdapter extends RecyclerView.Adapter<ShoppingListI
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     ShoppingListItem item = getShoppingListItem(getAdapterPosition());
-                    addItemPresenter.updateIsCollectedForItem(item.getId(), isChecked);
+                    shoppingListItemPresenter.updateIsCollectedForItem(item.getId(), isChecked);
                 }
             });
         }

@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglist.additem;
+package com.tatar.shoppinglist.ui.shoppinglistitem;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglist.additem;
+package com.tatar.shoppinglist.ui.shoppinglistitem;
 
 import android.os.AsyncTask;
 
@@ -7,22 +7,22 @@ import com.tatar.shoppinglist.data.db.item.model.Item;
 
 import java.util.List;
 
-import static com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemContract.AddItemView;
+import static com.tatar.shoppinglist.ui.shoppinglistitem.ShoppingListItemContract.ShoppingListItemView;
 
 public class ItemActvTask extends AsyncTask<Void, Void, List<Item>> {
 
-    private AddItemView addItemView;
+    private ShoppingListItemContract.ShoppingListItemView shoppingListItemView;
     private ItemDao itemDao;
 
-    public ItemActvTask(AddItemView addItemView, ItemDao itemDao) {
-        this.addItemView = addItemView;
+    public ItemActvTask(ShoppingListItemView shoppingListItemView, ItemDao itemDao) {
+        this.shoppingListItemView = shoppingListItemView;
         this.itemDao = itemDao;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        addItemView.toggleProgressBar();
+        shoppingListItemView.toggleProgressBar();
     }
 
     @Override
@@ -33,12 +33,12 @@ public class ItemActvTask extends AsyncTask<Void, Void, List<Item>> {
     @Override
     protected void onPostExecute(List<Item> items) {
         super.onPostExecute(items);
-        addItemView.toggleProgressBar();
+        shoppingListItemView.toggleProgressBar();
 
         if (items == null) {
-            addItemView.displayMessage("Upps ! Something went wrong.");
+            shoppingListItemView.displayMessage("Upps ! Something went wrong.");
         } else {
-            addItemView.populateItemActv(items);
+            shoppingListItemView.populateItemActv(items);
         }
     }
 }

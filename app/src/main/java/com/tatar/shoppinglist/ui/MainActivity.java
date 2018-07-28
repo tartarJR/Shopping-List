@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.main;
+package com.tatar.shoppinglist.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

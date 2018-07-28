@@ -18,7 +18,7 @@ import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
 import com.tatar.shoppinglist.di.shoppinglist.component.DaggerShoppingListsActivityComponent;
 import com.tatar.shoppinglist.di.shoppinglist.component.ShoppingListsActivityComponent;
 import com.tatar.shoppinglist.di.shoppinglist.module.ShoppingListsActivityModule;
-import com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemActivity;
+import com.tatar.shoppinglist.ui.shoppinglistitem.ShoppingListItemActivity;
 import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
 import com.tatar.shoppinglist.utils.ui.RecyclerViewDividerDecoration;
 import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogActions;
@@ -101,13 +101,13 @@ public class ShoppingListsActivity extends AppCompatActivity implements Shopping
     }
 
     /**
-     * Navigates to AddItemActivity after ShoppingList creation or RecyclerView item touch
+     * Navigates to ShoppingListItemActivity after ShoppingList creation or RecyclerView item touch
      */
     @Override
     public void navigateToAddItemActivity(String title, String id) {
-        Intent intent = new Intent(ShoppingListsActivity.this, AddItemActivity.class);
-        intent.putExtra(AddItemActivity.INCOMING_TITLE, title);
-        intent.putExtra(AddItemActivity.INCOMING_SHOPPING_LIST_ID, id);
+        Intent intent = new Intent(ShoppingListsActivity.this, ShoppingListItemActivity.class);
+        intent.putExtra(ShoppingListItemActivity.INCOMING_TITLE, title);
+        intent.putExtra(ShoppingListItemActivity.INCOMING_SHOPPING_LIST_ID, id);
         startActivity(intent);
     }
 

@@ -1,12 +1,12 @@
-package com.tatar.shoppinglist.ui.shoppinglist.additem;
+package com.tatar.shoppinglist.ui.shoppinglistitem;
 
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;
 
 import java.util.List;
 
-public interface AddItemContract {
-    interface AddItemView {
+public interface ShoppingListItemContract {
+    interface ShoppingListItemView {
         void populateItemActv(List<Item> items);
 
         void displayShoppingListItems(List<ShoppingListItem> shoppingListItems);
@@ -20,7 +20,7 @@ public interface AddItemContract {
         void clearActv();
     }
 
-    interface AddItemPresenter {
+    interface ShoppingListItemPresenter {
         void getActvItems();
 
         void getShoppingListItems(String shoppingListId);

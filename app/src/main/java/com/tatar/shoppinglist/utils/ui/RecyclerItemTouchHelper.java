@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import com.tatar.shoppinglist.ui.shoppinglist.additem.ShoppingListItemsAdapter;
+import com.tatar.shoppinglist.ui.shoppinglistitem.ShoppingListItemAdapter;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
@@ -24,26 +24,26 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
         if (viewHolder != null) {
-            final View foregroundView = ((ShoppingListItemsAdapter.ViewHolder) viewHolder).foregroundView;
+            final View foregroundView = ((ShoppingListItemAdapter.ViewHolder) viewHolder).foregroundView;
             getDefaultUIUtil().onSelected(foregroundView);
         }
     }
 
     @Override
     public void onChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-        final View foregroundView = ((ShoppingListItemsAdapter.ViewHolder) viewHolder).foregroundView;
+        final View foregroundView = ((ShoppingListItemAdapter.ViewHolder) viewHolder).foregroundView;
         getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
     }
 
     @Override
     public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        final View foregroundView = ((ShoppingListItemsAdapter.ViewHolder) viewHolder).foregroundView;
+        final View foregroundView = ((ShoppingListItemAdapter.ViewHolder) viewHolder).foregroundView;
         getDefaultUIUtil().clearView(foregroundView);
     }
 
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-        final View foregroundView = ((ShoppingListItemsAdapter.ViewHolder) viewHolder).foregroundView;
+        final View foregroundView = ((ShoppingListItemAdapter.ViewHolder) viewHolder).foregroundView;
         getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
     }
 

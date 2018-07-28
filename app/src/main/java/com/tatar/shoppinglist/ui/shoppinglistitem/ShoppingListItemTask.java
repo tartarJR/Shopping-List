@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglist.additem;
+package com.tatar.shoppinglist.ui.shoppinglistitem;
 
 import android.os.AsyncTask;
 
@@ -7,22 +7,20 @@ import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;
 
 import java.util.List;
 
-import static com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemContract.AddItemView;
+public class ShoppingListItemTask extends AsyncTask<String, Void, List<ShoppingListItem>> {
 
-public class ShoppingListItemsTask extends AsyncTask<String, Void, List<ShoppingListItem>> {
-
-    private AddItemView addItemView;
+    private ShoppingListItemContract.ShoppingListItemView shoppingListItemView;
     private ShoppingListDao shoppingListDao;
 
-    public ShoppingListItemsTask(AddItemView addItemView, ShoppingListDao shoppingListDao) {
-        this.addItemView = addItemView;
+    public ShoppingListItemTask(ShoppingListItemContract.ShoppingListItemView shoppingListItemView, ShoppingListDao shoppingListDao) {
+        this.shoppingListItemView = shoppingListItemView;
         this.shoppingListDao = shoppingListDao;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        addItemView.toggleProgressBar();
+        shoppingListItemView.toggleProgressBar();
     }
 
     @Override
@@ -33,13 +31,13 @@ public class ShoppingListItemsTask extends AsyncTask<String, Void, List<Shopping
     @Override
     protected void onPostExecute(List<ShoppingListItem> shoppingListItems) {
         super.onPostExecute(shoppingListItems);
-        addItemView.toggleProgressBar();
+        shoppingListItemView.toggleProgressBar();
 
         if (shoppingListItems == null) {
-            addItemView.displayMessage("Upps ! Something went wrong.");
+            shoppingListItemView.displayMessage("Upps ! Something went wrong.");
         } else {
-            addItemView.toggleNoItemsTv(shoppingListItems.size());
-            addItemView.displayShoppingListItems(shoppingListItems);
+            shoppingListItemView.toggleNoItemsTv(shoppingListItems.size());
+            shoppingListItemView.displayShoppingListItems(shoppingListItems);
         }
     }
 }

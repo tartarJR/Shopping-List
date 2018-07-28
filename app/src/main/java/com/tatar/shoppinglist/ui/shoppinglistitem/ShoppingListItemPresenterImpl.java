@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglist.additem;
+package com.tatar.shoppinglist.ui.shoppinglistitem;
 
 import android.util.Log;
 
@@ -6,21 +6,18 @@ import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.utils.StringUtils;
 
-import static com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemContract.AddItemPresenter;
-import static com.tatar.shoppinglist.ui.shoppinglist.additem.AddItemContract.AddItemView;
+public class ShoppingListItemPresenterImpl implements ShoppingListItemContract.ShoppingListItemPresenter {
 
-public class AddItemPresenterImpl implements AddItemPresenter {
-
-    private static final String TAG = AddItemPresenterImpl.class.getSimpleName();
+    private static final String TAG = ShoppingListItemPresenterImpl.class.getSimpleName();
 
     private String shoppingListId;
 
-    private AddItemView addItemView;
+    private ShoppingListItemContract.ShoppingListItemView shoppingListItemView;
     private ItemDao itemDao;
     private ShoppingListDao shoppingListDao;
 
-    public AddItemPresenterImpl(AddItemView addItemView, ItemDao itemDao, ShoppingListDao shoppingListDao) {
-        this.addItemView = addItemView;
+    public ShoppingListItemPresenterImpl(ShoppingListItemContract.ShoppingListItemView shoppingListItemView, ItemDao itemDao, ShoppingListDao shoppingListDao) {
+        this.shoppingListItemView = shoppingListItemView;
         this.itemDao = itemDao;
         this.shoppingListDao = shoppingListDao;
     }
@@ -28,11 +25,11 @@ public class AddItemPresenterImpl implements AddItemPresenter {
     @Override
     public void getActvItems() {
         try {
-            ItemActvTask itemActvTask = new ItemActvTask(addItemView, itemDao);
+            ItemActvTask itemActvTask = new ItemActvTask(shoppingListItemView, itemDao);
             itemActvTask.execute();
         } catch (Exception e) {
             Log.e(TAG, "getActvItems: ", e);
-            addItemView.displayMessage("An error occurred, please try again later.");
+            shoppingListItemView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -44,7 +41,7 @@ public class AddItemPresenterImpl implements AddItemPresenter {
             refreshAndDisplayShoppingListsItems(shoppingListId);
         } catch (Exception e) {
             Log.e(TAG, "getShoppingListItems: ", e);
-            addItemView.displayMessage("An error occurred, please try again later.");
+            shoppingListItemView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -54,16 +51,16 @@ public class AddItemPresenterImpl implements AddItemPresenter {
             if (name != null && !name.isEmpty()) {
                 String standardizedItemName = StringUtils.standardizeItemName(name);
                 shoppingListDao.addItemToShoppingList(shoppingListId, standardizedItemName);
-                addItemView.clearActv();
-                addItemView.displayMessage("Item has been added to shopping list.");
+                shoppingListItemView.clearActv();
+                shoppingListItemView.displayMessage("Item has been added to shopping list.");
                 getActvItems();
                 refreshAndDisplayShoppingListsItems(shoppingListId);
             } else {
-                addItemView.displayMessage("Please enter an item name.");
+                shoppingListItemView.displayMessage("Please enter an item name.");
             }
         } catch (Exception e) {
             Log.e(TAG, "addItemToShoppingList: ", e);
-            addItemView.displayMessage("An error occurred, please try again later.");
+            shoppingListItemView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -74,7 +71,7 @@ public class AddItemPresenterImpl implements AddItemPresenter {
             refreshAndDisplayShoppingListsItems(shoppingListId);
         } catch (Exception e) {
             Log.e(TAG, "removeItemFromShoppingList: ", e);
-            addItemView.displayMessage("An error occurred, please try again later.");
+            shoppingListItemView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -84,7 +81,7 @@ public class AddItemPresenterImpl implements AddItemPresenter {
     }
 
     private void refreshAndDisplayShoppingListsItems(String shoppingListId) {
-        ShoppingListItemsTask shoppingListItemsTask = new ShoppingListItemsTask(addItemView, shoppingListDao);
-        shoppingListItemsTask.execute(shoppingListId);
+        ShoppingListItemTask shoppingListItemTask = new ShoppingListItemTask(shoppingListItemView, shoppingListDao);
+        shoppingListItemTask.execute(shoppingListId);
     }
 }

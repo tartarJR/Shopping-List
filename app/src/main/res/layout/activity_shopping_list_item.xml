@@ -5,7 +5,7 @@
     android:id="@+id/addItemLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.shoppinglist.additem.AddItemActivity">
+    tools:context=".ui.shoppinglistitem.ShoppingListItemActivity">
 
     <AutoCompleteTextView
         android:id="@+id/itemNameActv"
