@@ -2,6 +2,7 @@ package com.tatar.shoppinglist.ui.activeshoppinglistitems;
 
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -17,6 +18,7 @@ import com.tatar.shoppinglist.di.activeshoppinglistitems.component.ActiveShoppin
 import com.tatar.shoppinglist.di.activeshoppinglistitems.component.DaggerActiveShoppingListItemsComponent;
 import com.tatar.shoppinglist.di.activeshoppinglistitems.module.ActiveShoppingListItemsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
+import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
 import com.tatar.shoppinglist.utils.ui.recyclerview.RecyclerItemTouchHelper;
 
 import java.util.List;
@@ -26,11 +28,12 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemAdapter.OnItemCheckListener;
 import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayPresenter;
 import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayView;
 import static com.tatar.shoppinglist.utils.ui.recyclerview.RecyclerItemTouchHelper.RecyclerItemTouchHelperListener;
 
-public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView, RecyclerItemTouchHelperListener {
+public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView, RecyclerItemTouchHelperListener, OnItemCheckListener {
 
     @BindView(R.id.addItemLayout)
     ConstraintLayout addItemLayout;
@@ -41,11 +44,17 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
     @BindView(R.id.addItemBtn)
     Button addItemBtn;
 
+    @BindView(R.id.completeShoppingBtn)
+    FloatingActionButton completeShoppingBtn;
+
     @Inject
     ItemAdapter itemAdapter;
 
     @Inject
     ActvAdapter actvAdapter;
+
+    @Inject
+    AlertDialogHelper alertDialogHelper;
 
     @Inject
     ItemDisplayPresenter itemDisplayPresenter;
@@ -63,7 +72,7 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
     @Override
     protected void provideDependencies() {
         ActiveShoppingListItemsComponent activeShoppingListItemsComponent = DaggerActiveShoppingListItemsComponent.builder()
-                .activeShoppingListItemsModule(new ActiveShoppingListItemsModule(ItemDisplayActivity.this, ItemDisplayActivity.this))
+                .activeShoppingListItemsModule(new ActiveShoppingListItemsModule(ItemDisplayActivity.this, ItemDisplayActivity.this, ItemDisplayActivity.this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
 
@@ -72,6 +81,8 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
 
     @Override
     protected void setUpViews() {
+        toggleCompleteShoppingBtnVisibility();
+
         itemNameActv.setAdapter(actvAdapter);
         recyclerView.setAdapter(itemAdapter);
 
@@ -153,6 +164,21 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
 
             snackbar.setActionTextColor(Color.YELLOW); // TODO change color, redesign snackbar
             snackbar.show();
+        }
+    }
+
+    @Override
+    public void onItemCheck() {
+        toggleCompleteShoppingBtnVisibility();
+    }
+
+    private void toggleCompleteShoppingBtnVisibility() {
+        if (itemAdapter.isEveryItemCollected()) {
+            completeShoppingBtn.setVisibility(View.VISIBLE);
+
+            alertDialogHelper.displayShoppingCompletedDialog();
+        } else {
+            completeShoppingBtn.setVisibility(View.INVISIBLE);
         }
     }
 }

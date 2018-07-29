@@ -7,7 +7,7 @@
     <string name="see_completed_shopping_lists">See completed shopping lists</string>
 
     <!--ItemsActivity-->
-    <string name="items_activity_title">Manage Items</string>
+    <string name="items_activity_title">Item Management</string>
     <string name="no_items_found">No Items Found</string>
     <string name="item_name">Item Name</string>
 

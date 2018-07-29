@@ -27,9 +27,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private List<ShoppingListItem> shoppingListItems;
     private ItemDisplayPresenter itemDisplayPresenter;
+    private OnItemCheckListener onItemCheckListener;
 
-    public ItemAdapter(ItemDisplayPresenter itemDisplayPresenter) {
+    public ItemAdapter(ItemDisplayPresenter itemDisplayPresenter, OnItemCheckListener onItemCheckListener) {
         this.itemDisplayPresenter = itemDisplayPresenter;
+        this.onItemCheckListener = onItemCheckListener;
         this.shoppingListItems = new ArrayList<>();
     }
 
@@ -63,6 +65,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public boolean isEveryItemCollected() {
+        int counter = 0;
+
+        for (ShoppingListItem shoppingListItem : shoppingListItems) {
+            if (shoppingListItem.isCollected()) {
+                counter++;
+            }
+        }
+
+        return counter == shoppingListItems.size();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.backgroundView)
@@ -87,11 +101,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             isCollectedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    ShoppingListItem item = getShoppingListItem(getAdapterPosition());
-                    itemDisplayPresenter.updateIsCollectedForItem(item.getId(), isChecked);
+                    if (buttonView.isPressed()) {
+                        ShoppingListItem item = getShoppingListItem(getAdapterPosition());
+                        itemDisplayPresenter.updateIsCollectedForItem(item.getId(), isChecked);
+                        item.setCollected(isChecked);
+                        onItemCheckListener.onItemCheck();
+                    }
                 }
             });
         }
     }
 
+    public interface OnItemCheckListener {
+        void onItemCheck();
+    }
 }

@@ -24,6 +24,11 @@ public class AlertDialogHelper {
         layoutInflater = LayoutInflater.from(activity);
     }
 
+    public AlertDialogHelper(Activity activity) {
+        this.activity = activity;
+        layoutInflater = LayoutInflater.from(activity);
+    }
+
     /**
      * Creates an alert dialog with given parameters.
      */
@@ -183,5 +188,19 @@ public class AlertDialogHelper {
         });
 
         dialogBuilder.show();
+    }
+
+    public void displayShoppingCompletedDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("CONGRATS!")
+                .setMessage("You have collected all your items. Please tap the button on the bottom right corner to complete your shopping.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        builder.create();
+        builder.show();
     }
 }
