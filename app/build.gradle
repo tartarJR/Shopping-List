@@ -65,6 +65,7 @@ dependencies {
 
     // String manipulation
     implementation 'org.apache.commons:commons-text:1.4'
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.6'
 
     // logging
     implementation 'com.jakewharton.timber:timber:4.6.0'
