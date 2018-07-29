@@ -14,5 +14,7 @@ public interface ShoppingListDisplayContract {
 
     interface ShoppingListDisplayPresenter {
         void loadCompletedShoppingLists(String userId);
+
+        String getUserId();
     }
 }

@@ -2,6 +2,7 @@ package com.tatar.shoppinglist.ui.completedshoppinglists;
 
 import com.tatar.shoppinglist.data.network.ShoppingListService;
 import com.tatar.shoppinglist.data.network.model.ShoppingList;
+import com.tatar.shoppinglist.data.prefs.SharedPreferencesManager;
 
 import java.util.List;
 
@@ -15,10 +16,12 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
 
     private ShoppingListDisplayView shoppingListDisplayView;
     private ShoppingListService shoppingListService;
+    private SharedPreferencesManager sharedPreferencesManager;
 
-    public ShoppingListDisplayPresenterImpl(ShoppingListDisplayView shoppingListDisplayView, ShoppingListService shoppingListService) {
+    public ShoppingListDisplayPresenterImpl(ShoppingListDisplayView shoppingListDisplayView, ShoppingListService shoppingListService, SharedPreferencesManager sharedPreferencesManager) {
         this.shoppingListDisplayView = shoppingListDisplayView;
         this.shoppingListService = shoppingListService;
+        this.sharedPreferencesManager = sharedPreferencesManager;
     }
 
     @Override
@@ -31,6 +34,11 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
             Timber.e("loadCompletedShoppingLists: ", e);
             shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
         }
+    }
+
+    @Override
+    public String getUserId() {
+        return sharedPreferencesManager.getUserId();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.tatar.shoppinglist.di.completedshoppinglists.module;
 
 import com.tatar.shoppinglist.data.network.ShoppingListAPI;
 import com.tatar.shoppinglist.data.network.ShoppingListService;
+import com.tatar.shoppinglist.data.prefs.SharedPreferencesManager;
 import com.tatar.shoppinglist.di.completedshoppinglists.scope.CompletedShoppingListsScope;
 import com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListAdapter;
 import com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListDisplayActivity;
@@ -38,8 +39,8 @@ public class CompletedShoppingListsModule {
 
     @CompletedShoppingListsScope
     @Provides
-    public ShoppingListDisplayPresenter shoppingListDisplayPresenter(ShoppingListDisplayView shoppingListDisplayView, ShoppingListService shoppingListService) {
-        return new ShoppingListDisplayPresenterImpl(shoppingListDisplayView, shoppingListService);
+    public ShoppingListDisplayPresenter shoppingListDisplayPresenter(ShoppingListDisplayView shoppingListDisplayView, ShoppingListService shoppingListService, SharedPreferencesManager sharedPreferencesManager) {
+        return new ShoppingListDisplayPresenterImpl(shoppingListDisplayView, shoppingListService, sharedPreferencesManager);
     }
 
     @CompletedShoppingListsScope

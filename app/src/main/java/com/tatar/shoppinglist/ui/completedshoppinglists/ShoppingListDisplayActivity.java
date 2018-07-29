@@ -68,7 +68,7 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
 
     @Override
     protected void makeInitialCalls() {
-        shoppingListDisplayPresenter.loadCompletedShoppingLists("1"); // TODO get user id from prefs
+        shoppingListDisplayPresenter.loadCompletedShoppingLists(shoppingListDisplayPresenter.getUserId());
     }
 
     @Override
