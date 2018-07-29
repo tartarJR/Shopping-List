@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglistitem;
+package com.tatar.shoppinglist.ui.activeshoppinglistitems;
 
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -21,15 +21,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.tatar.shoppinglist.ui.shoppinglistitem.ShoppingListItemContract.ShoppingListItemPresenter;
+import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayPresenter;
 
-public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListItemAdapter.ViewHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private List<ShoppingListItem> shoppingListItems;
-    private ShoppingListItemPresenter shoppingListItemPresenter;
+    private ItemDisplayPresenter itemDisplayPresenter;
 
-    public ShoppingListItemAdapter(ShoppingListItemContract.ShoppingListItemPresenter shoppingListItemPresenter) {
-        this.shoppingListItemPresenter = shoppingListItemPresenter;
+    public ItemAdapter(ItemDisplayPresenter itemDisplayPresenter) {
+        this.itemDisplayPresenter = itemDisplayPresenter;
         this.shoppingListItems = new ArrayList<>();
     }
 
@@ -37,7 +37,7 @@ public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListIt
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_list_item_row, parent, false);
-        return new ShoppingListItemAdapter.ViewHolder(itemView);
+        return new ItemAdapter.ViewHolder(itemView);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListIt
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     ShoppingListItem item = getShoppingListItem(getAdapterPosition());
-                    shoppingListItemPresenter.updateIsCollectedForItem(item.getId(), isChecked);
+                    itemDisplayPresenter.updateIsCollectedForItem(item.getId(), isChecked);
                 }
             });
         }

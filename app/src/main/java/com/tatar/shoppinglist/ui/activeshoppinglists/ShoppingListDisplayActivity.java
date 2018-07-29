@@ -11,7 +11,7 @@ import com.tatar.shoppinglist.di.activeshoppinglists.component.ActiveShoppingLis
 import com.tatar.shoppinglist.di.activeshoppinglists.component.DaggerActiveShoppingListsComponent;
 import com.tatar.shoppinglist.di.activeshoppinglists.module.ActiveShoppingListsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
-import com.tatar.shoppinglist.ui.shoppinglistitem.ShoppingListItemActivity;
+import com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayActivity;
 import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
 import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogActions;
 import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
@@ -107,7 +107,7 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
      */
     @Override
     public void navigateToAddItemActivity(String title, String id) {
-        Intent intent = new Intent(ShoppingListDisplayActivity.this, ShoppingListItemActivity.class);
+        Intent intent = new Intent(ShoppingListDisplayActivity.this, ItemDisplayActivity.class);
         intent.putExtra(INCOMING_TITLE, title);
         intent.putExtra(INCOMING_SHOPPING_LIST_ID, id);
         startActivity(intent);

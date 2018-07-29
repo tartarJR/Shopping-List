@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglistitem;
+package com.tatar.shoppinglist.ui.activeshoppinglistitems;
 
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
@@ -13,9 +13,9 @@ import com.tatar.shoppinglist.App;
 import com.tatar.shoppinglist.R;
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;
-import com.tatar.shoppinglist.di.shoppinglistItem.component.DaggerShoppingListItemActivityComponent;
-import com.tatar.shoppinglist.di.shoppinglistItem.component.ShoppingListItemActivityComponent;
-import com.tatar.shoppinglist.di.shoppinglistItem.module.ShoppingListItemActivityModule;
+import com.tatar.shoppinglist.di.activeshoppinglistitems.component.ActiveShoppingListItemsComponent;
+import com.tatar.shoppinglist.di.activeshoppinglistitems.component.DaggerActiveShoppingListItemsComponent;
+import com.tatar.shoppinglist.di.activeshoppinglistitems.module.ActiveShoppingListItemsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
 import com.tatar.shoppinglist.utils.ui.RecyclerItemTouchHelper;
 
@@ -26,10 +26,11 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.tatar.shoppinglist.ui.shoppinglistitem.ShoppingListItemContract.ShoppingListItemPresenter;
-import static com.tatar.shoppinglist.ui.shoppinglistitem.ShoppingListItemContract.ShoppingListItemView;
+import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayPresenter;
+import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayView;
+import static com.tatar.shoppinglist.utils.ui.RecyclerItemTouchHelper.RecyclerItemTouchHelperListener;
 
-public class ShoppingListItemActivity extends BaseActivity implements ShoppingListItemView, RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
+public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView, RecyclerItemTouchHelperListener {
 
     @BindView(R.id.addItemLayout)
     ConstraintLayout addItemLayout;
@@ -41,13 +42,13 @@ public class ShoppingListItemActivity extends BaseActivity implements ShoppingLi
     Button addItemBtn;
 
     @Inject
-    ShoppingListItemAdapter shoppingListItemAdapter;
+    ItemAdapter itemAdapter;
 
     @Inject
-    ItemActvAdapter itemActvAdapter;
+    ActvAdapter actvAdapter;
 
     @Inject
-    ShoppingListItemPresenter addItemsPresenter;
+    ItemDisplayPresenter itemDisplayPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -61,18 +62,18 @@ public class ShoppingListItemActivity extends BaseActivity implements ShoppingLi
 
     @Override
     protected void provideDependencies() {
-        ShoppingListItemActivityComponent shoppingListItemActivityComponent = DaggerShoppingListItemActivityComponent.builder()
-                .shoppingListItemActivityModule(new ShoppingListItemActivityModule(ShoppingListItemActivity.this, ShoppingListItemActivity.this))
+        ActiveShoppingListItemsComponent activeShoppingListItemsComponent = DaggerActiveShoppingListItemsComponent.builder()
+                .activeShoppingListItemsModule(new ActiveShoppingListItemsModule(ItemDisplayActivity.this, ItemDisplayActivity.this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
 
-        shoppingListItemActivityComponent.injectItemsActivity(ShoppingListItemActivity.this);
+        activeShoppingListItemsComponent.inject(ItemDisplayActivity.this);
     }
 
     @Override
     protected void setUpViews() {
-        itemNameActv.setAdapter(itemActvAdapter);
-        recyclerView.setAdapter(shoppingListItemAdapter);
+        itemNameActv.setAdapter(actvAdapter);
+        recyclerView.setAdapter(itemAdapter);
 
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
@@ -80,23 +81,23 @@ public class ShoppingListItemActivity extends BaseActivity implements ShoppingLi
 
     @Override
     protected void makeInitialCalls() {
-        addItemsPresenter.getActvItems();
-        addItemsPresenter.getShoppingListItems(getIntent().getStringExtra(INCOMING_SHOPPING_LIST_ID));
+        itemDisplayPresenter.getActvItems();
+        itemDisplayPresenter.getShoppingListItems(getIntent().getStringExtra(INCOMING_SHOPPING_LIST_ID));
     }
 
     @OnClick(R.id.addItemBtn)
     void floatingActionButtonClick() {
-        addItemsPresenter.addItemToShoppingList(itemNameActv.getText().toString());
+        itemDisplayPresenter.addItemToShoppingList(itemNameActv.getText().toString());
     }
 
     @Override
     public void populateItemActv(List<Item> items) {
-        itemActvAdapter.setItems(items);
+        actvAdapter.setItems(items);
     }
 
     @Override
     public void displayShoppingListItems(List<ShoppingListItem> shoppingListItems) {
-        shoppingListItemAdapter.setShoppingListItems(shoppingListItems);
+        itemAdapter.setShoppingListItems(shoppingListItems);
     }
 
     @Override
@@ -137,16 +138,16 @@ public class ShoppingListItemActivity extends BaseActivity implements ShoppingLi
     // RecyclerView swipe to delete event
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-        if (viewHolder instanceof ShoppingListItemAdapter.ViewHolder) {
+        if (viewHolder instanceof ItemAdapter.ViewHolder) {
             final int indexToBeDeleted = viewHolder.getAdapterPosition();
-            final ShoppingListItem removedItem = shoppingListItemAdapter.getShoppingListItem(indexToBeDeleted);
-            addItemsPresenter.removeItemFromShoppingList(indexToBeDeleted);
+            final ShoppingListItem removedItem = itemAdapter.getShoppingListItem(indexToBeDeleted);
+            itemDisplayPresenter.removeItemFromShoppingList(indexToBeDeleted);
 
             Snackbar snackbar = Snackbar.make(addItemLayout, removedItem.getName() + " removed from the shopping list!", Snackbar.LENGTH_LONG);
             snackbar.setAction("UNDO", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addItemsPresenter.addItemToShoppingList(removedItem.getName());
+                    itemDisplayPresenter.addItemToShoppingList(removedItem.getName());
                 }
             });
 

@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglistitem;
+package com.tatar.shoppinglist.ui.activeshoppinglistitems;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,12 +16,12 @@ import com.tatar.shoppinglist.data.db.item.model.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemActvAdapter extends ArrayAdapter<Item> {
+public class ActvAdapter extends ArrayAdapter<Item> {
 
     private Context context;
     private List<Item> items;
 
-    public ItemActvAdapter(@NonNull Context context) {
+    public ActvAdapter(@NonNull Context context) {
         super(context, 0);
 
         this.context = context;

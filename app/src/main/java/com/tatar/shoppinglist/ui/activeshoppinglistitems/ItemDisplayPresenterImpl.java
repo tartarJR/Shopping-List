@@ -1,6 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglistitem;
-
-import android.util.Log;
+package com.tatar.shoppinglist.ui.activeshoppinglistitems;
 
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
@@ -8,16 +6,19 @@ import com.tatar.shoppinglist.utils.StringUtils;
 
 import timber.log.Timber;
 
-public class ShoppingListItemPresenterImpl implements ShoppingListItemContract.ShoppingListItemPresenter {
+import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayPresenter;
+import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayView;
+
+public class ItemDisplayPresenterImpl implements ItemDisplayPresenter {
 
     private String shoppingListId;
 
-    private ShoppingListItemContract.ShoppingListItemView shoppingListItemView;
+    private ItemDisplayView itemDisplayView;
     private ItemDao itemDao;
     private ShoppingListDao shoppingListDao;
 
-    public ShoppingListItemPresenterImpl(ShoppingListItemContract.ShoppingListItemView shoppingListItemView, ItemDao itemDao, ShoppingListDao shoppingListDao) {
-        this.shoppingListItemView = shoppingListItemView;
+    public ItemDisplayPresenterImpl(ItemDisplayView itemDisplayView, ItemDao itemDao, ShoppingListDao shoppingListDao) {
+        this.itemDisplayView = itemDisplayView;
         this.itemDao = itemDao;
         this.shoppingListDao = shoppingListDao;
     }
@@ -25,11 +26,11 @@ public class ShoppingListItemPresenterImpl implements ShoppingListItemContract.S
     @Override
     public void getActvItems() {
         try {
-            ItemActvTask itemActvTask = new ItemActvTask(shoppingListItemView, itemDao);
-            itemActvTask.execute();
+            ActvTask actvTask = new ActvTask(itemDisplayView, itemDao);
+            actvTask.execute();
         } catch (Exception e) {
             Timber.e("getActvItems: ", e);
-            shoppingListItemView.displayMessage("An error occurred, please try again later.");
+            itemDisplayView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -41,7 +42,7 @@ public class ShoppingListItemPresenterImpl implements ShoppingListItemContract.S
             refreshAndDisplayShoppingListsItems(shoppingListId);
         } catch (Exception e) {
             Timber.e("getShoppingListItems: ", e);
-            shoppingListItemView.displayMessage("An error occurred, please try again later.");
+            itemDisplayView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -51,16 +52,16 @@ public class ShoppingListItemPresenterImpl implements ShoppingListItemContract.S
             if (name != null && !name.isEmpty()) {
                 String standardizedItemName = StringUtils.standardizeItemName(name);
                 shoppingListDao.addItemToShoppingList(shoppingListId, standardizedItemName);
-                shoppingListItemView.clearActv();
-                shoppingListItemView.displayMessage("Item has been added to shopping list.");
+                itemDisplayView.clearActv();
+                itemDisplayView.displayMessage("Item has been added to shopping list.");
                 getActvItems();
                 refreshAndDisplayShoppingListsItems(shoppingListId);
             } else {
-                shoppingListItemView.displayMessage("Please enter an item name.");
+                itemDisplayView.displayMessage("Please enter an item name.");
             }
         } catch (Exception e) {
             Timber.e("addItemToShoppingList: ", e);
-            shoppingListItemView.displayMessage("An error occurred, please try again later.");
+            itemDisplayView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -71,7 +72,7 @@ public class ShoppingListItemPresenterImpl implements ShoppingListItemContract.S
             refreshAndDisplayShoppingListsItems(shoppingListId);
         } catch (Exception e) {
             Timber.e("removeItemFromShoppingList: ", e);
-            shoppingListItemView.displayMessage("An error occurred, please try again later.");
+            itemDisplayView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -81,13 +82,13 @@ public class ShoppingListItemPresenterImpl implements ShoppingListItemContract.S
             shoppingListDao.updateIsCollectedForItem(itemId, isCollected);
         } catch (Exception e) {
             Timber.e("updateIsCollectedForItem: ", e);
-            shoppingListItemView.displayMessage("An error occurred, please try again later.");
+            itemDisplayView.displayMessage("An error occurred, please try again later.");
         }
 
     }
 
     private void refreshAndDisplayShoppingListsItems(String shoppingListId) {
-        ShoppingListItemTask shoppingListItemTask = new ShoppingListItemTask(shoppingListItemView, shoppingListDao);
-        shoppingListItemTask.execute(shoppingListId);
+        ItemTask itemTask = new ItemTask(itemDisplayView, shoppingListDao);
+        itemTask.execute(shoppingListId);
     }
 }

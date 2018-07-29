@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglistitem;
+package com.tatar.shoppinglist.ui.activeshoppinglistitems;
 
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;
@@ -6,8 +6,8 @@ import com.tatar.shoppinglist.ui.BaseView;
 
 import java.util.List;
 
-public interface ShoppingListItemContract {
-    interface ShoppingListItemView extends BaseView {
+public interface ItemDisplayContract {
+    interface ItemDisplayView extends BaseView {
         void populateItemActv(List<Item> items);
 
         void displayShoppingListItems(List<ShoppingListItem> shoppingListItems);
@@ -15,7 +15,7 @@ public interface ShoppingListItemContract {
         void clearActv();
     }
 
-    interface ShoppingListItemPresenter {
+    interface ItemDisplayPresenter {
         void getActvItems();
 
         void getShoppingListItems(String shoppingListId);
