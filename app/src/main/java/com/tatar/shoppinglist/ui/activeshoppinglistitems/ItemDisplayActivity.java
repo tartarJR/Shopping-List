@@ -52,7 +52,7 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_shopping_list_item;
+        return R.layout.active_shopping_list_items_layout;
     }
 
     @Override

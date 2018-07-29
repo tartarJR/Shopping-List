@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:showIn="@layout/activity_shopping_lists">
+        tools:showIn="@layout/active_shopping_lists_layout">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"

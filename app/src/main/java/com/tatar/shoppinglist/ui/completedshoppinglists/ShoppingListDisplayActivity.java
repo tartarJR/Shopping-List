@@ -30,7 +30,7 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_completed_shopping_lists;
+        return R.layout.completed_shopping_lists_layout;
     }
 
     @Override

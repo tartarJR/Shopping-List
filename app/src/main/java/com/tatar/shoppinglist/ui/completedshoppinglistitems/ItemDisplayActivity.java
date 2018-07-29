@@ -11,11 +11,11 @@ import javax.inject.Inject;
 public class ItemDisplayActivity extends BaseActivity {
 
     @Inject
-    ItemsAdapter itemsAdapter;
+    ItemAdapter itemAdapter;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_completed_shopping_list_item_display;
+        return R.layout.completed_shopping_list_items_layout;
     }
 
     @Override
@@ -32,12 +32,12 @@ public class ItemDisplayActivity extends BaseActivity {
 
     @Override
     protected void setUpViews() {
-        recyclerView.setAdapter(itemsAdapter);
+        recyclerView.setAdapter(itemAdapter);
     }
 
     @Override
     protected void makeInitialCalls() {
         ShoppingList shoppingList = getIntent().getExtras().getParcelable(INCOMING_SHOPPING_LIST);
-        itemsAdapter.setShoppingListItems(shoppingList.getShoppingListItems());
+        itemAdapter.setShoppingListItems(shoppingList.getShoppingListItems());
     }
 }

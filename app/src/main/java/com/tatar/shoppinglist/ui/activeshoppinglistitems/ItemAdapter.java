@@ -36,7 +36,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_list_item_row, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.active_shopping_list_item_row, parent, false);
         return new ItemAdapter.ViewHolder(itemView);
     }
 

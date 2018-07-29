@@ -17,23 +17,23 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private List<ShoppingListItem> shoppingListItems;
 
-    public ItemsAdapter() {
+    public ItemAdapter() {
         this.shoppingListItems = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public ItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.completed_shopping_list_row, parent, false);
-        return new ItemsAdapter.ViewHolder(itemView);
+    public ItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.completed_shopping_list_item_row, parent, false);
+        return new ItemAdapter.ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder holder, int position) {
         ShoppingListItem shoppingListItem = shoppingListItems.get(position);
 
         holder.itemNameTv.setText(shoppingListItem.getName());
