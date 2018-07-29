@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.completedshoppinglist;
+package com.tatar.shoppinglist.ui.completedshoppinglists;
 
 import android.content.Intent;
 import android.view.View;
@@ -6,9 +6,9 @@ import android.view.View;
 import com.tatar.shoppinglist.App;
 import com.tatar.shoppinglist.R;
 import com.tatar.shoppinglist.data.network.model.ShoppingList;
-import com.tatar.shoppinglist.di.completedshoppinglist.component.CompletedShoppingListsActivityComponent;
-import com.tatar.shoppinglist.di.completedshoppinglist.component.DaggerCompletedShoppingListsActivityComponent;
-import com.tatar.shoppinglist.di.completedshoppinglist.module.CompletedShoppingListsActivityModule;
+import com.tatar.shoppinglist.di.completedshoppinglists.component.CompletedShoppingListsComponent;
+import com.tatar.shoppinglist.di.completedshoppinglists.component.DaggerCompletedShoppingListsComponent;
+import com.tatar.shoppinglist.di.completedshoppinglists.module.CompletedShoppingListsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
 import com.tatar.shoppinglist.ui.completedshoppinglistitems.ItemDisplayActivity;
 import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
@@ -17,16 +17,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.tatar.shoppinglist.ui.completedshoppinglist.CompletedShoppingListsContract.CompletedShoppingListsPresenter;
-import static com.tatar.shoppinglist.ui.completedshoppinglist.CompletedShoppingListsContract.CompletedShoppingListsView;
+import static com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListDisplayContract.ShoppingListDisplayPresenter;
+import static com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListDisplayContract.ShoppingListDisplayView;
 
-public class CompletedShoppingListsActivity extends BaseActivity implements CompletedShoppingListsView {
-
-    @Inject
-    CompletedShoppingListsPresenter completedShoppingListsPresenter;
+public class ShoppingListDisplayActivity extends BaseActivity implements ShoppingListDisplayView {
 
     @Inject
-    CompletedShoppingListAdapter completedShoppingListAdapter;
+    ShoppingListDisplayPresenter shoppingListDisplayPresenter;
+
+    @Inject
+    ShoppingListAdapter shoppingListAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -40,22 +40,22 @@ public class CompletedShoppingListsActivity extends BaseActivity implements Comp
 
     @Override
     protected void provideDependencies() {
-        CompletedShoppingListsActivityComponent completedShoppingListsActivityComponent = DaggerCompletedShoppingListsActivityComponent.builder()
-                .completedShoppingListsActivityModule(new CompletedShoppingListsActivityModule(this, this))
+        CompletedShoppingListsComponent completedShoppingListsComponent = DaggerCompletedShoppingListsComponent.builder()
+                .completedShoppingListsModule(new CompletedShoppingListsModule(this, this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
 
-        completedShoppingListsActivityComponent.injectCompletedShoppingListsActivity(CompletedShoppingListsActivity.this);
+        completedShoppingListsComponent.inject(ShoppingListDisplayActivity.this);
     }
 
     @Override
     protected void setUpViews() {
-        recyclerView.setAdapter(completedShoppingListAdapter);
+        recyclerView.setAdapter(shoppingListAdapter);
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                ShoppingList shoppingList = completedShoppingListAdapter.getShoppingList(position);
+                ShoppingList shoppingList = shoppingListAdapter.getShoppingList(position);
                 navigateToItemDisplayActivity(shoppingList);
             }
 
@@ -68,17 +68,17 @@ public class CompletedShoppingListsActivity extends BaseActivity implements Comp
 
     @Override
     protected void makeInitialCalls() {
-        completedShoppingListsPresenter.loadCompletedShoppingLists("1"); // TODO get user id from prefs
+        shoppingListDisplayPresenter.loadCompletedShoppingLists("1"); // TODO get user id from prefs
     }
 
     @Override
     public void displayCompletedShoppingLists(List<ShoppingList> shoppingLists) {
-        completedShoppingListAdapter.setShoppingLists(shoppingLists);
+        shoppingListAdapter.setShoppingLists(shoppingLists);
     }
 
     @Override
     public void navigateToItemDisplayActivity(ShoppingList shoppingList) {
-        Intent intent = new Intent(CompletedShoppingListsActivity.this, ItemDisplayActivity.class);
+        Intent intent = new Intent(ShoppingListDisplayActivity.this, ItemDisplayActivity.class);
         intent.putExtra(INCOMING_SHOPPING_LIST, shoppingList);
         startActivity(intent);
     }

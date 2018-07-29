@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.tatar.shoppinglist.R;
-import com.tatar.shoppinglist.ui.completedshoppinglist.CompletedShoppingListsActivity;
+import com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListDisplayActivity;
 import com.tatar.shoppinglist.ui.item.ItemsActivity;
 import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsActivity;
 
@@ -33,20 +33,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.itemsActivityBtn)
-    void goToItemsActivity() {
+    void seeItemsActivity() {
         Intent intent = new Intent(MainActivity.this, ItemsActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.shoppingListsBtn)
-    void goToShoppingListActivity() {
+    void seeActiveShoppingListActivity() {
         Intent intent = new Intent(MainActivity.this, ShoppingListsActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.completedShoppingListsBtn)
-    void goToCompletedShoppingListsActivity() {
-        Intent intent = new Intent(MainActivity.this, CompletedShoppingListsActivity.class);
+    void seeToCompletedShoppingLists() {
+        Intent intent = new Intent(MainActivity.this, ShoppingListDisplayActivity.class);
         startActivity(intent);
     }
 }

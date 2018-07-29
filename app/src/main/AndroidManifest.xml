@@ -32,11 +32,11 @@
             android:launchMode="singleTop"
             android:parentActivityName=".ui.shoppinglist.ShoppingListsActivity" />
         <activity
-            android:name=".ui.completedshoppinglist.CompletedShoppingListsActivity"
+            android:name=".ui.completedshoppinglists.ShoppingListDisplayActivity"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
             android:name=".ui.completedshoppinglistitems.ItemDisplayActivity"
-            android:parentActivityName=".ui.completedshoppinglist.CompletedShoppingListsActivity" />
+            android:parentActivityName=".ui.completedshoppinglists.ShoppingListDisplayActivity" />
     </application>
 
 </manifest>

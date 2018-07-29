@@ -32,7 +32,7 @@
     <string name="delete_row_item_txt">DELETE</string>
     <string name="delete_row_icon_img_decr">Delete row icon img</string>
 
-    <!--CompletedShoppingListsActivity-->
+    <!--ShoppingListDisplayActivity (completed shopping lists feature)-->
     <string name="completed_shopping_lists_activity_title">Completed Shopping Lists</string>
     <string name="not_collected_txt">Not Collected</string>
     <string name="collected_txt">Collected</string>
