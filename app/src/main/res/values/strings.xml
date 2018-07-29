@@ -34,5 +34,7 @@
 
     <!--CompletedShoppingListsActivity-->
     <string name="completed_shopping_lists_activity_title">Completed Shopping Lists</string>
+    <string name="not_collected_txt">Not Collected</string>
+    <string name="collected_txt">Collected</string>
 
 </resources>
