@@ -80,7 +80,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
     }
 
     @Override
-    public void updateShoppingList(String shoppingListId, final String name) {
+    public void updateShoppingListName(String shoppingListId, final String name) {
         Realm realm = null;
 
         try {
@@ -94,6 +94,31 @@ public class ShoppingListDaoImpl implements ShoppingListDao {
                     @Override
                     public void execute(Realm realm) {
                         shoppingList.setName(name);
+                    }
+                });
+            }
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
+    }
+
+    @Override
+    public void updateShoppingListCompleted(String shoppingListId, final boolean isCompleted) {
+        Realm realm = null;
+
+        try {
+            realm = Realm.getDefaultInstance();
+
+            final ShoppingList shoppingList = realm.where(ShoppingList.class).equalTo(ShoppingList.ID_FIELD, shoppingListId).findFirst();
+
+            if (shoppingList != null) {
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        shoppingList.setCompleted(isCompleted);
                     }
                 });
             }

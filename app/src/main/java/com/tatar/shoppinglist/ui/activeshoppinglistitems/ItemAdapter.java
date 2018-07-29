@@ -74,7 +74,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             }
         }
 
-        return counter == shoppingListItems.size();
+        return counter == shoppingListItems.size() && shoppingListItems.size() != 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

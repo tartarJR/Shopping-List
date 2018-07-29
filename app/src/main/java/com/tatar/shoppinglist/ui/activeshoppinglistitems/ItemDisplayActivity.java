@@ -1,5 +1,6 @@
 package com.tatar.shoppinglist.ui.activeshoppinglistitems;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,7 @@ import com.tatar.shoppinglist.di.activeshoppinglistitems.component.ActiveShoppin
 import com.tatar.shoppinglist.di.activeshoppinglistitems.component.DaggerActiveShoppingListItemsComponent;
 import com.tatar.shoppinglist.di.activeshoppinglistitems.module.ActiveShoppingListItemsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
+import com.tatar.shoppinglist.ui.main.MainActivity;
 import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
 import com.tatar.shoppinglist.utils.ui.recyclerview.RecyclerItemTouchHelper;
 
@@ -93,12 +95,17 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
     @Override
     protected void makeInitialCalls() {
         itemDisplayPresenter.getActvItems();
-        itemDisplayPresenter.getShoppingListItems(getIntent().getStringExtra(INCOMING_SHOPPING_LIST_ID));
+        itemDisplayPresenter.getShoppingListItems(getIntent().getStringExtra(INCOMING_SHOPPING_LIST_ID), getIntent().getStringExtra(INCOMING_TITLE));
     }
 
     @OnClick(R.id.addItemBtn)
-    void floatingActionButtonClick() {
+    void addItemToShoppingList() {
         itemDisplayPresenter.addItemToShoppingList(itemNameActv.getText().toString());
+    }
+
+    @OnClick(R.id.completeShoppingBtn)
+    void completeShopping() {
+        itemDisplayPresenter.completeShopping();
     }
 
     @Override
@@ -145,6 +152,11 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
         itemNameActv.setText("");
     }
 
+    @Override
+    public void navigateToMainActivity() {
+        Intent intent = new Intent(ItemDisplayActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
 
     // RecyclerView swipe to delete event
     @Override

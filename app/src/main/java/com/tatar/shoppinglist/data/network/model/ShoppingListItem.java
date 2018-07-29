@@ -18,6 +18,10 @@ public class ShoppingListItem implements Parcelable {
     @Expose
     private boolean isCollected;
 
+    public ShoppingListItem() {
+
+    }
+
     protected ShoppingListItem(Parcel in) {
         id = in.readString();
         name = in.readString();

@@ -8,12 +8,14 @@ import com.tatar.shoppinglist.utils.StringUtils;
 
 import timber.log.Timber;
 
+import static com.tatar.shoppinglist.data.network.ShoppingListService.PostShoppingListCallback;
 import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayPresenter;
 import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayView;
 
-public class ItemDisplayPresenterImpl implements ItemDisplayPresenter {
+public class ItemDisplayPresenterImpl implements ItemDisplayPresenter, PostShoppingListCallback {
 
     private String shoppingListId;
+    private String shoppingListName;
 
     private ItemDisplayView itemDisplayView;
     private ItemDao itemDao;
@@ -41,9 +43,10 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter {
     }
 
     @Override
-    public void getShoppingListItems(String shoppingListId) {
+    public void getShoppingListItems(String shoppingListId, String shoppingListName) {
         try {
             this.shoppingListId = shoppingListId;
+            this.shoppingListName = shoppingListName;
 
             refreshAndDisplayShoppingListsItems(shoppingListId);
         } catch (Exception e) {
@@ -90,11 +93,31 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter {
             Timber.e("updateIsCollectedForItem: ", e);
             itemDisplayView.displayMessage("An error occurred, please try again later.");
         }
+    }
 
+    @Override
+    public void completeShopping() {
+        try {
+            RemoteItemsTask remoteItemsTask = new RemoteItemsTask(itemDisplayView, shoppingListDao, shoppingListService, sharedPreferencesManager, ItemDisplayPresenterImpl.this);
+            remoteItemsTask.execute(shoppingListId, shoppingListName);
+        } catch (Exception e) {
+            Timber.e("updateIsCollectedForItem: ", e);
+            itemDisplayView.displayMessage("An error occurred, please try again later.");
+        }
     }
 
     private void refreshAndDisplayShoppingListsItems(String shoppingListId) {
         ItemsTask itemsTask = new ItemsTask(itemDisplayView, shoppingListDao);
         itemsTask.execute(shoppingListId);
+    }
+
+    @Override
+    public void onFailure() {
+        itemDisplayView.displayMessage("An error occurred, please try again later.");
+    }
+
+    @Override
+    public void onPostSuccess() {
+        itemDisplayView.displayMessage("Shopping is done !");
     }
 }

@@ -27,6 +27,10 @@ public class ShoppingList implements Parcelable {
     @Expose
     private String userId;
 
+    public ShoppingList() {
+
+    }
+
     protected ShoppingList(Parcel in) {
         id = in.readString();
         name = in.readString();

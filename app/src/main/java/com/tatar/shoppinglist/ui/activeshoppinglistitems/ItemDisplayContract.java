@@ -13,17 +13,21 @@ public interface ItemDisplayContract {
         void displayShoppingListItems(List<ShoppingListItem> shoppingListItems);
 
         void clearActv();
+
+        void navigateToMainActivity();
     }
 
     interface ItemDisplayPresenter {
         void getActvItems();
 
-        void getShoppingListItems(String shoppingListId);
+        void getShoppingListItems(String shoppingListId, String shoppingListName);
 
         void addItemToShoppingList(String name);
 
         void removeItemFromShoppingList(int position);
 
         void updateIsCollectedForItem(String itemId, boolean isCollected);
+
+        void completeShopping();
     }
 }

@@ -13,7 +13,9 @@ public interface ShoppingListDao {
 
     String createShoppingList(String name);
 
-    void updateShoppingList(String shoppingListId, String name);
+    void updateShoppingListName(String shoppingListId, String name);
+
+    void updateShoppingListCompleted(String shoppingListId, boolean isCompleted);
 
     void deleteShoppingList(String shoppingListId);
 
