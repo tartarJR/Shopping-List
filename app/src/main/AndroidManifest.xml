@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.item.ItemsActivity"
+            android:name=".ui.manageitems.ItemsActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity

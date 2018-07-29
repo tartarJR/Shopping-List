@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.item;
+package com.tatar.shoppinglist.ui.manageitems;
 
 import android.os.AsyncTask;
 
@@ -7,7 +7,7 @@ import com.tatar.shoppinglist.data.db.item.model.Item;
 
 import java.util.List;
 
-import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
+import static com.tatar.shoppinglist.ui.manageitems.ItemsContract.ItemsView;
 
 public class ItemsTask extends AsyncTask<Void, Void, List<Item>> {
 

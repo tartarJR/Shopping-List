@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tatar.shoppinglist.R;
-import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
-import com.tatar.shoppinglist.ui.item.ItemsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

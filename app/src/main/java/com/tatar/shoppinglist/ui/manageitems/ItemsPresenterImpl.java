@@ -1,12 +1,12 @@
-package com.tatar.shoppinglist.ui.item;
+package com.tatar.shoppinglist.ui.manageitems;
 
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.utils.StringUtils;
 
 import timber.log.Timber;
 
-import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
-import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
+import static com.tatar.shoppinglist.ui.manageitems.ItemsContract.ItemsPresenter;
+import static com.tatar.shoppinglist.ui.manageitems.ItemsContract.ItemsView;
 
 /**
  * An Android free presenter class for ItemsActivity to manage its business logic

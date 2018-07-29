@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.item;
+package com.tatar.shoppinglist.ui.manageitems;
 
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -6,9 +6,9 @@ import android.view.View;
 import com.tatar.shoppinglist.App;
 import com.tatar.shoppinglist.R;
 import com.tatar.shoppinglist.data.db.item.model.Item;
-import com.tatar.shoppinglist.di.item.component.DaggerItemsActivityComponent;
-import com.tatar.shoppinglist.di.item.component.ItemsActivityComponent;
-import com.tatar.shoppinglist.di.item.module.ItemsActivityModule;
+import com.tatar.shoppinglist.di.manageitems.component.DaggerManageItemsComponent;
+import com.tatar.shoppinglist.di.manageitems.component.ManageItemsComponent;
+import com.tatar.shoppinglist.di.manageitems.module.ManageItemsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
 import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
 import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogActions;
@@ -21,8 +21,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsPresenter;
-import static com.tatar.shoppinglist.ui.item.ItemsContract.ItemsView;
+import static com.tatar.shoppinglist.ui.manageitems.ItemsContract.ItemsPresenter;
+import static com.tatar.shoppinglist.ui.manageitems.ItemsContract.ItemsView;
 
 public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialogActions {
 
@@ -50,12 +50,12 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
 
     @Override
     protected void provideDependencies() {
-        ItemsActivityComponent itemsActivityComponent = DaggerItemsActivityComponent.builder()
-                .itemsActivityModule(new ItemsActivityModule(ItemsActivity.this, ItemsActivity.this, ItemsActivity.this))
+        ManageItemsComponent manageItemsComponent = DaggerManageItemsComponent.builder()
+                .itemsActivityModule(new ManageItemsModule(ItemsActivity.this, ItemsActivity.this, ItemsActivity.this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
 
-        itemsActivityComponent.injectItemsActivity(ItemsActivity.this);
+        manageItemsComponent.inject(ItemsActivity.this);
     }
 
     @Override

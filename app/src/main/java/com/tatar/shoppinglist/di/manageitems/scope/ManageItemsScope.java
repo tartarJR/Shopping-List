@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.di.item.scope;
+package com.tatar.shoppinglist.di.manageitems.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,5 +7,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ItemsActivityScope {
+public @interface ManageItemsScope {
 }

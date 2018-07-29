@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.item;
+package com.tatar.shoppinglist.ui.manageitems;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

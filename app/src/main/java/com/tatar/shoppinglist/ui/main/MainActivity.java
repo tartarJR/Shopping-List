@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import com.tatar.shoppinglist.R;
 import com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListDisplayActivity;
-import com.tatar.shoppinglist.ui.item.ItemsActivity;
+import com.tatar.shoppinglist.ui.manageitems.ItemsActivity;
 import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsActivity;
 
 import butterknife.BindView;

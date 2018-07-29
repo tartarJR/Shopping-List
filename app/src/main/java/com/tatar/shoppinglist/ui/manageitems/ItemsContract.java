@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.item;
+package com.tatar.shoppinglist.ui.manageitems;
 
 import com.tatar.shoppinglist.data.db.item.model.Item;
 import com.tatar.shoppinglist.ui.BaseView;
