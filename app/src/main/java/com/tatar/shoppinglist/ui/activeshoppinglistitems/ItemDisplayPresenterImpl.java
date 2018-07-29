@@ -2,6 +2,8 @@ package com.tatar.shoppinglist.ui.activeshoppinglistitems;
 
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
+import com.tatar.shoppinglist.data.network.ShoppingListService;
+import com.tatar.shoppinglist.data.prefs.SharedPreferencesManager;
 import com.tatar.shoppinglist.utils.StringUtils;
 
 import timber.log.Timber;
@@ -16,11 +18,15 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter {
     private ItemDisplayView itemDisplayView;
     private ItemDao itemDao;
     private ShoppingListDao shoppingListDao;
+    private ShoppingListService shoppingListService;
+    private SharedPreferencesManager sharedPreferencesManager;
 
-    public ItemDisplayPresenterImpl(ItemDisplayView itemDisplayView, ItemDao itemDao, ShoppingListDao shoppingListDao) {
+    public ItemDisplayPresenterImpl(ItemDisplayView itemDisplayView, ItemDao itemDao, ShoppingListDao shoppingListDao, ShoppingListService shoppingListService, SharedPreferencesManager sharedPreferencesManager) {
         this.itemDisplayView = itemDisplayView;
         this.itemDao = itemDao;
         this.shoppingListDao = shoppingListDao;
+        this.shoppingListService = shoppingListService;
+        this.sharedPreferencesManager = sharedPreferencesManager;
     }
 
     @Override
