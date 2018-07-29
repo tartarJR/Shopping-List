@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.utils.ui;
+package com.tatar.shoppinglist.utils.ui.recyclerview;
 
 import android.content.Context;
 import android.content.res.Resources;

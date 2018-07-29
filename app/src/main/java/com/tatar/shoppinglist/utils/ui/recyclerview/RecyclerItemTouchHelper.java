@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.utils.ui;
+package com.tatar.shoppinglist.utils.ui.recyclerview;
 
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;

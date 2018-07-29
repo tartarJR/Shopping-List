@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tatar.shoppinglist.R;
-import com.tatar.shoppinglist.utils.ui.RecyclerViewDividerDecoration;
+import com.tatar.shoppinglist.utils.ui.recyclerview.RecyclerViewDividerDecoration;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

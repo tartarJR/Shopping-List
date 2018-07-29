@@ -17,7 +17,7 @@ import com.tatar.shoppinglist.di.activeshoppinglistitems.component.ActiveShoppin
 import com.tatar.shoppinglist.di.activeshoppinglistitems.component.DaggerActiveShoppingListItemsComponent;
 import com.tatar.shoppinglist.di.activeshoppinglistitems.module.ActiveShoppingListItemsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
-import com.tatar.shoppinglist.utils.ui.RecyclerItemTouchHelper;
+import com.tatar.shoppinglist.utils.ui.recyclerview.RecyclerItemTouchHelper;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ import butterknife.OnClick;
 
 import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayPresenter;
 import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayView;
-import static com.tatar.shoppinglist.utils.ui.RecyclerItemTouchHelper.RecyclerItemTouchHelperListener;
+import static com.tatar.shoppinglist.utils.ui.recyclerview.RecyclerItemTouchHelper.RecyclerItemTouchHelperListener;
 
 public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView, RecyclerItemTouchHelperListener {
 

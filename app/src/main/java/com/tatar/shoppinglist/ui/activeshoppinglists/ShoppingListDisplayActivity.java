@@ -12,7 +12,7 @@ import com.tatar.shoppinglist.di.activeshoppinglists.component.DaggerActiveShopp
 import com.tatar.shoppinglist.di.activeshoppinglists.module.ActiveShoppingListsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
 import com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayActivity;
-import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
+import com.tatar.shoppinglist.utils.ui.recyclerview.RecyclerTouchListener;
 import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogActions;
 import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
 

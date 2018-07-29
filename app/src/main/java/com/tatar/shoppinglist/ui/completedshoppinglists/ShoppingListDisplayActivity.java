@@ -11,7 +11,7 @@ import com.tatar.shoppinglist.di.completedshoppinglists.component.DaggerComplete
 import com.tatar.shoppinglist.di.completedshoppinglists.module.CompletedShoppingListsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
 import com.tatar.shoppinglist.ui.completedshoppinglistitems.ItemDisplayActivity;
-import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
+import com.tatar.shoppinglist.utils.ui.recyclerview.RecyclerTouchListener;
 
 import java.util.List;
 
