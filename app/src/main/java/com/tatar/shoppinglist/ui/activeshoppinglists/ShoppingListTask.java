@@ -1,29 +1,28 @@
-package com.tatar.shoppinglist.ui.shoppinglist;
+package com.tatar.shoppinglist.ui.activeshoppinglists;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
 
 import java.util.List;
 
-import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsView;
+import static com.tatar.shoppinglist.ui.activeshoppinglists.ShoppingListDisplayContract.ShoppingListDisplayView;
 
 public class ShoppingListTask extends AsyncTask<Void, Void, List<ShoppingList>> {
 
-    private ShoppingListsView shoppingListsView;
+    private ShoppingListDisplayView shoppingListDisplayView;
     private ShoppingListDao shoppingListDao;
 
-    public ShoppingListTask(ShoppingListsView shoppingListsView, ShoppingListDao shoppingListDao) {
-        this.shoppingListsView = shoppingListsView;
+    public ShoppingListTask(ShoppingListDisplayView shoppingListDisplayView, ShoppingListDao shoppingListDao) {
+        this.shoppingListDisplayView = shoppingListDisplayView;
         this.shoppingListDao = shoppingListDao;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        shoppingListsView.toggleProgressBar();
+        shoppingListDisplayView.toggleProgressBar();
     }
 
     @Override
@@ -34,13 +33,13 @@ public class ShoppingListTask extends AsyncTask<Void, Void, List<ShoppingList>> 
     @Override
     protected void onPostExecute(List<ShoppingList> shoppingLists) {
         super.onPostExecute(shoppingLists);
-        shoppingListsView.toggleProgressBar();
+        shoppingListDisplayView.toggleProgressBar();
 
         if (shoppingLists == null) {
-            shoppingListsView.displayMessage("Upps ! Something went wrong.");
+            shoppingListDisplayView.displayMessage("Upps ! Something went wrong.");
         } else {
-            shoppingListsView.toggleNoDataTv(shoppingLists.size());
-            shoppingListsView.displayShoppingLists(shoppingLists);
+            shoppingListDisplayView.toggleNoDataTv(shoppingLists.size());
+            shoppingListDisplayView.displayShoppingLists(shoppingLists);
         }
     }
 }

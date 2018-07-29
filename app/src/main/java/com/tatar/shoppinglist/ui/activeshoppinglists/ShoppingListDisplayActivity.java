@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglist;
+package com.tatar.shoppinglist.ui.activeshoppinglists;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -7,9 +7,9 @@ import android.view.View;
 import com.tatar.shoppinglist.App;
 import com.tatar.shoppinglist.R;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
-import com.tatar.shoppinglist.di.shoppinglist.component.DaggerShoppingListsActivityComponent;
-import com.tatar.shoppinglist.di.shoppinglist.component.ShoppingListsActivityComponent;
-import com.tatar.shoppinglist.di.shoppinglist.module.ShoppingListsActivityModule;
+import com.tatar.shoppinglist.di.activeshoppinglists.component.ActiveShoppingListsComponent;
+import com.tatar.shoppinglist.di.activeshoppinglists.component.DaggerActiveShoppingListsComponent;
+import com.tatar.shoppinglist.di.activeshoppinglists.module.ActiveShoppingListsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
 import com.tatar.shoppinglist.ui.shoppinglistitem.ShoppingListItemActivity;
 import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
@@ -23,22 +23,22 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsPresenter;
-import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsView;
+import static com.tatar.shoppinglist.ui.activeshoppinglists.ShoppingListDisplayContract.ShoppingListDisplayPresenter;
+import static com.tatar.shoppinglist.ui.activeshoppinglists.ShoppingListDisplayContract.ShoppingListDisplayView;
 
-public class ShoppingListsActivity extends BaseActivity implements ShoppingListsView, AlertDialogActions {
+public class ShoppingListDisplayActivity extends BaseActivity implements ShoppingListDisplayView, AlertDialogActions {
 
     @BindView(R.id.floatingActionButton)
     FloatingActionButton floatingActionButton;
 
     @Inject
-    ShoppingListsAdapter shoppingListsAdapter;
+    ShoppingListAdapter shoppingListAdapter;
 
     @Inject
     AlertDialogHelper alertDialogHelper;
 
     @Inject
-    ShoppingListsPresenter shoppingListsPresenter;
+    ShoppingListDisplayPresenter shoppingListDisplayPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -52,28 +52,28 @@ public class ShoppingListsActivity extends BaseActivity implements ShoppingLists
 
     @Override
     protected void provideDependencies() {
-        ShoppingListsActivityComponent shoppingListsActivityComponent = DaggerShoppingListsActivityComponent.builder()
-                .shoppingListsActivityModule(new ShoppingListsActivityModule(ShoppingListsActivity.this, ShoppingListsActivity.this, ShoppingListsActivity.this))
+        ActiveShoppingListsComponent activeShoppingListsComponent = DaggerActiveShoppingListsComponent.builder()
+                .activeShoppingListsModule(new ActiveShoppingListsModule(ShoppingListDisplayActivity.this, ShoppingListDisplayActivity.this, ShoppingListDisplayActivity.this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
 
-        shoppingListsActivityComponent.injectShoppingListsActivity(ShoppingListsActivity.this);
+        activeShoppingListsComponent.inject(ShoppingListDisplayActivity.this);
     }
 
     @Override
     protected void setUpViews() {
-        recyclerView.setAdapter(shoppingListsAdapter);
+        recyclerView.setAdapter(shoppingListAdapter);
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                ShoppingList shoppingList = shoppingListsAdapter.getShoppingList(position);
+                ShoppingList shoppingList = shoppingListAdapter.getShoppingList(position);
                 navigateToAddItemActivity(shoppingList.getName(), shoppingList.getId());
             }
 
             @Override
             public void onLongClick(View view, int position) {
-                ShoppingList shoppingList = shoppingListsAdapter.getShoppingList(position);
+                ShoppingList shoppingList = shoppingListAdapter.getShoppingList(position);
                 alertDialogHelper.displayActionsDialog(shoppingList.getId(), shoppingList.getName());
             }
         }));
@@ -81,17 +81,17 @@ public class ShoppingListsActivity extends BaseActivity implements ShoppingLists
 
     @Override
     protected void makeInitialCalls() {
-        shoppingListsPresenter.loadShoppingLists();
+        shoppingListDisplayPresenter.loadShoppingLists();
     }
 
     @OnClick(R.id.floatingActionButton)
-    void floatingActionButtonClick() {
+    void displayCreateShoppingListDialog() {
         alertDialogHelper.displayCreateShoppingListDialog();
     }
 
     @Override
     public void displayShoppingLists(List<ShoppingList> shoppingLists) {
-        shoppingListsAdapter.setshoppingLists(shoppingLists);
+        shoppingListAdapter.setshoppingLists(shoppingLists);
     }
 
     /**
@@ -107,7 +107,7 @@ public class ShoppingListsActivity extends BaseActivity implements ShoppingLists
      */
     @Override
     public void navigateToAddItemActivity(String title, String id) {
-        Intent intent = new Intent(ShoppingListsActivity.this, ShoppingListItemActivity.class);
+        Intent intent = new Intent(ShoppingListDisplayActivity.this, ShoppingListItemActivity.class);
         intent.putExtra(INCOMING_TITLE, title);
         intent.putExtra(INCOMING_SHOPPING_LIST_ID, id);
         startActivity(intent);
@@ -138,17 +138,17 @@ public class ShoppingListsActivity extends BaseActivity implements ShoppingLists
      */
     @Override
     public void create(String name) {
-        shoppingListsPresenter.createShoppingList(name);
+        shoppingListDisplayPresenter.createShoppingList(name);
     }
 
     @Override
     public void update(String id, String name) {
-        shoppingListsPresenter.updateShoppingList(id, name);
+        shoppingListDisplayPresenter.updateShoppingList(id, name);
     }
 
     @Override
     public void delete(String id) {
-        shoppingListsPresenter.deleteShoppingList(id);
+        shoppingListDisplayPresenter.deleteShoppingList(id);
     }
 
     @Override

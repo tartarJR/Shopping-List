@@ -1,4 +1,4 @@
-package com.tatar.shoppinglist.ui.shoppinglist;
+package com.tatar.shoppinglist.ui.activeshoppinglists;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -17,25 +17,25 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ShoppingListsAdapter extends RecyclerView.Adapter<ShoppingListsAdapter.ViewHolder> {
+public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ViewHolder> {
 
     private List<ShoppingList> shoppingLists;
 
-    public ShoppingListsAdapter() {
+    public ShoppingListAdapter() {
         this.shoppingLists = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public ShoppingListsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ShoppingListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.shopping_list_row, parent, false);
 
-        return new ShoppingListsAdapter.ViewHolder(itemView);
+        return new ShoppingListAdapter.ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShoppingListsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ShoppingListAdapter.ViewHolder holder, int position) {
         ShoppingList shoppingList = shoppingLists.get(position);
 
         holder.shoppingListNameTv.setText(shoppingList.getName());

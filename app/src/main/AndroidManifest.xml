@@ -24,13 +24,13 @@
             android:launchMode="singleTop"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
-            android:name=".ui.shoppinglist.ShoppingListsActivity"
+            android:name=".ui.activeshoppinglists.ShoppingListDisplayActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
             android:name=".ui.shoppinglistitem.ShoppingListItemActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.shoppinglist.ShoppingListsActivity" />
+            android:parentActivityName=".ui.activeshoppinglists.ShoppingListDisplayActivity" />
         <activity
             android:name=".ui.completedshoppinglists.ShoppingListDisplayActivity"
             android:parentActivityName=".ui.main.MainActivity" />

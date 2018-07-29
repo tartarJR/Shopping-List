@@ -6,9 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.tatar.shoppinglist.R;
-import com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListDisplayActivity;
+import com.tatar.shoppinglist.ui.activeshoppinglists.ShoppingListDisplayActivity;
 import com.tatar.shoppinglist.ui.manageitems.ItemsActivity;
-import com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.shoppingListsBtn)
     void seeActiveShoppingListActivity() {
-        Intent intent = new Intent(MainActivity.this, ShoppingListsActivity.class);
+        Intent intent = new Intent(MainActivity.this, ShoppingListDisplayActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.completedShoppingListsBtn)
     void seeToCompletedShoppingLists() {
-        Intent intent = new Intent(MainActivity.this, ShoppingListDisplayActivity.class);
+        Intent intent = new Intent(MainActivity.this, com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListDisplayActivity.class);
         startActivity(intent);
     }
 }

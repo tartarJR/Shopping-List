@@ -1,19 +1,19 @@
-package com.tatar.shoppinglist.ui.shoppinglist;
+package com.tatar.shoppinglist.ui.activeshoppinglists;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingList;
 import com.tatar.shoppinglist.ui.BaseView;
 
 import java.util.List;
 
-public interface ShoppingListsContract {
+public interface ShoppingListDisplayContract {
 
-    interface ShoppingListsView extends BaseView {
+    interface ShoppingListDisplayView extends BaseView {
         void displayShoppingLists(List<ShoppingList> shoppingLists);
 
         void navigateToAddItemActivity(String title, String id);
     }
 
-    interface ShoppingListsPresenter {
+    interface ShoppingListDisplayPresenter {
 
         void loadShoppingLists();
 

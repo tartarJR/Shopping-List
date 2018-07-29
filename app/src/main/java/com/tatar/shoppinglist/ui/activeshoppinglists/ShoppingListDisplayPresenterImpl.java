@@ -1,20 +1,20 @@
-package com.tatar.shoppinglist.ui.shoppinglist;
+package com.tatar.shoppinglist.ui.activeshoppinglists;
 
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.utils.StringUtils;
 
 import timber.log.Timber;
 
-import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsPresenter;
-import static com.tatar.shoppinglist.ui.shoppinglist.ShoppingListsContract.ShoppingListsView;
+import static com.tatar.shoppinglist.ui.activeshoppinglists.ShoppingListDisplayContract.ShoppingListDisplayPresenter;
+import static com.tatar.shoppinglist.ui.activeshoppinglists.ShoppingListDisplayContract.ShoppingListDisplayView;
 
-public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
+public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPresenter {
 
-    private ShoppingListsView shoppingListsView;
+    private ShoppingListDisplayView shoppingListDisplayView;
     private ShoppingListDao shoppingListDao;
 
-    public ShoppingListsPresenterImpl(ShoppingListsView shoppingListsView, ShoppingListDao shoppingListDao) {
-        this.shoppingListsView = shoppingListsView;
+    public ShoppingListDisplayPresenterImpl(ShoppingListDisplayView shoppingListDisplayView, ShoppingListDao shoppingListDao) {
+        this.shoppingListDisplayView = shoppingListDisplayView;
         this.shoppingListDao = shoppingListDao;
     }
 
@@ -24,7 +24,7 @@ public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
             refreshAndDisplayShoppingLists();
         } catch (Exception e) {
             Timber.e("loadShoppingLists: ", e);
-            shoppingListsView.displayMessage("An error occurred, please try again later.");
+            shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -33,12 +33,12 @@ public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
         try {
             String standardizedItemName = StringUtils.standardizeItemName(name);
             String id = shoppingListDao.createShoppingList(standardizedItemName);
-            shoppingListsView.displayMessage("Shopping list created.");
+            shoppingListDisplayView.displayMessage("Shopping list created.");
             refreshAndDisplayShoppingLists();
-            shoppingListsView.navigateToAddItemActivity(standardizedItemName, id);
+            shoppingListDisplayView.navigateToAddItemActivity(standardizedItemName, id);
         } catch (Exception e) {
             Timber.e("createShoppingList: ", e);
-            shoppingListsView.displayMessage("An error occurred, please try again later.");
+            shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -48,10 +48,10 @@ public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
             String standardizedItemName = StringUtils.standardizeItemName(name);
             shoppingListDao.updateShoppingList(id, standardizedItemName);
             refreshAndDisplayShoppingLists();
-            shoppingListsView.displayMessage("Shopping List updated.");
+            shoppingListDisplayView.displayMessage("Shopping List updated.");
         } catch (Exception e) {
             Timber.e("updateShoppingList: ", e);
-            shoppingListsView.displayMessage("An error occurred, please try again later.");
+            shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
         }
     }
 
@@ -60,15 +60,15 @@ public class ShoppingListsPresenterImpl implements ShoppingListsPresenter {
         try {
             shoppingListDao.deleteShoppingList(id);
             refreshAndDisplayShoppingLists();
-            shoppingListsView.displayMessage("Shopping List deleted.");
+            shoppingListDisplayView.displayMessage("Shopping List deleted.");
         } catch (Exception e) {
             Timber.e("deleteShoppingList: ", e);
-            shoppingListsView.displayMessage("An error occurred, please try again later.");
+            shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
         }
     }
 
     private void refreshAndDisplayShoppingLists() {
-        ShoppingListTask shoppingListTask = new ShoppingListTask(shoppingListsView, shoppingListDao);
+        ShoppingListTask shoppingListTask = new ShoppingListTask(shoppingListDisplayView, shoppingListDao);
         shoppingListTask.execute();
     }
 }
