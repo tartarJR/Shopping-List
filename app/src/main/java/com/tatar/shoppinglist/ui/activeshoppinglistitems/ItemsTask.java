@@ -9,12 +9,12 @@ import java.util.List;
 
 import static com.tatar.shoppinglist.ui.activeshoppinglistitems.ItemDisplayContract.ItemDisplayView;
 
-public class ItemTask extends AsyncTask<String, Void, List<ShoppingListItem>> {
+public class ItemsTask extends AsyncTask<String, Void, List<ShoppingListItem>> {
 
     private ItemDisplayView itemDisplayView;
     private ShoppingListDao shoppingListDao;
 
-    public ItemTask(ItemDisplayView itemDisplayView, ShoppingListDao shoppingListDao) {
+    public ItemsTask(ItemDisplayView itemDisplayView, ShoppingListDao shoppingListDao) {
         this.itemDisplayView = itemDisplayView;
         this.shoppingListDao = shoppingListDao;
     }

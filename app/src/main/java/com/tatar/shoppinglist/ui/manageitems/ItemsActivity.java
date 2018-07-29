@@ -30,7 +30,7 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
     FloatingActionButton floatingActionButton;
 
     @Inject
-    ItemsAdapter itemsAdapter;
+    ItemAdapter itemAdapter;
 
     @Inject
     AlertDialogHelper alertDialogHelper;
@@ -60,7 +60,7 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
 
     @Override
     protected void setUpViews() {
-        recyclerView.setAdapter(itemsAdapter);
+        recyclerView.setAdapter(itemAdapter);
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -70,7 +70,7 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
 
             @Override
             public void onLongClick(View view, int position) {
-                Item item = itemsAdapter.getItem(position);
+                Item item = itemAdapter.getItem(position);
                 alertDialogHelper.displayActionsDialog(item.getId(), item.getName());
             }
         }));
@@ -88,7 +88,7 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
 
     @Override
     public void displayItems(List<Item> items) {
-        itemsAdapter.setItemList(items);
+        itemAdapter.setItemList(items);
     }
 
     /**

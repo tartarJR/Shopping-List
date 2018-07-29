@@ -88,7 +88,7 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter {
     }
 
     private void refreshAndDisplayShoppingListsItems(String shoppingListId) {
-        ItemTask itemTask = new ItemTask(itemDisplayView, shoppingListDao);
-        itemTask.execute(shoppingListId);
+        ItemsTask itemsTask = new ItemsTask(itemDisplayView, shoppingListDao);
+        itemsTask.execute(shoppingListId);
     }
 }

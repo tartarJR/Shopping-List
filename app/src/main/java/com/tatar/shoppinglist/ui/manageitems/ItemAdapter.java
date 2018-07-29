@@ -17,17 +17,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private List<Item> itemList;
 
-    public ItemsAdapter() {
+    public ItemAdapter() {
         this.itemList = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public ItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_list_row, parent, false);
 
@@ -35,7 +35,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder holder, int position) {
         Item item = itemList.get(position);
 
         holder.itemNameTv.setText(item.getName());

@@ -68,7 +68,7 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
     }
 
     private void refreshAndDisplayShoppingLists() {
-        ShoppingListTask shoppingListTask = new ShoppingListTask(shoppingListDisplayView, shoppingListDao);
-        shoppingListTask.execute();
+        ShoppingListsTask shoppingListsTask = new ShoppingListsTask(shoppingListDisplayView, shoppingListDao);
+        shoppingListsTask.execute();
     }
 }

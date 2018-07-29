@@ -2,8 +2,8 @@ package com.tatar.shoppinglist.di.manageitems.module;
 
 import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.di.manageitems.scope.ManageItemsScope;
+import com.tatar.shoppinglist.ui.manageitems.ItemAdapter;
 import com.tatar.shoppinglist.ui.manageitems.ItemsActivity;
-import com.tatar.shoppinglist.ui.manageitems.ItemsAdapter;
 import com.tatar.shoppinglist.ui.manageitems.ItemsPresenterImpl;
 import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogActions;
 import com.tatar.shoppinglist.utils.ui.alertdialog.AlertDialogHelper;
@@ -53,8 +53,8 @@ public class ManageItemsModule {
 
     @ManageItemsScope
     @Provides
-    public ItemsAdapter itemsAdapter() {
-        return new ItemsAdapter();
+    public ItemAdapter itemAdapter() {
+        return new ItemAdapter();
     }
 
     @ManageItemsScope
