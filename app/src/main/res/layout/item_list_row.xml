@@ -20,7 +20,7 @@
         android:layout_marginTop="10dp"
         android:includeFontPadding="false"
         android:lineSpacingExtra="0dp"
-        android:textColor="@color/orange_dot_color"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="40sp" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_toEndOf="@id/itemDot"
         android:layout_toRightOf="@id/itemDot"
         android:text="@string/item_name"
-        android:textColor="@color/timestamp"
+        android:textColor="@color/colorShoppingListNameLbl"
         android:textSize="14sp" />
 
     <TextView
@@ -40,7 +40,7 @@
         android:layout_below="@id/itemNameLbl"
         android:layout_toEndOf="@id/itemDot"
         android:layout_toRightOf="@id/itemDot"
-        android:textColor="@color/note_list_text"
+        android:textColor="@color/colorNoteListText"
         android:textSize="18sp"
         tools:text="Item name" />
 

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="timestamp">#858585</color>
-    <color name="note_list_text">#232323</color>
-    <item name="orange_dot_color" type="color">#ff5722</item>
+    <color name="colorPrimary">#5A93AD</color>
+    <color name="colorPrimaryDark">#FF7700</color>
+    <color name="colorAccent">@android:color/white</color>
+    <color name="colorShoppingListNameLbl">#858585</color>
+    <color name="colorNoteListText">#232323</color>
 </resources>
