@@ -108,8 +108,8 @@ public class ShoppingListsActivity extends BaseActivity implements ShoppingLists
     @Override
     public void navigateToAddItemActivity(String title, String id) {
         Intent intent = new Intent(ShoppingListsActivity.this, ShoppingListItemActivity.class);
-        intent.putExtra(ShoppingListItemActivity.INCOMING_TITLE, title);
-        intent.putExtra(ShoppingListItemActivity.INCOMING_SHOPPING_LIST_ID, id);
+        intent.putExtra(INCOMING_TITLE, title);
+        intent.putExtra(INCOMING_SHOPPING_LIST_ID, id);
         startActivity(intent);
     }
 
