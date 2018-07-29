@@ -34,6 +34,9 @@
         <activity
             android:name=".ui.completedshoppinglist.CompletedShoppingListsActivity"
             android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.completedshoppinglistitems.ItemDisplayActivity"
+            android:parentActivityName=".ui.completedshoppinglist.CompletedShoppingListsActivity" />
     </application>
 
 </manifest>

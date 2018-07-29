@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    public static final String INCOMING_SHOPPING_LIST = "shopping_list";
     public static final String INCOMING_TITLE = "title";
     public static final String INCOMING_SHOPPING_LIST_ID = "id";
 

@@ -1,5 +1,6 @@
 package com.tatar.shoppinglist.ui.completedshoppinglist;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.tatar.shoppinglist.App;
@@ -9,6 +10,8 @@ import com.tatar.shoppinglist.di.completedshoppinglist.component.CompletedShoppi
 import com.tatar.shoppinglist.di.completedshoppinglist.component.DaggerCompletedShoppingListsActivityComponent;
 import com.tatar.shoppinglist.di.completedshoppinglist.module.CompletedShoppingListsActivityModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
+import com.tatar.shoppinglist.ui.completedshoppinglistitems.ItemDisplayActivity;
+import com.tatar.shoppinglist.utils.ui.RecyclerTouchListener;
 
 import java.util.List;
 
@@ -48,6 +51,19 @@ public class CompletedShoppingListsActivity extends BaseActivity implements Comp
     @Override
     protected void setUpViews() {
         recyclerView.setAdapter(completedShoppingListAdapter);
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, final int position) {
+                ShoppingList shoppingList = completedShoppingListAdapter.getShoppingList(position);
+                navigateToItemDisplayActivity(shoppingList);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     @Override
@@ -58,6 +74,13 @@ public class CompletedShoppingListsActivity extends BaseActivity implements Comp
     @Override
     public void displayCompletedShoppingLists(List<ShoppingList> shoppingLists) {
         completedShoppingListAdapter.setShoppingLists(shoppingLists);
+    }
+
+    @Override
+    public void navigateToItemDisplayActivity(ShoppingList shoppingList) {
+        Intent intent = new Intent(CompletedShoppingListsActivity.this, ItemDisplayActivity.class);
+        intent.putExtra(INCOMING_SHOPPING_LIST, shoppingList);
+        startActivity(intent);
     }
 
     @Override
