@@ -46,11 +46,11 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
     public void updateShoppingList(String id, String name) {
         try {
             String standardizedItemName = StringUtils.standardizeItemName(name);
-            shoppingListDao.updateShoppingList(id, standardizedItemName);
+            shoppingListDao.updateShoppingListName(id, standardizedItemName);
             refreshAndDisplayShoppingLists();
             shoppingListDisplayView.displayMessage("Shopping List updated.");
         } catch (Exception e) {
-            Timber.e("updateShoppingList: ", e);
+            Timber.e("updateShoppingListName: ", e);
             shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
         }
     }
