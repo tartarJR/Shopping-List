@@ -51,7 +51,7 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
     @Override
     protected void provideDependencies() {
         ManageItemsComponent manageItemsComponent = DaggerManageItemsComponent.builder()
-                .itemsActivityModule(new ManageItemsModule(ItemsActivity.this, ItemsActivity.this, ItemsActivity.this))
+                .manageItemsModule(new ManageItemsModule(ItemsActivity.this, ItemsActivity.this, ItemsActivity.this))
                 .appComponent(App.get(this).getAppComponent())
                 .build();
 
@@ -82,7 +82,7 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
     }
 
     @OnClick(R.id.floatingActionButton)
-    void floatingActionButtonClick() {
+    void displayAddItemDialog() {
         alertDialogHelper.displayAddItemDialog();
     }
 
