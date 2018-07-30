@@ -83,8 +83,6 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
 
     @Override
     protected void setUpViews() {
-        toggleCompleteShoppingBtnVisibility();
-
         itemNameActv.setAdapter(actvAdapter);
         recyclerView.setAdapter(itemAdapter);
 
@@ -116,6 +114,7 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
     @Override
     public void displayShoppingListItems(List<ShoppingListItem> shoppingListItems) {
         itemAdapter.setShoppingListItems(shoppingListItems);
+        toggleCompleteShoppingBtnVisibility();
     }
 
     @Override
