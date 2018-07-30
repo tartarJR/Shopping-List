@@ -174,6 +174,11 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
         displayToast("Please enter a name.");
     }
 
+    @Override
+    public void showNoInternetMessage() {
+        displayToast("Please check your internet connection and try again.");
+    }
+
     // RecyclerView swipe to delete event
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {

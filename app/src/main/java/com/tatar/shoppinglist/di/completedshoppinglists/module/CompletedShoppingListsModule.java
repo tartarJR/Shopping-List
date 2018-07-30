@@ -7,6 +7,7 @@ import com.tatar.shoppinglist.di.completedshoppinglists.scope.CompletedShoppingL
 import com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListAdapter;
 import com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListDisplayActivity;
 import com.tatar.shoppinglist.ui.completedshoppinglists.ShoppingListDisplayPresenterImpl;
+import com.tatar.shoppinglist.utils.NetworkUtil;
 
 import dagger.Module;
 import dagger.Provides;
@@ -39,8 +40,8 @@ public class CompletedShoppingListsModule {
 
     @CompletedShoppingListsScope
     @Provides
-    public ShoppingListDisplayPresenter shoppingListDisplayPresenter(ShoppingListDisplayView shoppingListDisplayView, ShoppingListService shoppingListService, SharedPreferencesManager sharedPreferencesManager) {
-        return new ShoppingListDisplayPresenterImpl(shoppingListDisplayView, shoppingListService, sharedPreferencesManager);
+    public ShoppingListDisplayPresenter shoppingListDisplayPresenter(ShoppingListDisplayView shoppingListDisplayView, ShoppingListService shoppingListService, SharedPreferencesManager sharedPreferencesManager, NetworkUtil networkUtil) {
+        return new ShoppingListDisplayPresenterImpl(shoppingListDisplayView, shoppingListService, sharedPreferencesManager, networkUtil);
     }
 
     @CompletedShoppingListsScope

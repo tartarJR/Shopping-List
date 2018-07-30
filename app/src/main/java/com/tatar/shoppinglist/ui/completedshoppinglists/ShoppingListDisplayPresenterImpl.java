@@ -3,6 +3,7 @@ package com.tatar.shoppinglist.ui.completedshoppinglists;
 import com.tatar.shoppinglist.data.network.ShoppingListService;
 import com.tatar.shoppinglist.data.network.model.RemoteShoppingList;
 import com.tatar.shoppinglist.data.prefs.SharedPreferencesManager;
+import com.tatar.shoppinglist.utils.NetworkUtil;
 
 import java.util.List;
 
@@ -17,28 +18,30 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
     private ShoppingListDisplayView shoppingListDisplayView;
     private ShoppingListService shoppingListService;
     private SharedPreferencesManager sharedPreferencesManager;
+    private NetworkUtil networkUtil;
 
-    public ShoppingListDisplayPresenterImpl(ShoppingListDisplayView shoppingListDisplayView, ShoppingListService shoppingListService, SharedPreferencesManager sharedPreferencesManager) {
+    public ShoppingListDisplayPresenterImpl(ShoppingListDisplayView shoppingListDisplayView, ShoppingListService shoppingListService, SharedPreferencesManager sharedPreferencesManager, NetworkUtil networkUtil) {
         this.shoppingListDisplayView = shoppingListDisplayView;
         this.shoppingListService = shoppingListService;
         this.sharedPreferencesManager = sharedPreferencesManager;
+        this.networkUtil = networkUtil;
     }
 
     @Override
-    public void loadCompletedShoppingLists(String userId) {
-        shoppingListDisplayView.toggleProgressBar();
-
+    public void loadCompletedShoppingLists() {
         try {
-            shoppingListService.getShoppingLists(userId, this);
+            if (networkUtil.isNetworkAvailable()) {
+                shoppingListDisplayView.toggleProgressBar();
+                shoppingListService.getShoppingLists(sharedPreferencesManager.getUserId(), this);
+            } else {
+                shoppingListDisplayView.navigateToMainActivity();
+                shoppingListDisplayView.showNoInternetMessage();
+            }
         } catch (Exception e) {
             Timber.e("loadCompletedShoppingLists: ", e);
+            shoppingListDisplayView.toggleProgressBar();
             shoppingListDisplayView.showErrorMessage();
         }
-    }
-
-    @Override
-    public String getUserId() {
-        return sharedPreferencesManager.getUserId();
     }
 
     @Override

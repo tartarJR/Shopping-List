@@ -4,6 +4,7 @@ import com.tatar.shoppinglist.data.db.item.ItemDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.data.network.ShoppingListService;
 import com.tatar.shoppinglist.data.prefs.SharedPreferencesManager;
+import com.tatar.shoppinglist.utils.NetworkUtil;
 import com.tatar.shoppinglist.utils.StringUtils;
 
 import timber.log.Timber;
@@ -22,13 +23,15 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter, PostShopp
     private ShoppingListDao shoppingListDao;
     private ShoppingListService shoppingListService;
     private SharedPreferencesManager sharedPreferencesManager;
+    private NetworkUtil networkUtil;
 
-    public ItemDisplayPresenterImpl(ItemDisplayView itemDisplayView, ItemDao itemDao, ShoppingListDao shoppingListDao, ShoppingListService shoppingListService, SharedPreferencesManager sharedPreferencesManager) {
+    public ItemDisplayPresenterImpl(ItemDisplayView itemDisplayView, ItemDao itemDao, ShoppingListDao shoppingListDao, ShoppingListService shoppingListService, SharedPreferencesManager sharedPreferencesManager, NetworkUtil networkUtil) {
         this.itemDisplayView = itemDisplayView;
         this.itemDao = itemDao;
         this.shoppingListDao = shoppingListDao;
         this.shoppingListService = shoppingListService;
         this.sharedPreferencesManager = sharedPreferencesManager;
+        this.networkUtil = networkUtil;
     }
 
     @Override
@@ -98,8 +101,12 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter, PostShopp
     @Override
     public void completeShopping() {
         try {
-            RemoteItemsTask remoteItemsTask = new RemoteItemsTask(itemDisplayView, shoppingListDao, shoppingListService, sharedPreferencesManager, ItemDisplayPresenterImpl.this);
-            remoteItemsTask.execute(shoppingListId, shoppingListName);
+            if (networkUtil.isNetworkAvailable()) {
+                RemoteItemsTask remoteItemsTask = new RemoteItemsTask(itemDisplayView, shoppingListDao, shoppingListService, sharedPreferencesManager, ItemDisplayPresenterImpl.this);
+                remoteItemsTask.execute(shoppingListId, shoppingListName);
+            } else {
+                itemDisplayView.showNoInternetMessage();
+            }
         } catch (Exception e) {
             Timber.e("completeShopping: ", e);
             itemDisplayView.showErrorMessage();

@@ -11,6 +11,7 @@ import com.tatar.shoppinglist.di.completedshoppinglists.component.DaggerComplete
 import com.tatar.shoppinglist.di.completedshoppinglists.module.CompletedShoppingListsModule;
 import com.tatar.shoppinglist.ui.BaseActivity;
 import com.tatar.shoppinglist.ui.completedshoppinglistitems.ItemDisplayActivity;
+import com.tatar.shoppinglist.ui.main.MainActivity;
 import com.tatar.shoppinglist.utils.ui.recyclerview.RecyclerTouchListener;
 
 import java.util.List;
@@ -68,7 +69,7 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
 
     @Override
     protected void makeInitialCalls() {
-        shoppingListDisplayPresenter.loadCompletedShoppingLists(shoppingListDisplayPresenter.getUserId());
+        shoppingListDisplayPresenter.loadCompletedShoppingLists();
     }
 
     @Override
@@ -81,6 +82,17 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
         Intent intent = new Intent(ShoppingListDisplayActivity.this, ItemDisplayActivity.class);
         intent.putExtra(INCOMING_SHOPPING_LIST, remoteShoppingList);
         startActivity(intent);
+    }
+
+    @Override
+    public void navigateToMainActivity() {
+        Intent intent = new Intent(ShoppingListDisplayActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showNoInternetMessage() {
+        displayToast("Please check your internet connection and try again.");
     }
 
     @Override

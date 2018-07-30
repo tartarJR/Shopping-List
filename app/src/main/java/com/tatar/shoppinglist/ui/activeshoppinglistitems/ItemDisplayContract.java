@@ -21,6 +21,8 @@ public interface ItemDisplayContract {
         void showShoppingCompletedMessage();
 
         void showValidationMessage();
+
+        void showNoInternetMessage();
     }
 
     interface ItemDisplayPresenter {

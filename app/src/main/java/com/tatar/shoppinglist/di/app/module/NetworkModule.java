@@ -3,6 +3,7 @@ package com.tatar.shoppinglist.di.app.module;
 import android.content.Context;
 
 import com.tatar.shoppinglist.di.app.scope.AppScope;
+import com.tatar.shoppinglist.utils.NetworkUtil;
 
 import java.io.File;
 
@@ -50,5 +51,11 @@ public class NetworkModule {
     @Provides
     public File cacheFile(Context context) {
         return new File(context.getCacheDir(), "okhttp_cache");
+    }
+
+    @AppScope
+    @Provides
+    public NetworkUtil NetworkUtil(Context context) {
+        return new NetworkUtil(context);
     }
 }

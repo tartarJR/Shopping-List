@@ -10,11 +10,13 @@ public interface ShoppingListDisplayContract {
         void displayCompletedShoppingLists(List<RemoteShoppingList> remoteShoppingLists);
 
         void navigateToItemDisplayActivity(RemoteShoppingList remoteShoppingList);
+
+        void navigateToMainActivity();
+
+        void showNoInternetMessage();
     }
 
     interface ShoppingListDisplayPresenter {
-        void loadCompletedShoppingLists(String userId);
-
-        String getUserId();
+        void loadCompletedShoppingLists();
     }
 }
