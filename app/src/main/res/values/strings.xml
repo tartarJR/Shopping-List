@@ -2,9 +2,12 @@
     <string name="app_name">Shopping List</string>
 
     <!--MainActivity-->
-    <string name="see_shopping_lists">See Shopping Lists</string>
-    <string name="see_items">See Items</string>
-    <string name="see_completed_shopping_lists">See completed shopping lists</string>
+    <string name="completed_shopping_lists_txt">COMPLETED SHOPPING LISTS</string>
+    <string name="active_shopping_lists_txt">ACTIVE SHOPPING LISTS</string>
+    <string name="manage_items_txt">MANAGE ITEMS</string>
+    <string name="seeItemsBtn_img_descr">seeItemsBtn img</string>
+    <string name="seeCompletedShoppingListsBtn_img_descr">seeCompletedShoppingListsBtn img</string>
+    <string name="seeActiveShoppingListsImgBtn_img_descr">seeActiveShoppingListsImgBtn img</string>
 
     <!--ItemsActivity-->
     <string name="items_activity_title">Item Management</string>

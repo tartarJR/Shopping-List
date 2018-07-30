@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#5A93AD</color>
-    <color name="colorPrimaryDark">#FF7700</color>
-    <color name="colorAccent">@android:color/white</color>
-    <color name="colorShoppingListNameLbl">#858585</color>
-    <color name="colorNoteListText">#232323</color>
+    <color name="colorPrimaryDark">#377E9E</color>
+    <color name="colorPrimaryLight">#ccebf9</color>
+    <color name="colorAccent">#FF7700</color>
 </resources>

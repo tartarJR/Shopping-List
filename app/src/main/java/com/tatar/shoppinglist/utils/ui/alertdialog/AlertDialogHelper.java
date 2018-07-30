@@ -33,7 +33,7 @@ public class AlertDialogHelper {
      * Creates an alert dialog with given parameters.
      */
     private AlertDialog createAlertDialog(View view, String title, String hint, String positiveBtnTxt) {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity, R.style.AppCompatAlertDialogStyle);
         dialogBuilder.setView(view);
 
         final EditText nameEt = view.findViewById(R.id.nameEt);
@@ -174,7 +174,7 @@ public class AlertDialogHelper {
     public void displayActionsDialog(final String id, final String name) {
         CharSequence actions[] = new CharSequence[]{"Update", "Delete"};
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity, R.style.AppCompatAlertDialogStyle);
         dialogBuilder.setTitle("Choose option");
         dialogBuilder.setItems(actions, new DialogInterface.OnClickListener() {
             @Override
@@ -191,7 +191,7 @@ public class AlertDialogHelper {
     }
 
     public void displayShoppingCompletedDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.AppCompatAlertDialogStyle);
         builder.setTitle("CONGRATS!")
                 .setMessage("You have collected all your items. Please tap the button on the bottom right corner to complete your shopping.")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
     android:paddingBottom="10dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
@@ -20,7 +17,7 @@
         android:layout_marginTop="10dp"
         android:includeFontPadding="false"
         android:lineSpacingExtra="0dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"
         android:textSize="40sp" />
 
     <TextView
@@ -30,7 +27,7 @@
         android:layout_toEndOf="@id/itemDot"
         android:layout_toRightOf="@id/itemDot"
         android:text="@string/shopping_list_name"
-        android:textColor="@color/colorShoppingListNameLbl"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp" />
 
     <TextView
@@ -40,7 +37,7 @@
         android:layout_below="@id/shoppingListNameLbl"
         android:layout_toEndOf="@id/itemDot"
         android:layout_toRightOf="@id/itemDot"
-        android:textColor="@color/colorNoteListText"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         tools:text="Item name" />
 
