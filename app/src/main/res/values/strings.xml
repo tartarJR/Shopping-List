@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Shopping List</string>
+    <string name="app_name">Shopplication</string>
 
     <!--MainActivity-->
     <string name="completed_shopping_lists_txt">COMPLETED SHOPPING LISTS</string>
