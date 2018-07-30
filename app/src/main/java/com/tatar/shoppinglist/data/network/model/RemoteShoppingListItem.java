@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ShoppingListItem implements Parcelable {
+public class RemoteShoppingListItem implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -18,25 +18,25 @@ public class ShoppingListItem implements Parcelable {
     @Expose
     private boolean isCollected;
 
-    public ShoppingListItem() {
+    public RemoteShoppingListItem() {
 
     }
 
-    protected ShoppingListItem(Parcel in) {
+    protected RemoteShoppingListItem(Parcel in) {
         id = in.readString();
         name = in.readString();
         isCollected = in.readByte() != 0;
     }
 
-    public static final Creator<ShoppingListItem> CREATOR = new Creator<ShoppingListItem>() {
+    public static final Creator<RemoteShoppingListItem> CREATOR = new Creator<RemoteShoppingListItem>() {
         @Override
-        public ShoppingListItem createFromParcel(Parcel in) {
-            return new ShoppingListItem(in);
+        public RemoteShoppingListItem createFromParcel(Parcel in) {
+            return new RemoteShoppingListItem(in);
         }
 
         @Override
-        public ShoppingListItem[] newArray(int size) {
-            return new ShoppingListItem[size];
+        public RemoteShoppingListItem[] newArray(int size) {
+            return new RemoteShoppingListItem[size];
         }
     };
 

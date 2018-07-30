@@ -1,7 +1,7 @@
 package com.tatar.shoppinglist.ui.completedshoppinglistitems;
 
 import com.tatar.shoppinglist.R;
-import com.tatar.shoppinglist.data.network.model.ShoppingList;
+import com.tatar.shoppinglist.data.network.model.RemoteShoppingList;
 import com.tatar.shoppinglist.di.completedshoppinglistitems.component.CompletedShoppingListItemsComponent;
 import com.tatar.shoppinglist.di.completedshoppinglistitems.component.DaggerCompletedShoppingListItemsComponent;
 import com.tatar.shoppinglist.ui.BaseActivity;
@@ -20,8 +20,8 @@ public class ItemDisplayActivity extends BaseActivity {
 
     @Override
     protected String getActivityTitle() {
-        ShoppingList shoppingList = getIntent().getExtras().getParcelable(INCOMING_SHOPPING_LIST);
-        return shoppingList.getName();
+        RemoteShoppingList remoteShoppingList = getIntent().getExtras().getParcelable(INCOMING_SHOPPING_LIST);
+        return remoteShoppingList.getName();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ItemDisplayActivity extends BaseActivity {
 
     @Override
     protected void makeInitialCalls() {
-        ShoppingList shoppingList = getIntent().getExtras().getParcelable(INCOMING_SHOPPING_LIST);
-        itemAdapter.setShoppingListItems(shoppingList.getShoppingListItems());
+        RemoteShoppingList remoteShoppingList = getIntent().getExtras().getParcelable(INCOMING_SHOPPING_LIST);
+        itemAdapter.setRemoteShoppingListItems(remoteShoppingList.getRemoteShoppingListItems());
     }
 }

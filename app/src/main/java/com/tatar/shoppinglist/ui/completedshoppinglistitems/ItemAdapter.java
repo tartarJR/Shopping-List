@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tatar.shoppinglist.R;
-import com.tatar.shoppinglist.data.network.model.ShoppingListItem;
+import com.tatar.shoppinglist.data.network.model.RemoteShoppingListItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,10 @@ import butterknife.ButterKnife;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
-    private List<ShoppingListItem> shoppingListItems;
+    private List<RemoteShoppingListItem> remoteShoppingListItems;
 
     public ItemAdapter() {
-        this.shoppingListItems = new ArrayList<>();
+        this.remoteShoppingListItems = new ArrayList<>();
     }
 
     @NonNull
@@ -34,12 +34,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder holder, int position) {
-        ShoppingListItem shoppingListItem = shoppingListItems.get(position);
+        RemoteShoppingListItem remoteShoppingListItem = remoteShoppingListItems.get(position);
 
-        holder.itemNameTv.setText(shoppingListItem.getName());
+        holder.itemNameTv.setText(remoteShoppingListItem.getName());
         holder.itemDot.setText(Html.fromHtml("&#8226;"));
 
-        if (shoppingListItem.isCollected()) {
+        if (remoteShoppingListItem.isCollected()) {
             holder.isCollectedTv.setText(R.string.collected_txt);
         } else {
             holder.isCollectedTv.setText(R.string.not_collected_txt);
@@ -48,15 +48,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return shoppingListItems.size();
+        return remoteShoppingListItems.size();
     }
 
-    public ShoppingListItem getShoppingListItem(int position) {
-        return shoppingListItems.get(position);
+    public RemoteShoppingListItem getShoppingListItem(int position) {
+        return remoteShoppingListItems.get(position);
     }
 
-    public void setShoppingListItems(List<ShoppingListItem> shoppingListItems) {
-        this.shoppingListItems = shoppingListItems;
+    public void setRemoteShoppingListItems(List<RemoteShoppingListItem> remoteShoppingListItems) {
+        this.remoteShoppingListItems = remoteShoppingListItems;
         notifyDataSetChanged();
     }
 

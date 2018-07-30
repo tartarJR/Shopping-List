@@ -1,7 +1,7 @@
 package com.tatar.shoppinglist.ui.completedshoppinglists;
 
 import com.tatar.shoppinglist.data.network.ShoppingListService;
-import com.tatar.shoppinglist.data.network.model.ShoppingList;
+import com.tatar.shoppinglist.data.network.model.RemoteShoppingList;
 import com.tatar.shoppinglist.data.prefs.SharedPreferencesManager;
 
 import java.util.List;
@@ -42,10 +42,10 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
     }
 
     @Override
-    public void onDataReceived(List<ShoppingList> shoppingLists) {
+    public void onDataReceived(List<RemoteShoppingList> remoteShoppingLists) {
         shoppingListDisplayView.toggleProgressBar();
-        shoppingListDisplayView.toggleNoDataTv(shoppingLists.size());
-        shoppingListDisplayView.displayCompletedShoppingLists(shoppingLists);
+        shoppingListDisplayView.toggleNoDataTv(remoteShoppingLists.size());
+        shoppingListDisplayView.displayCompletedShoppingLists(remoteShoppingLists);
     }
 
     @Override

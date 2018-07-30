@@ -5,7 +5,8 @@ import android.os.AsyncTask;
 import com.tatar.shoppinglist.data.db.shoppinglist.ShoppingListDao;
 import com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem;
 import com.tatar.shoppinglist.data.network.ShoppingListService;
-import com.tatar.shoppinglist.data.network.model.ShoppingList;
+import com.tatar.shoppinglist.data.network.model.RemoteShoppingList;
+import com.tatar.shoppinglist.data.network.model.RemoteShoppingListItem;
 import com.tatar.shoppinglist.data.prefs.SharedPreferencesManager;
 
 import java.util.ArrayList;
@@ -39,23 +40,23 @@ public class RemoteItemsTask extends AsyncTask<String, Void, Void> {
 
         List<ShoppingListItem> shoppingListItems = shoppingListDao.getShoppingListItemsById(strings[0]);
 
-        List<com.tatar.shoppinglist.data.network.model.ShoppingListItem> remoteShoppingListItems = new ArrayList<>();
+        List<RemoteShoppingListItem> remoteRemoteShoppingListItems = new ArrayList<>();
 
-        for (com.tatar.shoppinglist.data.db.shoppinglist.model.ShoppingListItem shoppingListItem : shoppingListItems) {
-            com.tatar.shoppinglist.data.network.model.ShoppingListItem remoteShoppingListItem = new com.tatar.shoppinglist.data.network.model.ShoppingListItem();
-            remoteShoppingListItem.setId(shoppingListItem.getId());
-            remoteShoppingListItem.setName(shoppingListItem.getName());
-            remoteShoppingListItem.setCollected(shoppingListItem.isCollected());
-            remoteShoppingListItems.add(remoteShoppingListItem);
+        for (ShoppingListItem shoppingListItem : shoppingListItems) {
+            RemoteShoppingListItem remoteRemoteShoppingListItem = new RemoteShoppingListItem();
+            remoteRemoteShoppingListItem.setId(shoppingListItem.getId());
+            remoteRemoteShoppingListItem.setName(shoppingListItem.getName());
+            remoteRemoteShoppingListItem.setCollected(shoppingListItem.isCollected());
+            remoteRemoteShoppingListItems.add(remoteRemoteShoppingListItem);
         }
 
-        ShoppingList shoppingList = new ShoppingList();
-        shoppingList.setId(strings[0]);
-        shoppingList.setName(strings[1]);
-        shoppingList.setShoppingListItems(remoteShoppingListItems);
-        shoppingList.setUserId(sharedPreferencesManager.getUserId());
+        RemoteShoppingList remoteShoppingList = new RemoteShoppingList();
+        remoteShoppingList.setId(strings[0]);
+        remoteShoppingList.setName(strings[1]);
+        remoteShoppingList.setRemoteShoppingListItems(remoteRemoteShoppingListItems);
+        remoteShoppingList.setUserId(sharedPreferencesManager.getUserId());
 
-        shoppingListService.postShoppingList(shoppingList, postShoppingListCallbackImpl);
+        shoppingListService.postShoppingList(remoteShoppingList, postShoppingListCallbackImpl);
 
         return null;
     }

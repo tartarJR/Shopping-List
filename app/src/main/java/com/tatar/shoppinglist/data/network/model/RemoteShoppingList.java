@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 
-public class ShoppingList implements Parcelable {
+public class RemoteShoppingList implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -21,32 +21,32 @@ public class ShoppingList implements Parcelable {
 
     @SerializedName("shopping_list_items")
     @Expose
-    private List<ShoppingListItem> shoppingListItems;
+    private List<RemoteShoppingListItem> remoteShoppingListItems;
 
     @SerializedName("user_id")
     @Expose
     private String userId;
 
-    public ShoppingList() {
+    public RemoteShoppingList() {
 
     }
 
-    protected ShoppingList(Parcel in) {
+    protected RemoteShoppingList(Parcel in) {
         id = in.readString();
         name = in.readString();
-        shoppingListItems = in.createTypedArrayList(ShoppingListItem.CREATOR);
+        remoteShoppingListItems = in.createTypedArrayList(RemoteShoppingListItem.CREATOR);
         userId = in.readString();
     }
 
-    public static final Creator<ShoppingList> CREATOR = new Creator<ShoppingList>() {
+    public static final Creator<RemoteShoppingList> CREATOR = new Creator<RemoteShoppingList>() {
         @Override
-        public ShoppingList createFromParcel(Parcel in) {
-            return new ShoppingList(in);
+        public RemoteShoppingList createFromParcel(Parcel in) {
+            return new RemoteShoppingList(in);
         }
 
         @Override
-        public ShoppingList[] newArray(int size) {
-            return new ShoppingList[size];
+        public RemoteShoppingList[] newArray(int size) {
+            return new RemoteShoppingList[size];
         }
     };
 
@@ -66,12 +66,12 @@ public class ShoppingList implements Parcelable {
         this.name = name;
     }
 
-    public List<ShoppingListItem> getShoppingListItems() {
-        return shoppingListItems;
+    public List<RemoteShoppingListItem> getRemoteShoppingListItems() {
+        return remoteShoppingListItems;
     }
 
-    public void setShoppingListItems(List<ShoppingListItem> shoppingListItems) {
-        this.shoppingListItems = shoppingListItems;
+    public void setRemoteShoppingListItems(List<RemoteShoppingListItem> remoteShoppingListItems) {
+        this.remoteShoppingListItems = remoteShoppingListItems;
     }
 
     public String getUserId() {
@@ -91,7 +91,7 @@ public class ShoppingList implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(id);
         parcel.writeString(name);
-        parcel.writeTypedList(shoppingListItems);
+        parcel.writeTypedList(remoteShoppingListItems);
         parcel.writeString(userId);
     }
 }

@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.tatar.shoppinglist.App;
 import com.tatar.shoppinglist.R;
-import com.tatar.shoppinglist.data.network.model.ShoppingList;
+import com.tatar.shoppinglist.data.network.model.RemoteShoppingList;
 import com.tatar.shoppinglist.di.completedshoppinglists.component.CompletedShoppingListsComponent;
 import com.tatar.shoppinglist.di.completedshoppinglists.component.DaggerCompletedShoppingListsComponent;
 import com.tatar.shoppinglist.di.completedshoppinglists.module.CompletedShoppingListsModule;
@@ -55,8 +55,8 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                ShoppingList shoppingList = shoppingListAdapter.getShoppingList(position);
-                navigateToItemDisplayActivity(shoppingList);
+                RemoteShoppingList remoteShoppingList = shoppingListAdapter.getShoppingList(position);
+                navigateToItemDisplayActivity(remoteShoppingList);
             }
 
             @Override
@@ -72,14 +72,14 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
     }
 
     @Override
-    public void displayCompletedShoppingLists(List<ShoppingList> shoppingLists) {
-        shoppingListAdapter.setShoppingLists(shoppingLists);
+    public void displayCompletedShoppingLists(List<RemoteShoppingList> remoteShoppingLists) {
+        shoppingListAdapter.setRemoteShoppingLists(remoteShoppingLists);
     }
 
     @Override
-    public void navigateToItemDisplayActivity(ShoppingList shoppingList) {
+    public void navigateToItemDisplayActivity(RemoteShoppingList remoteShoppingList) {
         Intent intent = new Intent(ShoppingListDisplayActivity.this, ItemDisplayActivity.class);
-        intent.putExtra(INCOMING_SHOPPING_LIST, shoppingList);
+        intent.putExtra(INCOMING_SHOPPING_LIST, remoteShoppingList);
         startActivity(intent);
     }
 

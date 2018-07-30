@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tatar.shoppinglist.R;
-import com.tatar.shoppinglist.data.network.model.ShoppingList;
+import com.tatar.shoppinglist.data.network.model.RemoteShoppingList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,10 @@ import butterknife.ButterKnife;
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ViewHolder> {
 
-    private List<ShoppingList> shoppingLists;
+    private List<RemoteShoppingList> remoteShoppingLists;
 
     public ShoppingListAdapter() {
-        this.shoppingLists = new ArrayList<>();
+        this.remoteShoppingLists = new ArrayList<>();
     }
 
     @NonNull
@@ -34,23 +34,23 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ShoppingListAdapter.ViewHolder holder, int position) {
-        ShoppingList shoppingList = shoppingLists.get(position);
+        RemoteShoppingList remoteShoppingList = remoteShoppingLists.get(position);
 
-        holder.shoppingListNameTv.setText(shoppingList.getName());
+        holder.shoppingListNameTv.setText(remoteShoppingList.getName());
         holder.itemDot.setText(Html.fromHtml("&#8226;"));
     }
 
     @Override
     public int getItemCount() {
-        return shoppingLists.size();
+        return remoteShoppingLists.size();
     }
 
-    public ShoppingList getShoppingList(int position) {
-        return shoppingLists.get(position);
+    public RemoteShoppingList getShoppingList(int position) {
+        return remoteShoppingLists.get(position);
     }
 
-    public void setShoppingLists(List<ShoppingList> shoppingLists) {
-        this.shoppingLists = shoppingLists;
+    public void setRemoteShoppingLists(List<RemoteShoppingList> remoteShoppingLists) {
+        this.remoteShoppingLists = remoteShoppingLists;
         notifyDataSetChanged();
     }
 
