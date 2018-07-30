@@ -14,6 +14,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.main.SplashActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,25 +23,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.manageitems.ItemsActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.main.MainActivity" />
+            android:parentActivityName=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activeshoppinglists.ShoppingListDisplayActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.main.MainActivity" />
+            android:parentActivityName=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activeshoppinglistitems.ItemDisplayActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.activeshoppinglists.ShoppingListDisplayActivity" />
+            android:parentActivityName=".ui.activeshoppinglists.ShoppingListDisplayActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.completedshoppinglists.ShoppingListDisplayActivity"
-            android:parentActivityName=".ui.main.MainActivity" />
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.completedshoppinglistitems.ItemDisplayActivity"
-            android:parentActivityName=".ui.completedshoppinglists.ShoppingListDisplayActivity" />
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.completedshoppinglists.ShoppingListDisplayActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
