@@ -5,5 +5,5 @@ public interface BaseView {
 
     void toggleNoDataTv(int size);
 
-    void displayMessage(String message);
+    void showErrorMessage();
 }

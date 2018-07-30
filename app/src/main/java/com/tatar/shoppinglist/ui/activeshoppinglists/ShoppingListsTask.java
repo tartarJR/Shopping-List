@@ -36,7 +36,7 @@ public class ShoppingListsTask extends AsyncTask<Void, Void, List<ShoppingList>>
         shoppingListDisplayView.toggleProgressBar();
 
         if (shoppingLists == null) {
-            shoppingListDisplayView.displayMessage("Upps ! Something went wrong.");
+            shoppingListDisplayView.showErrorMessage();
         } else {
             shoppingListDisplayView.toggleNoDataTv(shoppingLists.size());
             shoppingListDisplayView.displayShoppingLists(shoppingLists);

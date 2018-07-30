@@ -102,7 +102,7 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
     }
 
     @Override
-    public void displayMessage(String message) {
-        displayToast(message);
+    public void showErrorMessage() {
+        displayErrorMessage();
     }
 }

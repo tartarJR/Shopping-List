@@ -48,7 +48,7 @@ public class AlertDialogHelper {
 
                     }
                 })
-                .setNegativeButton("CANCEL",
+                .setNegativeButton(R.string.alert_dialog_cancel_txt,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogBox, int id) {
                                 dialogBox.cancel();
@@ -64,7 +64,7 @@ public class AlertDialogHelper {
     public void displayAddItemDialog() {
         View view = layoutInflater.inflate(R.layout.alert_dialog, null);
 
-        final AlertDialog addItemDialog = createAlertDialog(view, activity.getString(R.string.add_an_new_item), activity.getString(R.string.item_name_hint), "ADD");
+        final AlertDialog addItemDialog = createAlertDialog(view, activity.getString(R.string.add_an_new_item), activity.getString(R.string.item_name_hint), activity.getString(R.string.alert_dialog_add_txt));
 
         final EditText nameEt = view.findViewById(R.id.nameEt);
 
@@ -74,7 +74,7 @@ public class AlertDialogHelper {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(nameEt.getText().toString())) {
-                    Toast.makeText(activity, "Name field is mandatory!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, R.string.alert_dialog_validation_msg, Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     addItemDialog.dismiss();
@@ -91,7 +91,7 @@ public class AlertDialogHelper {
     public void displayUpdateItemDialog(final String id, String name) {
         View view = layoutInflater.inflate(R.layout.alert_dialog, null);
 
-        final AlertDialog addItemDialog = createAlertDialog(view, activity.getString(R.string.update_an_existing_item), activity.getString(R.string.item_name_hint), "UPDATE");
+        final AlertDialog addItemDialog = createAlertDialog(view, activity.getString(R.string.update_an_existing_item), activity.getString(R.string.item_name_hint), activity.getString(R.string.alert_dialog_update_txt));
 
         final EditText nameEt = view.findViewById(R.id.nameEt);
         nameEt.setText(name);
@@ -102,7 +102,7 @@ public class AlertDialogHelper {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(nameEt.getText().toString())) {
-                    Toast.makeText(activity, "Name field is mandatory!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, R.string.alert_dialog_validation_msg, Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     addItemDialog.dismiss();
@@ -119,7 +119,7 @@ public class AlertDialogHelper {
     public void displayCreateShoppingListDialog() {
         View view = layoutInflater.inflate(R.layout.alert_dialog, null);
 
-        final AlertDialog addItemDialog = createAlertDialog(view, activity.getString(R.string.create_shopping_list_title), activity.getString(R.string.shopping_list_name_hint), "CREATE");
+        final AlertDialog addItemDialog = createAlertDialog(view, activity.getString(R.string.create_shopping_list_title), activity.getString(R.string.shopping_list_name_hint), activity.getString(R.string.alert_dialog_create_txt));
 
         final EditText nameEt = view.findViewById(R.id.nameEt);
 
@@ -129,7 +129,7 @@ public class AlertDialogHelper {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(nameEt.getText().toString())) {
-                    Toast.makeText(activity, "Name field is mandatory!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, R.string.alert_dialog_validation_msg, Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     addItemDialog.dismiss();
@@ -146,7 +146,7 @@ public class AlertDialogHelper {
     public void displayUpdateShoppingListDialog(final String id, String name) {
         View view = layoutInflater.inflate(R.layout.alert_dialog, null);
 
-        final AlertDialog addItemDialog = createAlertDialog(view, activity.getString(R.string.update_an_existing_shopping_list), activity.getString(R.string.shopping_list_name_hint), "UPDATE");
+        final AlertDialog addItemDialog = createAlertDialog(view, activity.getString(R.string.update_an_existing_shopping_list), activity.getString(R.string.shopping_list_name_hint), activity.getString(R.string.alert_dialog_update_txt));
 
         final EditText nameEt = view.findViewById(R.id.nameEt);
         nameEt.setText(name);
@@ -157,7 +157,7 @@ public class AlertDialogHelper {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(nameEt.getText().toString())) {
-                    Toast.makeText(activity, "Name field is mandatory!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, R.string.alert_dialog_validation_msg, Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     addItemDialog.dismiss();
@@ -172,11 +172,9 @@ public class AlertDialogHelper {
      * Creates and displays an alert dialog for picking an option to update or delete an Item.
      */
     public void displayActionsDialog(final String id, final String name) {
-        CharSequence actions[] = new CharSequence[]{"Update", "Delete"};
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity, R.style.AppCompatAlertDialogStyle);
-        dialogBuilder.setTitle("Choose option");
-        dialogBuilder.setItems(actions, new DialogInterface.OnClickListener() {
+        dialogBuilder.setTitle(R.string.display_actions_dialog_title);
+        dialogBuilder.setItems(activity.getResources().getStringArray(R.array.action_dialog_options), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int actionType) {
                 if (actionType == 0) {
@@ -192,9 +190,9 @@ public class AlertDialogHelper {
 
     public void displayShoppingCompletedDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.AppCompatAlertDialogStyle);
-        builder.setTitle("CONGRATS!")
-                .setMessage("You have collected all your items. Please tap the button on the bottom right corner to complete your shopping.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.completed_shopping_dialog_title)
+                .setMessage(R.string.completed_shopping_dialog_msg)
+                .setPositiveButton(R.string.alert_dialog_ok_txt, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

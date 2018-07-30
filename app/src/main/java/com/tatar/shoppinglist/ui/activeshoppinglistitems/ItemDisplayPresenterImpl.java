@@ -38,7 +38,7 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter, PostShopp
             actvTask.execute();
         } catch (Exception e) {
             Timber.e("getActvItems: ", e);
-            itemDisplayView.displayMessage("An error occurred, please try again later.");
+            itemDisplayView.showErrorMessage();
         }
     }
 
@@ -51,7 +51,7 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter, PostShopp
             refreshAndDisplayShoppingListsItems(shoppingListId);
         } catch (Exception e) {
             Timber.e("getShoppingListItems: ", e);
-            itemDisplayView.displayMessage("An error occurred, please try again later.");
+            itemDisplayView.showErrorMessage();
         }
     }
 
@@ -62,15 +62,15 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter, PostShopp
                 String standardizedItemName = StringUtils.standardizeItemName(name);
                 shoppingListDao.addItemToShoppingList(shoppingListId, standardizedItemName);
                 itemDisplayView.clearActv();
-                itemDisplayView.displayMessage("Item has been added to shopping list.");
+                itemDisplayView.showItemAdditionSuccessMessage();
                 getActvItems();
                 refreshAndDisplayShoppingListsItems(shoppingListId);
             } else {
-                itemDisplayView.displayMessage("Please enter an item name.");
+                itemDisplayView.showValidationMessage();
             }
         } catch (Exception e) {
             Timber.e("addItemToShoppingList: ", e);
-            itemDisplayView.displayMessage("An error occurred, please try again later.");
+            itemDisplayView.showErrorMessage();
         }
     }
 
@@ -81,7 +81,7 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter, PostShopp
             refreshAndDisplayShoppingListsItems(shoppingListId);
         } catch (Exception e) {
             Timber.e("removeItemFromShoppingList: ", e);
-            itemDisplayView.displayMessage("An error occurred, please try again later.");
+            itemDisplayView.showErrorMessage();
         }
     }
 
@@ -91,7 +91,7 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter, PostShopp
             shoppingListDao.updateIsCollectedForItem(itemId, isCollected);
         } catch (Exception e) {
             Timber.e("updateIsCollectedForItem: ", e);
-            itemDisplayView.displayMessage("An error occurred, please try again later.");
+            itemDisplayView.showErrorMessage();
         }
     }
 
@@ -101,8 +101,8 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter, PostShopp
             RemoteItemsTask remoteItemsTask = new RemoteItemsTask(itemDisplayView, shoppingListDao, shoppingListService, sharedPreferencesManager, ItemDisplayPresenterImpl.this);
             remoteItemsTask.execute(shoppingListId, shoppingListName);
         } catch (Exception e) {
-            Timber.e("updateIsCollectedForItem: ", e);
-            itemDisplayView.displayMessage("An error occurred, please try again later.");
+            Timber.e("completeShopping: ", e);
+            itemDisplayView.showErrorMessage();
         }
     }
 
@@ -113,11 +113,11 @@ public class ItemDisplayPresenterImpl implements ItemDisplayPresenter, PostShopp
 
     @Override
     public void onFailure() {
-        itemDisplayView.displayMessage("An error occurred, please try again later.");
+        itemDisplayView.showErrorMessage();
     }
 
     @Override
     public void onPostSuccess() {
-        itemDisplayView.displayMessage("Shopping is done !");
+        itemDisplayView.showShoppingCompletedMessage();
     }
 }

@@ -9,6 +9,14 @@ public interface ItemsContract {
 
     interface ItemsView extends BaseView {
         void displayItems(List<Item> items);
+
+        void showItemCreatedMessage();
+
+        void showItemUpdatedMessage();
+
+        void showItemDeletedMessage();
+
+        void showValidationMessage();
     }
 
     interface ItemsPresenter {

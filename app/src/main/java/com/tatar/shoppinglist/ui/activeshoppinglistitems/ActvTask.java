@@ -36,7 +36,7 @@ public class ActvTask extends AsyncTask<Void, Void, List<Item>> {
         itemDisplayView.toggleProgressBar();
 
         if (items == null) {
-            itemDisplayView.displayMessage("Upps ! Something went wrong.");
+            itemDisplayView.showErrorMessage();
         } else {
             itemDisplayView.populateItemActv(items);
         }

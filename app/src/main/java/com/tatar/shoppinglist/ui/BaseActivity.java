@@ -72,6 +72,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+
+
+    public void displayErrorMessage() {
+        displayToast("An error occurred, please try again later.");
+    }
+
     protected void displayToast(String message) {
         Toast.makeText(BaseActivity.this, message, Toast.LENGTH_SHORT).show();
     }

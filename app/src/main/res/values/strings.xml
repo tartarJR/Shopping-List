@@ -41,5 +41,19 @@
     <string name="create_shopping_list_title">Create a Shopping List</string>
     <string name="update_an_existing_shopping_list">Update an existing shopping list</string>
     <string name="shopping_list_name_hint">Enter a shopping list name</string>
+    <string name="alert_dialog_cancel_txt">CANCEL</string>
+    <string name="alert_dialog_add_txt">ADD</string>
+    <string name="alert_dialog_validation_msg">Please enter a name.</string>
+    <string name="display_actions_dialog_title">Choose option</string>
+    <string name="alert_dialog_update_txt">UPDATE</string>
+    <string name="completed_shopping_dialog_title">CONGRATS!</string>
+    <string name="completed_shopping_dialog_msg">You have collected all your items. Please tap the button on the bottom right corner to complete your shopping.</string>
+    <string name="alert_dialog_ok_txt">OK</string>
+    <string name="alert_dialog_create_txt">CREATE</string>
+
+    <string-array name="action_dialog_options">
+        <item>Update</item>
+        <item>Delete</item>
+    </string-array>
 
 </resources>

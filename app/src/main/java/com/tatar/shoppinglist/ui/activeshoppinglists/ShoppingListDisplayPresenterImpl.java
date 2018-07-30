@@ -24,7 +24,7 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
             refreshAndDisplayShoppingLists();
         } catch (Exception e) {
             Timber.e("loadShoppingLists: ", e);
-            shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
+            shoppingListDisplayView.showErrorMessage();
         }
     }
 
@@ -33,12 +33,12 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
         try {
             String standardizedItemName = StringUtils.standardizeItemName(name);
             String id = shoppingListDao.createShoppingList(standardizedItemName);
-            shoppingListDisplayView.displayMessage("Shopping list created.");
+            shoppingListDisplayView.showShoppingListCreatedMessage();
             refreshAndDisplayShoppingLists();
             shoppingListDisplayView.navigateToAddItemActivity(standardizedItemName, id);
         } catch (Exception e) {
             Timber.e("createShoppingList: ", e);
-            shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
+            shoppingListDisplayView.showErrorMessage();
         }
     }
 
@@ -48,10 +48,10 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
             String standardizedItemName = StringUtils.standardizeItemName(name);
             shoppingListDao.updateShoppingListName(id, standardizedItemName);
             refreshAndDisplayShoppingLists();
-            shoppingListDisplayView.displayMessage("Shopping List updated.");
+            shoppingListDisplayView.showShoppingListUpdatedMessage();
         } catch (Exception e) {
             Timber.e("updateShoppingListName: ", e);
-            shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
+            shoppingListDisplayView.showErrorMessage();
         }
     }
 
@@ -60,10 +60,10 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
         try {
             shoppingListDao.deleteShoppingList(id);
             refreshAndDisplayShoppingLists();
-            shoppingListDisplayView.displayMessage("Shopping List deleted.");
+            shoppingListDisplayView.showShoppingListDeletedMessage();
         } catch (Exception e) {
             Timber.e("deleteShoppingList: ", e);
-            shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
+            shoppingListDisplayView.showErrorMessage();
         }
     }
 

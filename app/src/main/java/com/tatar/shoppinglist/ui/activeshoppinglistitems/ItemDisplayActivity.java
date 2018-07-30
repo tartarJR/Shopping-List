@@ -1,7 +1,6 @@
 package com.tatar.shoppinglist.ui.activeshoppinglistitems;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -144,9 +143,10 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
     }
 
     @Override
-    public void displayMessage(String message) {
-        displayToast(message);
+    public void showErrorMessage() {
+        displayErrorMessage();
     }
+
 
     @Override
     public void clearActv() {
@@ -157,6 +157,21 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
     public void navigateToMainActivity() {
         Intent intent = new Intent(ItemDisplayActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void showItemAdditionSuccessMessage() {
+        displayToast("Item has been added to shopping list.");
+    }
+
+    @Override
+    public void showShoppingCompletedMessage() {
+        displayToast("Shopping is done !");
+    }
+
+    @Override
+    public void showValidationMessage() {
+        displayToast("Please enter a name.");
     }
 
     // RecyclerView swipe to delete event

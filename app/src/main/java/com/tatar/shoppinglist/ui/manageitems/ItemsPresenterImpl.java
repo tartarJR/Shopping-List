@@ -27,7 +27,7 @@ public class ItemsPresenterImpl implements ItemsPresenter {
             refreshAndDisplayItemsList();
         } catch (Exception e) {
             Timber.e("loadItems: ", e);
-            itemsView.displayMessage("An error occurred, please try again later.");
+            itemsView.showErrorMessage();
         }
     }
 
@@ -38,13 +38,13 @@ public class ItemsPresenterImpl implements ItemsPresenter {
 
             if (itemDao.createItem(standardizedItemName)) {
                 refreshAndDisplayItemsList();
-                itemsView.displayMessage("Item created.");
+                itemsView.showItemCreatedMessage();
             } else {
-                itemsView.displayMessage("This item is already created.");
+                itemsView.showValidationMessage();
             }
         } catch (Exception e) {
             Timber.e("createItem: ", e);
-            itemsView.displayMessage("An error occurred, please try again later.");
+            itemsView.showErrorMessage();
         }
     }
 
@@ -55,13 +55,13 @@ public class ItemsPresenterImpl implements ItemsPresenter {
 
             if (itemDao.updateItem(id, standardizedItemName)) {
                 refreshAndDisplayItemsList();
-                itemsView.displayMessage("Item updated.");
+                itemsView.showItemUpdatedMessage();
             } else {
-                itemsView.displayMessage("There is an item already created with that name.");
+                itemsView.showValidationMessage();
             }
         } catch (Exception e) {
             Timber.e("updateItem: ", e);
-            itemsView.displayMessage("An error occurred, please try again later.");
+            itemsView.showErrorMessage();
         }
     }
 
@@ -70,10 +70,10 @@ public class ItemsPresenterImpl implements ItemsPresenter {
         try {
             itemDao.deleteItem(id);
             refreshAndDisplayItemsList();
-            itemsView.displayMessage("Item deleted.");
+            itemsView.showItemDeletedMessage();
         } catch (Exception e) {
             Timber.e("deleteItem: ", e);
-            itemsView.displayMessage("An error occurred, please try again later.");
+            itemsView.showErrorMessage();
         }
     }
 

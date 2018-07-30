@@ -11,6 +11,12 @@ public interface ShoppingListDisplayContract {
         void displayShoppingLists(List<ShoppingList> shoppingLists);
 
         void navigateToAddItemActivity(String title, String id);
+
+        void showShoppingListCreatedMessage();
+
+        void showShoppingListUpdatedMessage();
+
+        void showShoppingListDeletedMessage();
     }
 
     interface ShoppingListDisplayPresenter {

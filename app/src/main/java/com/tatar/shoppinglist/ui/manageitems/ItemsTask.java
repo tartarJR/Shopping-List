@@ -36,7 +36,7 @@ public class ItemsTask extends AsyncTask<Void, Void, List<Item>> {
         itemsView.toggleProgressBar();
 
         if (items == null) {
-            itemsView.displayMessage("Upps ! Something went wrong.");
+            itemsView.showErrorMessage();
         } else {
             itemsView.toggleNoDataTv(items.size());
             itemsView.displayItems(items);

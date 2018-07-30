@@ -91,6 +91,26 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
         itemAdapter.setItemList(items);
     }
 
+    @Override
+    public void showItemCreatedMessage() {
+        displayToast("Item created.");
+    }
+
+    @Override
+    public void showItemUpdatedMessage() {
+        displayToast("Item updated.");
+    }
+
+    @Override
+    public void showItemDeletedMessage() {
+        displayToast("Item deleted.");
+    }
+
+    @Override
+    public void showValidationMessage() {
+        displayToast("There is an item already created with that name.");
+    }
+
     /**
      * Displays a text view if there is no data in local database.
      */
@@ -100,8 +120,8 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
     }
 
     @Override
-    public void displayMessage(String message) {
-        displayToast(message);
+    public void showErrorMessage() {
+        displayErrorMessage();
     }
 
     @Override
@@ -119,9 +139,6 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
         }
     }
 
-    /**
-     * AlertDialogActions interface method implementations.
-     */
     @Override
     public void create(String name) {
         itemsPresenter.createItem(name);

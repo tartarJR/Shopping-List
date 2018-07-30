@@ -15,6 +15,12 @@ public interface ItemDisplayContract {
         void clearActv();
 
         void navigateToMainActivity();
+
+        void showItemAdditionSuccessMessage();
+
+        void showShoppingCompletedMessage();
+
+        void showValidationMessage();
     }
 
     interface ItemDisplayPresenter {

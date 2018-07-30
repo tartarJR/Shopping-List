@@ -114,6 +114,21 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
     }
 
     @Override
+    public void showShoppingListCreatedMessage() {
+        displayToast("Shopping list created.");
+    }
+
+    @Override
+    public void showShoppingListUpdatedMessage() {
+        displayToast("Shopping List updated.");
+    }
+
+    @Override
+    public void showShoppingListDeletedMessage() {
+        displayToast("Shopping List deleted.");
+    }
+
+    @Override
     public void toggleProgressBar() {
         if (progressBar.getVisibility() == View.INVISIBLE) {
             progressBar.setVisibility(View.VISIBLE);
@@ -129,8 +144,8 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
     }
 
     @Override
-    public void displayMessage(String message) {
-        displayToast(message);
+    public void showErrorMessage() {
+        displayErrorMessage();
     }
 
     /**

@@ -32,7 +32,7 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
             shoppingListService.getShoppingLists(userId, this);
         } catch (Exception e) {
             Timber.e("loadCompletedShoppingLists: ", e);
-            shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
+            shoppingListDisplayView.showErrorMessage();
         }
     }
 
@@ -51,6 +51,6 @@ public class ShoppingListDisplayPresenterImpl implements ShoppingListDisplayPres
     @Override
     public void onFailure() {
         shoppingListDisplayView.toggleProgressBar();
-        shoppingListDisplayView.displayMessage("An error occurred, please try again later.");
+        shoppingListDisplayView.showErrorMessage();
     }
 }
