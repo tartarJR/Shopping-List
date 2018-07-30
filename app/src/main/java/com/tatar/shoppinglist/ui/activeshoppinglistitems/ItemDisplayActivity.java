@@ -151,6 +151,7 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
     @Override
     public void clearActv() {
         itemNameActv.setText("");
+        itemNameActv.clearFocus();
     }
 
     @Override

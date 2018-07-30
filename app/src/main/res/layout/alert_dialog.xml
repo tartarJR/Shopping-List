@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:textColor="@color/colorPrimaryDark"
         android:lineSpacingExtra="8sp"
         android:text="@string/add_an_new_item"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:textStyle="normal" />
 
@@ -22,11 +22,11 @@
         android:id="@+id/nameEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
         android:background="@android:color/transparent"
         android:gravity="top"
-        android:inputType="textCapSentences|textMultiLine"
-        android:lines="4"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@color/colorAccent"
         android:textSize="20sp" />
 
 </LinearLayout>
