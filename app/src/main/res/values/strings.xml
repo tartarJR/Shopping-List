@@ -13,11 +13,18 @@
     <string name="items_activity_title">Item Management</string>
     <string name="no_items_found">No Items Found</string>
     <string name="item_name">Item Name</string>
+    <string name="created_item_msg">Item created.</string>
+    <string name="updated_item_msg">Item updated.</string>
+    <string name="deleted_item_msg">Item deleted.</string>
+    <string name="create_item_validation_msg">There is an item already created with that name.</string>
 
     <!--ShoppingListDisplayActivity (active shopping lists feature)-->
     <string name="shopping_lists_activity_title">Shopping List Management</string>
     <string name="no_shopping_lists_found">No Shopping Lists Found</string>
     <string name="shopping_list_name">Shopping List Name</string>
+    <string name="created_shopping_list_msg">Shopping list created.</string>
+    <string name="updated_shopping_list_msg">Shopping List updated.</string>
+    <string name="deleted_shopping_list_msg">Shopping List deleted.</string>
 
     <!--ItemDisplayActivity (active shopping list items feature)-->
     <string name="add_btn_txt">ADD</string>
@@ -26,6 +33,12 @@
     <string name="collected_checkbox_text">Collected</string>
     <string name="delete_row_item_txt">DELETE</string>
     <string name="delete_row_icon_img_description">Delete row icon img</string>
+    <string name="item_addition_success_msg">Item has been added to shopping list.</string>
+    <string name="shopping_completed_msg">Shopping is done !</string>
+    <string name="add_item_validation_msg">Please enter a name.</string>
+    <string name="remove_item_snackbar_msg">removed from the shopping list!</string>
+    <string name="remove_item_snackbar_undo_btn_txt">UNDO</string>
+    <string name="add_item_actv_empty_txt" />
 
     <!--ShoppingListDisplayActivity (completed shopping lists feature)-->
     <string name="completed_shopping_lists_activity_title">Completed Shopping Lists</string>
@@ -55,5 +68,10 @@
         <item>Update</item>
         <item>Delete</item>
     </string-array>
+
+    <!-- common messages/texts -->
+    <string name="error_msg">An error occurred, please try again later.</string>
+    <string name="no_internet_msg">Please check your internet connection and try again.</string>
+    <string name="item_dot_html">&#8226;</string>
 
 </resources>

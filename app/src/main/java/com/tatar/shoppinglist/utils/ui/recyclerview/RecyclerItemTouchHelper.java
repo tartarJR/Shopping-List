@@ -30,7 +30,6 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
             final View backgroundView = ((ItemAdapter.ViewHolder) viewHolder).backgroundView;
             backgroundView.setVisibility(View.VISIBLE);
             getDefaultUIUtil().onSelected(foregroundView);
-            Timber.d("SWIPE: onSelectedChanged" );
         }
     }
 
@@ -38,7 +37,6 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     public void onChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         final View foregroundView = ((ItemAdapter.ViewHolder) viewHolder).foregroundView;
         getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
-        Timber.d("SWIPE: onChildDrawOver" );
     }
 
     @Override
@@ -47,14 +45,12 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         final View backgroundView = ((ItemAdapter.ViewHolder) viewHolder).backgroundView;
         backgroundView.setVisibility(View.INVISIBLE);
         getDefaultUIUtil().clearView(foregroundView);
-        Timber.d("SWIPE: clearView" );
     }
 
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         final View foregroundView = ((ItemAdapter.ViewHolder) viewHolder).foregroundView;
         getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
-        Timber.d("SWIPE: onChildDraw" );
     }
 
     @Override

@@ -93,22 +93,22 @@ public class ItemsActivity extends BaseActivity implements ItemsView, AlertDialo
 
     @Override
     public void showItemCreatedMessage() {
-        displayToast("Item created.");
+        displayToast(getString(R.string.created_item_msg));
     }
 
     @Override
     public void showItemUpdatedMessage() {
-        displayToast("Item updated.");
+        displayToast(getString(R.string.updated_item_msg));
     }
 
     @Override
     public void showItemDeletedMessage() {
-        displayToast("Item deleted.");
+        displayToast(getString(R.string.deleted_item_msg));
     }
 
     @Override
     public void showValidationMessage() {
-        displayToast("There is an item already created with that name.");
+        displayToast(getString(R.string.create_item_validation_msg));
     }
 
     /**

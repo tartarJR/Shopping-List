@@ -149,8 +149,7 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
 
     @Override
     public void clearActv() {
-        itemNameActv.setText("");
-        itemNameActv.clearFocus();
+        itemNameActv.setText(R.string.add_item_actv_empty_txt);
     }
 
     @Override
@@ -161,22 +160,22 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
 
     @Override
     public void showItemAdditionSuccessMessage() {
-        displayToast("Item has been added to shopping list.");
+        displayToast(getString(R.string.item_addition_success_msg));
     }
 
     @Override
     public void showShoppingCompletedMessage() {
-        displayToast("Shopping is done !");
+        displayToast(getString(R.string.shopping_completed_msg));
     }
 
     @Override
     public void showValidationMessage() {
-        displayToast("Please enter a name.");
+        displayToast(getString(R.string.add_item_validation_msg));
     }
 
     @Override
     public void showNoInternetMessage() {
-        displayToast("Please check your internet connection and try again.");
+        displayToast(getString(R.string.no_internet_msg));
     }
 
     // RecyclerView swipe to delete event
@@ -187,8 +186,8 @@ public class ItemDisplayActivity extends BaseActivity implements ItemDisplayView
             final ShoppingListItem removedItem = itemAdapter.getShoppingListItem(indexToBeDeleted);
             itemDisplayPresenter.removeItemFromShoppingList(indexToBeDeleted);
 
-            Snackbar snackbar = Snackbar.make(addItemLayout, removedItem.getName() + " removed from the shopping list!", Snackbar.LENGTH_LONG);
-            snackbar.setAction("UNDO", new View.OnClickListener() {
+            Snackbar snackbar = Snackbar.make(addItemLayout, removedItem.getName() + getString(R.string.remove_item_snackbar_msg), Snackbar.LENGTH_LONG);
+            snackbar.setAction(R.string.remove_item_snackbar_undo_btn_txt, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     itemDisplayPresenter.addItemToShoppingList(removedItem.getName());

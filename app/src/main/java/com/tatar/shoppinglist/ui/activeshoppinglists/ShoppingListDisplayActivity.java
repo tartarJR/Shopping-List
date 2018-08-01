@@ -94,16 +94,13 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
         shoppingListAdapter.setshoppingLists(shoppingLists);
     }
 
-    /**
-     * Displays a text view if there is no data in local database.
-     */
     @Override
     public void toggleNoDataTv(int size) {
         switchNoDataTvVisibility(size);
     }
 
     /**
-     * Navigates to ShoppingListItemActivity after ShoppingList creation or RecyclerView item touch
+     * Navigates to ItemDisplayActivity after ShoppingList creation or RecyclerView item touch
      */
     @Override
     public void navigateToAddItemActivity(String title, String id) {
@@ -115,17 +112,17 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
 
     @Override
     public void showShoppingListCreatedMessage() {
-        displayToast("Shopping list created.");
+        displayToast(getString(R.string.created_shopping_list_msg));
     }
 
     @Override
     public void showShoppingListUpdatedMessage() {
-        displayToast("Shopping List updated.");
+        displayToast(getString(R.string.updated_shopping_list_msg));
     }
 
     @Override
     public void showShoppingListDeletedMessage() {
-        displayToast("Shopping List deleted.");
+        displayToast(getString(R.string.deleted_shopping_list_msg));
     }
 
     @Override

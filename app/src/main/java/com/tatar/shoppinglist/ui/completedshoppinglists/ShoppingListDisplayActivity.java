@@ -92,7 +92,7 @@ public class ShoppingListDisplayActivity extends BaseActivity implements Shoppin
 
     @Override
     public void showNoInternetMessage() {
-        displayToast("Please check your internet connection and try again.");
+        displayToast(getString(R.string.no_internet_msg));
     }
 
     @Override
