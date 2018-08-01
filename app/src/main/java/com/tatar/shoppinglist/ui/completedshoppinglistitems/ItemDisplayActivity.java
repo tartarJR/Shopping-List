@@ -21,7 +21,7 @@ public class ItemDisplayActivity extends BaseActivity {
     @Override
     protected String getActivityTitle() {
         RemoteShoppingList remoteShoppingList = getIntent().getExtras().getParcelable(INCOMING_SHOPPING_LIST);
-        return remoteShoppingList.getName();
+        return remoteShoppingList.getName() + getString(R.string.completed_shopping_list_txt);
     }
 
     @Override

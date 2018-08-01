@@ -44,6 +44,7 @@
     <string name="completed_shopping_lists_activity_title">Completed Shopping Lists</string>
 
     <!--ItemDisplayActivity (completed shopping list items feature)-->
+    <string name="completed_shopping_list_txt">(Completed)</string>
     <string name="not_collected_txt">Not Collected</string>
     <string name="collected_txt">Collected</string>
 
